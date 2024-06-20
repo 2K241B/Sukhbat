@@ -2,7 +2,7 @@ import Photo2nd from '../assets/Photo2nd.png';
 
 const Second = () => {
   return (
-    <div className="pt-16 pr-4 pl-4 pb-16">
+    <div className="pt-16 pr-4 pl-4 pb-16 bg-gray-50">
       <div className="mb-12">
         <div className="flex justify-center mb-6">
           <button className="bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium">
