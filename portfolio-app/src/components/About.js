@@ -1,16 +1,27 @@
 import Photo2nd from '../assets/Photo2nd.png';
-
+import About768 from '../assets/About768.png';
 const About = () => {
   return (
-    <div className="pt-16 pr-4 pl-4 pb-16 bg-gray-50 flex flex-col justify-center">
-      <div className="mb-12">
-        <div className="flex justify-center mb-6">
-          <button className="bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium">
-            About me
-          </button>
+    <div className="pt-16 pr-4 pl-4 pb-16 bg-gray-50 md:flex md:flex-col mb:items-center md:pr-32 md:pl-32 md:pt-24 md:pb-24">
+      <div className="mb-12 flex justify-center">
+        <button className="bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium w-[content-fit]">
+          About me
+        </button>
+      </div>
+      <div className="md:flex">
+        <div className="md:min-h-[694px] md:min-w-[584px]">
+          <img
+            className="mb-12 min-w-[440px] max-h-[520px] md:hidden "
+            src={Photo2nd}
+            alt="Photo2nd"
+          ></img>
+          <img
+            className="mb-12 hidden md:flex "
+            src={About768}
+            alt="Photo2nd"
+          ></img>
         </div>
-        <img className="mb-12" src={Photo2nd} alt="Photo2nd"></img>
-        <div className="flex flex-col gap-4 text-gray-600 text-base">
+        <div className="flex flex-col gap-4 text-gray-600 text-base md:ml-24 md:text-justify">
           <h1 className="text-2xl font-semibold mb-6 text-gray-900">
             Curious about me? Here you have it:
           </h1>

@@ -35,7 +35,7 @@ const Iconstitle = () => {
   ];
   return iconsT.map((el) => {
     return (
-      <div className="">
+      <div className="text-center">
         <img src={el.icons} alt={el.title}></img>
         <p>{el.title}</p>
       </div>

@@ -9,7 +9,7 @@ import FooterSince from './components/FooterSince';
 
 function App() {
   return (
-    <div>
+    <div className="w-screen">
       <Main />
       <Second />
       <Third />
