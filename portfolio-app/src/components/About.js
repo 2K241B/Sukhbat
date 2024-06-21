@@ -1,8 +1,8 @@
 import Photo2nd from '../assets/Photo2nd.png';
 
-const Second = () => {
+const About = () => {
   return (
-    <div className="pt-16 pr-4 pl-4 pb-16 bg-gray-50">
+    <div className="pt-16 pr-4 pl-4 pb-16 bg-gray-50 flex flex-col justify-center">
       <div className="mb-12">
         <div className="flex justify-center mb-6">
           <button className="bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium">
@@ -43,7 +43,7 @@ const Second = () => {
           </p>
           <p>Finally, some quick bits about me.</p>
           <div className="flex gap-2.5">
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2.5 ">
               <li>B.E. in Computer Engineering</li>
               <li>Full time freelancer</li>
             </div>
@@ -61,4 +61,4 @@ const Second = () => {
     </div>
   );
 };
-export default Second;
+export default About;

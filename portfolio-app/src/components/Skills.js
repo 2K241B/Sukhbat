@@ -1,6 +1,6 @@
 import Iconstitle from './Iconstitle';
 
-const Third = () => {
+const Skills = () => {
   return (
     <div className="pt-16 pr-4 pl-4 pb-16">
       <div className="flex justify-center mb-4">
@@ -18,4 +18,4 @@ const Third = () => {
   );
 };
 
-export default Third;
+export default Skills;

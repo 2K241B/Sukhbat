@@ -1,3 +1,5 @@
+import WorkCard from './WorkCard';
+
 const Work = () => {
   return (
     <div className="pt-16 pr-4 pl-4 pb-16">
@@ -9,7 +11,11 @@ const Work = () => {
       <p className="text-lg text-gray-600 font-normal text-center mb-6">
         Some of the noteworthy projects I have built:
       </p>
-      <div>3x work card</div>
+      <div>
+        <WorkCard />
+        <WorkCard />
+        <WorkCard />
+      </div>
     </div>
   );
 };
