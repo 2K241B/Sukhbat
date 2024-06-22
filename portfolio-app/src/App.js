@@ -7,10 +7,12 @@ import {
   Skills,
   Work,
   Footer,
+  Navbar,
 } from './components';
 function App() {
   return (
     <div>
+      <Navbar />
       <Main />
       <About />
       <Skills />
