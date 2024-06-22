@@ -15,13 +15,19 @@ const buttons = [
 ];
 const WorkCard = () => {
   return (
-    <div className="p-8 flex flex-col items-center md:flex md:flex-row md:justify-center ">
-      <div className="bg-gray-100 p-8 rounded-t-lg w-[343px] h-[256px] md:min-h-[480px] md:min-w-[576px] md:rounded-none md:rounded-l-lg shadow-lg">
-        <img className="size-full" src={WorkCardImg} alt="WorkCardImg"></img>
+    <div className="flex flex-col items-center md:flex md:flex-row md:justify-center md:mb-12 mb-6 ">
+      <div className="dark:bg-[#374151] bg-gray-100 p-8 rounded-t-lg w-[343px] h-[256px] md:min-h-[480px] md:min-w-[576px] md:rounded-none md:rounded-l-lg shadow-lg">
+        <img
+          className="size-full rounded-lg"
+          src={WorkCardImg}
+          alt="WorkCardImg"
+        ></img>
       </div>
-      <div className="md:p-6 md:h-[480px] md:w-[576px] shadow-lg rounded-r-lg">
-        <h1 className="pt-8 text-gray-900 text-lg font-bold mb-6">Fiskil</h1>
-        <p className="text-base text-gray-600 mb-6">
+      <div className="dark:bg-[#1F2937] p-8 w-[343px] md:h-[480px] md:w-[576px] shadow-lg rounded-r-lg">
+        <h1 className="pt-8 dark:text-[#F9FAFB] text-gray-900 text-lg font-bold mb-6">
+          Fiskil
+        </h1>
+        <p className="text-base dark:text-[#D1D5DB] text-gray-600 mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec
           urna ac tellus volutpat viverra. Vestibulum ante ipsum primis in
           faucibus orci luctus et ultrices posuere cubilia curae.
@@ -29,7 +35,7 @@ const WorkCard = () => {
         <div className="flex flex-wrap mb-6">
           {buttons.map((el) => {
             return (
-              <button className="bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium mr-2 mb-2">
+              <button className="dark:bg-[#374151] dark:text-[#D1D5DB] bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium mr-2 mb-2">
                 {el}
               </button>
             );
