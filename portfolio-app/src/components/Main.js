@@ -43,7 +43,7 @@ export const Main = () => {
           </div>
         </div>
       </div>
-      <div className=" dark:bg-[#030712] dark:text-[#F9FAFB] pr-4 pl-4 pt-16 pb-12 flex flex-col justify-center md:flex-row-reverse md:pr-32 md:pl-32 md:pt-24 md:pb-24">
+      <div className=" dark:bg-[#030712] dark:text-[#F9FAFB] pr-4 pl-4 pt-16 pb-12 flex flex-col justify-center md:flex-row-reverse md:pr-24 md:pl-24 md:pt-24 md:pb-24">
         <div className="flex justify-center items-center">
           <img
             className="mb-12 flex dark:hidden min-w-[280px] min-h-[300px] md:hidden"
@@ -66,11 +66,11 @@ export const Main = () => {
             alt="Profile768"
           ></img>
         </div>
-        <div className="mr-0 md:mr-12 text-justify ">
+        <div className="mr-0 md:mr-12 ">
           <h1 className="text-4xl mb-2 font-bold md:text-6xl">
             Hi, I’m Sagar 👋
           </h1>
-          <p className="text-base text-gray-600 font-normal mb-12 dark:text-[#D1D5DB]">
+          <p className="text-base text-gray-600 font-normal mb-12">
             I'm a full stack developer (React.js & Node.js) with a focus on
             creating (and occasionally designing) exceptional digital
             experiences that are fast, accessible, visually appealing, and

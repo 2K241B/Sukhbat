@@ -4,7 +4,7 @@ import About768 from '../assets/About768.png';
 import About768dark from '../assets/About768dark.png';
 export const About = () => {
   return (
-    <div className=" dark:bg-[#111827] pt-16 pr-4 pl-4 pb-16 bg-gray-50 md:flex md:flex-col mb:items-center md:pr-32 md:pl-32 md:pt-24 md:pb-24">
+    <div className=" dark:bg-[#111827] pt-16 pr-4 pl-4 pb-16 bg-gray-50 md:flex md:flex-col mb:items-center md:pr-24 md:pl-24 md:pt-24 md:pb-24">
       <div className="mb-12 flex justify-center">
         <button className="dark:bg-[#374151] dark:text-[#D1D5DB] bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium w-[content-fit]">
           About me
@@ -43,8 +43,8 @@ export const About = () => {
             bringing the technical and visual aspects of digital products to
             life. User experience, pixel perfect design, and writing clear,
             readable, highly performant code matters to me
-          </p>
-          <p>
+            <br />
+            <br />
             I began my journey as a web developer in 2015, and since then, I've
             continued to grow and evolve as a developer, taking on new
             challenges and learning the latest technologies along the way. Now,
@@ -52,12 +52,10 @@ export const About = () => {
             journey, I'm building cutting-edge web applications using modern
             technologies such as Next.js, TypeScript, Nestjs, Tailwindcss,
             Supabase and much more
-          </p>
-          <p>
-            I am very much a progressive thinker and enjoy working on products
-            end to end, from ideation all the way to development.
-          </p>
-          <p>
+            <br />I am very much a progressive thinker and enjoy working on
+            products end to end, from ideation all the way to development.
+            <br />
+            <br />
             When I'm not in full-on developer mode, you can find me hovering
             around on twitter or on indie hacker, witnessing the journey of
             early startups or enjoying some free time. You can follow me on
