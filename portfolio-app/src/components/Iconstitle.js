@@ -36,24 +36,24 @@ const Iconstitle = () => {
     { icons: storyIcon, title: 'Storybook' },
     { icons: gitIcon, title: 'Git' },
   ];
-  const iconsW = [
-    { icons: jsIcon, title: 'Javascript' },
-    { icons: tsIcon, title: 'Typescript' },
-    { icons: reactIcon, title: 'React' },
-    { icons: nextIcon, title: 'Next.js' },
-    { icons: nodeIcon, title: 'Node.js' },
-    { icons: expressWhite, title: 'Express.js' },
-    { icons: nestIcon, title: 'Nest.js' },
-    { icons: socketWhite, title: 'Socket.io' },
-    { icons: postIcon, title: 'PostgreSQL' },
-    { icons: mongoIcon, title: 'MongoDB' },
-    { icons: sassIcon, title: 'Sass/Scss' },
-    { icons: tailwindIcon, title: 'Tailwindcss' },
-    { icons: figmaIcon, title: 'Figma' },
-    { icons: cypressWhite, title: 'Cypress' },
-    { icons: storyIcon, title: 'Storybook' },
-    { icons: gitIcon, title: 'Git' },
-  ];
+  // const iconsW = [
+  //   { icons: jsIcon, title: 'Javascript' },
+  //   { icons: tsIcon, title: 'Typescript' },
+  //   { icons: reactIcon, title: 'React' },
+  //   { icons: nextIcon, title: 'Next.js' },
+  //   { icons: nodeIcon, title: 'Node.js' },
+  //   { icons: expressWhite, title: 'Express.js' },
+  //   { icons: nestIcon, title: 'Nest.js' },
+  //   { icons: socketWhite, title: 'Socket.io' },
+  //   { icons: postIcon, title: 'PostgreSQL' },
+  //   { icons: mongoIcon, title: 'MongoDB' },
+  //   { icons: sassIcon, title: 'Sass/Scss' },
+  //   { icons: tailwindIcon, title: 'Tailwindcss' },
+  //   { icons: figmaIcon, title: 'Figma' },
+  //   { icons: cypressWhite, title: 'Cypress' },
+  //   { icons: storyIcon, title: 'Storybook' },
+  //   { icons: gitIcon, title: 'Git' },
+  // ];
   return iconsT.map((el) => {
     return (
       <div className="text-center items-center flex flex-col gap-y-2">

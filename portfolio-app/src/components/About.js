@@ -4,14 +4,14 @@ import About768 from '../assets/About768.png';
 import About768dark from '../assets/About768dark.png';
 export const About = () => {
   return (
-    <div className=" dark:bg-[#111827] pt-16 pr-4 pl-4 pb-16 bg-gray-50 md:flex md:flex-col mb:items-center md:pr-24 md:pl-24 md:pt-24 md:pb-24">
+    <div className=" dark:bg-[#111827] pt-16 pr-4 pl-4 pb-16 bg-gray-50 md:flex md:flex-col mb:items-center md:pr-24 md:pl-24 md:pt-24 md:pb-24 ">
       <div className="mb-12 flex justify-center">
         <button className="dark:bg-[#374151] dark:text-[#D1D5DB] bg-gray-200 justify-start px-5 py-1 items-center rounded-xl text-gray-600 text-sm font-medium w-[content-fit]">
           About me
         </button>
       </div>
       <div className="md:flex">
-        <div className="md:min-h-[694px] md:min-w-[584px]">
+        <div className="md:min-h-[694px] md:min-w-[584px] flex justify-center md:block ">
           <img
             className="mb-12 max-w-[440px] max-h-[520px] md:hidden md:dark:hidden dark:hidden "
             src={Photo2nd}

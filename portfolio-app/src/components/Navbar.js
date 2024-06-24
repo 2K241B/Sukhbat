@@ -4,10 +4,6 @@ const s = '<SS/>';
 const changeTheme = () => {
   document.documentElement.classList.toggle('dark');
 };
-const MenuClick = () => {
-  document.getElementById('menuku').style.display = 'relative';
-  document.getElementById('menuka').style.display = 'relative';
-};
 export const Navbar = () => {
   return (
     <div className=" dark:bg-[#030712] items-center md:pt-4 md:pb-4 md:pl-20 md:pr-20 md:items-center md:font-medium md:flex md:justify-between ">
@@ -15,11 +11,7 @@ export const Navbar = () => {
         <p className="text-gray-900 text-3xl font-bold dark:text-[#F9FAFB]">
           {s}
         </p>
-        <Menu
-          strokeWidth={2}
-          className="md:hidden text-gray-600 "
-          onClick={MenuClick}
-        />
+        <Menu strokeWidth={2} className="md:hidden text-gray-600 " />
       </div>
       <div
         id="menuku"
