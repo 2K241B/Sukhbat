@@ -15,7 +15,7 @@ export const Navbar = () => {
       </div>
       <div
         id="menuku"
-        className=" p-4 gap-2 flex flex-col md:flex-row cursor-pointer md:flex md:text-gray-600 md:gap-x-6 md:text-base md:items-center dark:text-[#F9FAFB] md:p-0 absolute  md:z-0 md:relative w-[100%] md:w-auto dark:bg-[#030712] bg-[#FFFFFF] h-[830px] md:h-auto z-[-1]"
+        className=" p-4 gap-2 flex flex-col md:flex-row cursor-pointer md:flex md:text-gray-600 md:gap-x-6 md:text-base md:items-center dark:text-[#F9FAFB] md:p-0 $ absolute md:z-0 md:relative w-[100%] md:w-auto dark:bg-[#030712] bg-[#FFFFFF] h-[830px] md:h-auto z-[1]"
       >
         <p>About</p>
         <p>Work</p>
@@ -34,7 +34,7 @@ export const Navbar = () => {
 
         <div
           id="menuka"
-          className="flex md:items-center flex-col md:flex-row p-6 gap-4 md:p-0 absolute top-[222px] w-[100%] md:z-0 dark:bg-[#030712] bg-[#FFFFFF]  md:relative md:w-auto md:top-0 md:h-auto z-[-1] border-t-[1px] md:border-none dark:border-[#1F2937]"
+          className="flex md:items-center flex-col md:flex-row p-6 gap-4 md:p-0 top-[222px] w-[100%] md:z-0 dark:bg-[#030712] bg-[#FFFFFF]  md:relative md:w-auto md:top-0 md:h-auto border-t-[1px] md:border-none dark:border-[#1F2937] pl-0"
         >
           <div className="flex flex-row justify-between items-center gap-4 md:gap-x-6 md:items-center md:p-6 dark:text-[#F9FAFB]">
             <p className="md:hidden">Switch Theme</p>

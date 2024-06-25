@@ -42,13 +42,13 @@ const Card = () => {
             <h1 className="dark:text-[#F9FAFB] text-gray-900 size-lg font-semibold mb-4">
               {el.title}
             </h1>
-            <div className="">
+            <ul className="list-disc">
               {el.text.map((t) => (
-                <li className="text-base text-gray-600 dark:text-[#D1D5DB]">
+                <li className="text-base text-gray-600 dark:text-[#D1D5DB] ml-5">
                   {t}
                 </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>
