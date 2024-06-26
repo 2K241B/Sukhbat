@@ -33,7 +33,7 @@ export const About = () => {
             alt="About768dark"
           ></img>
         </div>
-        <div className=" dark:text-[#F9FAFB] flex flex-col gap-4 text-gray-600 text-base md:ml-24 md:text-justify">
+        <div className=" dark:text-[#F9FAFB] flex flex-col gap-4 text-gray-600 text-base md:ml-24">
           <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-900 dark:text-[#F9FAFB]">
             Curious about me? Here you have it:
           </h1>
@@ -63,15 +63,15 @@ export const About = () => {
             can follow me on GitHub.
           </p>
           <p>Finally, some quick bits about me.</p>
-          <div className="flex gap-2.5">
-            <div className="flex flex-col gap-2.5 ">
+          <div className="flex">
+            <ul className="list-disc ml-4">
               <li>B.E. in Computer Engineering</li>
               <li>Full time freelancer</li>
-            </div>
-            <div className="flex flex-col gap-2.5">
+            </ul>
+            <ul className="list-disc ml-4">
               <li>Avid learner</li>
               <li>Aspiring indie hacker</li>
-            </div>
+            </ul>
           </div>
           <p>
             One last thing, I'm available for freelance work, so feel free to
