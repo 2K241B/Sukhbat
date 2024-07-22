@@ -1,2 +1,0 @@
-# Sukhbat
-Portfolio
