@@ -55,9 +55,7 @@ export const Navbar = () => {
           {isShow ? (
             <div className="absolute top-[40px] left-0 z-10 bg-[#F4F4F5] w-[154px] pr-2 pl-4 rounded-[5px] flex flex-col gap-2 py-2">
               {x.map((el, i) => (
-                <div key={i} ondrop={onChangeHandler}>
-                  {el}
-                </div>
+                <div>{el}</div>
               ))}
             </div>
           ) : (
