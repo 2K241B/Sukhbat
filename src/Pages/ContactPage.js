@@ -3,7 +3,7 @@ import { ContactCard } from '../components/ContactCard.js';
 
 const styles = {
   container: 'flex flex-col items-center gap-[100px] h-full',
-  text: 'text-[#696A75] font-base font-normal leading-6',
+  text: 'text-[#696A75] text-base font-normal leading-6',
   input:
     'w-[225px] h-[38px] py-[14px] pr-[14px] pl-[20px] items-center flex gap-3 flex-shrink-0 border-[1px] border-[#DCDDDF] outline-none rounded-[5px]',
 };
