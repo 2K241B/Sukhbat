@@ -1,6 +1,6 @@
-import { AllBlogPostTag } from '../constants.js';
-import { Carousel } from './Carousel';
-import { Trending } from './Trending';
+import { AllBlogPostTag } from '../constants.js/index.js';
+import { Carousel } from '../components/Carousel.js';
+import { Trending } from '../components/Trending.js';
 import { AllBlogPost } from './AllBlogPost.js';
 export const HomePage = () => {
   return (

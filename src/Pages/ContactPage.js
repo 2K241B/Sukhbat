@@ -1,5 +1,5 @@
 import { contactData } from '../constants.js/index.js';
-import { ContactCard } from './ContactCard.js';
+import { ContactCard } from '../components/ContactCard.js';
 
 const styles = {
   container: 'flex flex-col items-center gap-[100px] h-full',
