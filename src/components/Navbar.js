@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 import Logo from '../Assets/Logo.png';
-import { AllBlogPostTag, Menutext } from '../constants.js';
+import { AllBlogContent, AllBlogPostTag, Menutext } from '../constants.js';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -16,7 +16,8 @@ const styles = {
 
 export const Navbar = () => {
   const [text, setText] = useState('');
-  const [isShow, setIsShow] = useState(false);
+  const [searchText, setSearchText] = useState(AllBlogContent);
+  const [isShow, setIsShow] = useState(true);
   const handlerClick = () => {
     setIsShow(!isShow);
   };
@@ -24,8 +25,8 @@ export const Navbar = () => {
     setText(event.target.value);
   };
 
-  const x = AllBlogPostTag.filter((el, i) =>
-    el.toLowerCase().includes(text.toLowerCase())
+  const x = searchText.filter((el, i) =>
+    el.title.toLowerCase().includes(text.toLowerCase())
   );
   return (
     <div className={styles.container}>
@@ -55,9 +56,13 @@ export const Navbar = () => {
             />
           </div>
           {isShow ? (
-            <div className="absolute top-[40px] left-0 z-10 bg-[#F4F4F5] w-[154px] pr-2 pl-4 rounded-[5px] flex flex-col gap-2 py-2">
+            <div className="absolute top-[40px] left-0 z-10 bg-[#F4F4F5] w-[300px] pr-2 pl-4 rounded-[5px] flex flex-col gap-2 py-2 z-20">
               {x.map((el, i) => (
-                <div>{el}</div>
+                <div className="flex flex-col gap-1 border-b-2 p-2 last:border-0">
+                  <p className="text-[#4B6BFB]">{el.tag}</p>
+                  <p className="font-medium">{el.title}</p>
+                  <p className="text-[#97989F]">{el.date}</p>
+                </div>
               ))}
             </div>
           ) : (
