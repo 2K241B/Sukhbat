@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 import Logo from '../Assets/Logo.png';
-import { AllBlogContent, AllBlogPostTag, Menutext } from '../constants.js';
+import { AllBlogContent, Menutext } from '../constants.js';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -56,7 +56,7 @@ export const Navbar = () => {
             />
           </div>
           {isShow ? (
-            <div className="absolute top-[40px] left-0 z-10 bg-[#F4F4F5] w-[300px] pr-2 pl-4 rounded-[5px] flex flex-col gap-2 py-2 z-20">
+            <div className="absolute top-[40px] left-0 bg-[#F4F4F5] w-[300px] pr-2 pl-4 rounded-[5px] flex flex-col gap-2 py-2 z-20">
               {x.map((el, i) => (
                 <div className="flex flex-col gap-1 border-b-2 p-2 last:border-0">
                   <p className="text-[#4B6BFB]">{el.tag}</p>
