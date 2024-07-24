@@ -28,55 +28,57 @@ export const AllBlogPost = ({ postTag }) => {
     setTextColor(Color);
   };
   return (
-    <div className={styles.conatiner}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.header}>All Blog Post</h1>
-        {postTag ? (
-          <div className="flex cursor-pointer justify-between items-center text-center">
-            <div className="flex  gap-5 ">
-              {postTag.map((el, i) => (
-                <p
-                  className={`${styles.tag} [&:nth-child(${textColor})]:text-[#D4A373]`}
-                  onClick={() => Click(i)}
-                >
-                  {el}
-                </p>
-              ))}
+    <>
+      <div className={styles.conatiner}>
+        <div className={styles.textContainer}>
+          <h1 className={styles.header}>All Blog Post</h1>
+          {postTag ? (
+            <div className="flex cursor-pointer justify-between items-center text-center">
+              <div className="flex  gap-5 ">
+                {postTag.map((el, i) => (
+                  <p
+                    className={`${styles.tag} [&:nth-child(${textColor})]:text-[#D4A373]`}
+                    onClick={() => Click(i)}
+                  >
+                    {el}
+                  </p>
+                ))}
+              </div>
+              <Link to="/Blog" className={`text-right ${styles.tag}`}>
+                <p>View All</p>
+              </Link>
             </div>
-            <Link to="/Blog" className={`text-right ${styles.tag}`}>
-              <p>View All</p>
-            </Link>
+          ) : null}
+        </div>
+        {postTag ? (
+          <div className={styles.postContainer}>
+            {filteredData.map((el, index) => (
+              <Post
+                key={index}
+                img={el.img}
+                tag={el.tag}
+                title={el.title}
+                date={el.date}
+              />
+            ))}
           </div>
-        ) : null}
+        ) : (
+          <div className={styles.postContainer}>
+            {allPost.map((el, index) => (
+              <Post
+                key={index}
+                autorImg="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
+                autorName="Hello World"
+                img={el.img}
+                tag={el.tag}
+                title={el.title}
+                date={el.date}
+              />
+            ))}
+          </div>
+        )}
       </div>
-      {postTag ? (
-        <div className={styles.postContainer}>
-          {filteredData.map((el, index) => (
-            <Post
-              key={index}
-              img={el.img}
-              tag={el.tag}
-              title={el.title}
-              date={el.date}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className={styles.postContainer}>
-          {allPost.map((el, index) => (
-            <Post
-              key={index}
-              autorImg="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
-              autorName="Hello World"
-              img={el.img}
-              tag={el.tag}
-              title={el.title}
-              date={el.date}
-            />
-          ))}
-        </div>
-      )}
       {postTag ? <LoadMore /> : <></>}
-    </div>
+    </>
   );
 };
