@@ -1,8 +1,7 @@
 import { Footer, Navbar } from '../components';
 
 const styles = {
-  container:
-    'flex flex-col justify-center items-center gap-[100px] max-w-[1217px]',
+  container: 'flex flex-col items-center gap-[100px] max-w-[1216px]',
 };
 export const BasicLayout = ({ children }) => {
   return (
