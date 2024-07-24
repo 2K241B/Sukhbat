@@ -16,6 +16,7 @@ const styles = {
 
 export const AllBlogPost = ({ postTag }) => {
   const [allPost, setAllPost] = useState(AllBlogContent);
+  const [textColor, setTextColor] = useState(1);
   const [filteredData, setFilteredData] = useState(allPost);
   const Click = (i) => {
     if (AllBlogPostTag[i] === 'All') {
@@ -23,17 +24,21 @@ export const AllBlogPost = ({ postTag }) => {
     } else {
       setFilteredData(allPost.filter((el) => el.tag === AllBlogPostTag[i]));
     }
+    let Color = i + 1;
+    setTextColor(Color);
   };
-
   return (
     <div className={styles.conatiner}>
       <div className={styles.textContainer}>
         <h1 className={styles.header}>All Blog Post</h1>
         {postTag ? (
-          <div className="flex cursor-pointer justify-between items-center text-center text-">
+          <div className="flex cursor-pointer justify-between items-center text-center">
             <div className="flex  gap-5 ">
               {postTag.map((el, i) => (
-                <p className={styles.tag} onClick={() => Click(i)}>
+                <p
+                  className={`${styles.tag} [&:nth-child(${textColor})]:text-[#D4A373]`}
+                  onClick={() => Click(i)}
+                >
                   {el}
                 </p>
               ))}
