@@ -16,10 +16,9 @@ const styles = {
 
 export const AllBlogPost = ({ postTag }) => {
   const [allPost, setAllPost] = useState(AllBlogContent);
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState(allPost);
   const Click = (i) => {
     if (AllBlogPostTag[i] === 'All') {
-      setAllPost(AllBlogContent);
       setFilteredData(allPost);
     } else {
       setFilteredData(allPost.filter((el) => el.tag === AllBlogPostTag[i]));
@@ -59,7 +58,7 @@ export const AllBlogPost = ({ postTag }) => {
         </div>
       ) : (
         <div className={styles.postContainer}>
-          {filteredData.map((el, index) => (
+          {allPost.map((el, index) => (
             <Post
               key={index}
               autorImg="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"

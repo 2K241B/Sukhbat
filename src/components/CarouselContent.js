@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Tag } from './Tag';
 
 export const CarouselContent = ({ img, tag, title, date }) => {
@@ -15,11 +16,13 @@ export const CarouselContent = ({ img, tag, title, date }) => {
   return (
     <div className={carouselStyles.container}>
       <img src={img} alt={img} className={carouselStyles.img}></img>
-      <div className={carouselStyles.content}>
-        <Tag tag={tag} />
-        <h1 className={carouselStyles.title}>{title}</h1>
-        <p className={carouselStyles.date}>{date}</p>
-      </div>
+      <Link to="/BlogPost">
+        <div className={carouselStyles.content}>
+          <Tag tag={tag} />
+          <h1 className={carouselStyles.title}>{title}</h1>
+          <p className={carouselStyles.date}>{date}</p>
+        </div>
+      </Link>
     </div>
   );
 };
