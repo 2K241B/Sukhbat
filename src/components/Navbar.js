@@ -30,7 +30,7 @@ export const Navbar = () => {
   return (
     <div className={styles.container}>
       <Link to="/Home">
-        <img src={Logo} alt="Logo"></img>
+        <img src={Logo} alt="Logo" className="min-w-[158px] min-h-[36px]"></img>
       </Link>
       <div className={styles.navbarContainer}>
         <div className={styles.menu}>
