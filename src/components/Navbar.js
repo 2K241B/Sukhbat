@@ -17,7 +17,7 @@ const styles = {
 export const Navbar = () => {
   const [text, setText] = useState('');
   const [searchText, setSearchText] = useState(AllBlogContent);
-  const [isShow, setIsShow] = useState(true);
+  const [isShow, setIsShow] = useState(false);
   const handlerClick = () => {
     setIsShow(!isShow);
   };
@@ -56,9 +56,9 @@ export const Navbar = () => {
             />
           </div>
           {isShow ? (
-            <div className="absolute top-[40px] left-0 bg-[#F4F4F5] w-[300px] pr-2 pl-4 rounded-[5px] flex flex-col gap-2 py-2 z-20">
+            <div className="absolute top-[40px] left-0 bg-[#F4F4F5] w-[280px] px-2 py-2 rounded-[5px] flex flex-col gap-2 z-20">
               {x.map((el, i) => (
-                <div className="flex flex-col gap-1 border-b-2 p-2 last:border-0">
+                <div className="flex flex-col gap-1 border-b-2 last:border-0 p-2">
                   <p className="text-[#4B6BFB]">{el.tag}</p>
                   <p className="font-medium">{el.title}</p>
                   <p className="text-[#97989F]">{el.date}</p>
