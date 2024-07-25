@@ -7,16 +7,16 @@ const styles = {
   cardContainer: 'flex flex-row gap-5 text-[#ffffff]',
 };
 
-export const Trending = () => {
+export const Trending = ({ Content }) => {
   return (
     <Link to="/BlogPost" className={styles.container}>
       <h2 className={styles.header}>Trending</h2>
       <div className={styles.cardContainer}>
         {content.map((el, index) => (
           <Card
-            image={AllBlogContent[index].img}
-            tag={AllBlogContent[index].tag}
-            title={AllBlogContent[index].title}
+            image={Content[index].img}
+            tag={Content[index].tag}
+            title={Content[index].title}
           />
         ))}
       </div>
