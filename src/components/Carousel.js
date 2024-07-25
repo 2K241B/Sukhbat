@@ -27,12 +27,12 @@ export const Carousel = ({ Content }) => {
         className={styles.sliderContainer}
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {Content.map((el) => (
+        {Content.map((el, i) => (
           <CarouselContent
-            img={el.img}
-            tag={el.tag}
+            img={el.social_image}
+            tag={el.tag_list[0]}
             title={el.title}
-            date={el.date}
+            date={el.published_at}
           />
         ))}
       </div>

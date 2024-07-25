@@ -14,8 +14,8 @@ export const Trending = ({ Content }) => {
       <div className={styles.cardContainer}>
         {content.map((el, index) => (
           <Card
-            image={Content[index].img}
-            tag={Content[index].tag}
+            image={Content[index].cover_image}
+            tag={Content[index].tag_list[0]}
             title={Content[index].title}
           />
         ))}
