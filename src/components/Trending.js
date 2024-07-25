@@ -1,6 +1,7 @@
 import { Card } from './Card';
-import { content } from '../constants.js';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const styles = {
   container: 'flex flex-col gap-[30px] items-start w-[1231px]',
   header: 'text-2xl font-bold text-[#181A2A]',
@@ -8,16 +9,20 @@ const styles = {
 };
 
 export const Trending = ({ Content }) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get('https://dev.to/api/articles').then((response) => {
+      setData(response.data);
+    });
+  }, []);
+
+  const CardContent = data.splice(5, 4);
   return (
     <Link to="/BlogPost" className={styles.container}>
       <h2 className={styles.header}>Trending</h2>
       <div className={styles.cardContainer}>
-        {content.map((el, index) => (
-          <Card
-          // image={Content[index].cover_image}
-          // tag={Content[index].tag_list[0]}
-          // title={Content[index].title}
-          />
+        {CardContent.map((el, index) => (
+          <Card image={el.cover_image} tag={el.tag_list[0]} title={el.title} />
         ))}
       </div>
     </Link>

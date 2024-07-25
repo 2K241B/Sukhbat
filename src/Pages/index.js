@@ -1,4 +1,4 @@
-export * from './AllBlogPost';
+export * from './AllBlogPostPage';
 export * from './BlogPost';
 export * from './ContactPage';
 export * from './ErrorPage';
