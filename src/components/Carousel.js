@@ -9,7 +9,7 @@ const styles = {
   button:
     'size-10 rounded-md border-[1px] border-solid border-[#696A75] flex items-center justify-center',
 };
-export const Carousel = () => {
+export const Carousel = ({ Content }) => {
   const [current, setCurrent] = useState(0);
   const leftClick = () => {
     if (current > 0) {
@@ -27,7 +27,7 @@ export const Carousel = () => {
         className={styles.sliderContainer}
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {AllBlogContent.map((el) => (
+        {Content.map((el) => (
           <CarouselContent
             img={el.img}
             tag={el.tag}

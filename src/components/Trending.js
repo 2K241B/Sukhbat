@@ -1,5 +1,5 @@
 import { Card } from './Card';
-import { AllBlogContent, content } from '../constants.js';
+import { content } from '../constants.js';
 import { Link } from 'react-router-dom';
 const styles = {
   container: 'flex flex-col gap-[30px] items-start w-[1231px]',

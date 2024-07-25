@@ -5,7 +5,7 @@ import { AllBlogPost } from './AllBlogPost.js';
 export const HomePage = () => {
   return (
     <div className="flex flex-col items-center gap-[100px]">
-      <Carousel />
+      <Carousel Content={AllBlogContent} />
       <Trending Content={AllBlogContent} />
       <AllBlogPost postTag={AllBlogPostTag} />
     </div>
