@@ -11,12 +11,12 @@ const styles = {
 export const Carousel = ({ Content }) => {
   const [current, setCurrent] = useState(0);
   const leftClick = () => {
-    if (current > 0) {
+    if (current >= 0) {
       setCurrent(current === Content.length - 1 ? 0 : current - 1);
     }
   };
   const rightClick = () => {
-    if (current < Content.length - 1) {
+    if (current <= Content.length - 1) {
       setCurrent(current === Content.length - 1 ? 0 : current + 1);
     }
   };
