@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { AllBlogContent, AllBlogPostTag } from '../constants.js/index.js';
 import { LoadMore } from '../components/LoadMore.js';
 import { Post } from '../components/Post.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const styles = {
   conatiner: 'flex flex-col items-center gap-8',
   textContainer:
@@ -15,18 +16,24 @@ const styles = {
 };
 
 export const AllBlogPost = ({ postTag }) => {
-  const [allPost, setAllPost] = useState(AllBlogContent);
+  const [allPost, setAllPost] = useState([]);
+  useEffect(() => {
+    axios.get('https://dev.to/api/articles').then((response) => {
+      setAllPost(response.data);
+    });
+  }, []);
+
   const [textColor, setTextColor] = useState(1);
   const [filteredData, setFilteredData] = useState(allPost);
-  const Click = (i) => {
-    if (AllBlogPostTag[i] === 'All') {
-      setFilteredData(allPost);
-    } else {
-      setFilteredData(allPost.filter((el) => el.tag === AllBlogPostTag[i]));
-    }
-    let Color = i + 1;
-    setTextColor(Color);
-  };
+  // const Click = (i) => {
+  //   if (AllBlogPostTag[i] === 'All') {
+  //     setFilteredData(allPost);
+  //   } else {
+  //     setFilteredData(allPost.filter((el) => el.tag === AllBlogPostTag[i]));
+  //   }
+  //   let Color = i + 1;
+  //   setTextColor(Color);
+  // };
   return (
     <>
       <div className={styles.conatiner}>
@@ -38,7 +45,7 @@ export const AllBlogPost = ({ postTag }) => {
                 {postTag.map((el, i) => (
                   <p
                     className={`${styles.tag} [&:nth-child(${textColor})]:text-[#D4A373]`}
-                    onClick={() => Click(i)}
+                    // onClick={() => Click(i)}
                   >
                     {el}
                   </p>
@@ -55,10 +62,10 @@ export const AllBlogPost = ({ postTag }) => {
             {filteredData.map((el, index) => (
               <Post
                 key={index}
-                img={el.img}
-                tag={el.tag}
+                img={el.social_image}
+                tag={el.tag_list[0]}
                 title={el.title}
-                date={el.date}
+                date={el.published_at}
               />
             ))}
           </div>
@@ -67,12 +74,12 @@ export const AllBlogPost = ({ postTag }) => {
             {allPost.map((el, index) => (
               <Post
                 key={index}
-                autorImg="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
-                autorName="Hello World"
-                img={el.img}
-                tag={el.tag}
+                autorImg={el.user.profile_image}
+                autorName={el.user.name}
+                img={el.social_image}
+                tag={el.tag_list[0]}
                 title={el.title}
-                date={el.date}
+                date={el.published_at}
               />
             ))}
           </div>
