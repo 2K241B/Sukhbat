@@ -1,8 +1,8 @@
 const styles = {
   primary:
-    'px-[10px] py-1 rounded-md  w-fit  text-[12px] bg-[#4B6BFB] text-white',
+    'px-[10px] py-1 rounded-md  w-fit  text-[12px] bg-[#4B6BFB] text-white capitalize',
   secondary:
-    'px-[10px] py-1 rounded-md  w-fit  text-[12px] text-[#4B6BFB] bg-[rgba(75,107,251,0.05)]',
+    'px-[10px] py-1 rounded-md  w-fit  text-[12px] text-[#4B6BFB] bg-[rgba(75,107,251,0.05)] capitalize',
 };
 
 export const Tag = ({ tag, isPrimary = true }) => {

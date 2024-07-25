@@ -2,8 +2,8 @@ import { Search } from 'lucide-react';
 import Logo from '../Assets/Logo.png';
 import { AllBlogContent, Menutext } from '../constants.js';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 const styles = {
   container:
     'flex gap-[118px] py-8 justify-start items-start max-w-[1130px] mr-[90px]',
@@ -15,8 +15,14 @@ const styles = {
 };
 
 export const Navbar = () => {
+  const [searchText, setSearchText] = useState([]);
+  useEffect(() => {
+    axios.get('https://dev.to/api/articles').then((response) => {
+      setSearchText(response.data);
+    });
+  }, []);
   const [text, setText] = useState('');
-  const [searchText, setSearchText] = useState(AllBlogContent);
+
   const [isShow, setIsShow] = useState(false);
   const handlerClick = () => {
     setIsShow(!isShow);
@@ -59,9 +65,9 @@ export const Navbar = () => {
             <div className="absolute top-[40px] left-0 bg-[#F4F4F5] w-[280px] px-2 py-2 rounded-[5px] flex flex-col gap-2 z-20">
               {x.map((el, i) => (
                 <div className="flex flex-col gap-1 border-b-2 last:border-0 p-2">
-                  <p className="text-[#4B6BFB]">{el.tag}</p>
+                  <p className="text-[#4B6BFB]">{el.tag_list[0]}</p>
                   <p className="font-medium">{el.title}</p>
-                  <p className="text-[#97989F]">{el.date}</p>
+                  <p className="text-[#97989F]">{el.published_at}</p>
                 </div>
               ))}
             </div>

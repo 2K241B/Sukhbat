@@ -12,14 +12,6 @@ export const Menutext = ['Home', 'Blog', 'Contact'];
 // trending
 export const content = ['', '', '', ''];
 // allblogpost
-export const AllBlogPostTag = [
-  'All',
-  'Design',
-  'Travel',
-  'Fashion',
-  'Technology',
-  'Branding',
-];
 
 export const AllBlogContent = [
   {
