@@ -19,7 +19,7 @@ export const AllBlogPost = ({ postTag }) => {
   useEffect(() => {
     axios.get('https://dev.to/api/articles').then((response) => {
       setAllPost(response.data);
-      setFilteredData(response.data);
+      setFilteredData(response.data.slice(0, 9));
     });
   }, []);
   const AllBlogPostTag = allPost.map((el) => `${el.tag_list[0]}`);
