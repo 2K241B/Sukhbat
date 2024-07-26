@@ -6,6 +6,7 @@ import axios from 'axios';
 import { LoadMore } from '../components/LoadMore.js';
 export const HomePage = () => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     axios.get('https://dev.to/api/articles').then((response) => {
       setData(response.data);

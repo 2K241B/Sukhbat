@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react';
 import Logo from '../Assets/Logo.png';
-import { AllBlogContent, Menutext } from '../constants.js';
-import { Link } from 'react-router-dom';
+import { Menutext } from '../constants.js';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 const styles = {
@@ -16,6 +16,7 @@ const styles = {
 
 export const Navbar = () => {
   const [searchText, setSearchText] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get('https://dev.to/api/articles').then((response) => {
       setSearchText(response.data);
@@ -34,6 +35,9 @@ export const Navbar = () => {
   const x = searchText.filter((el, i) =>
     el.title.toLowerCase().includes(text.toLowerCase())
   );
+  const handlePostClick = (id) => {
+    navigate(`/${id}`);
+  };
   return (
     <div className={styles.container}>
       <Link to="/Home">

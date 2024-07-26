@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Post } from './Post.js';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -16,6 +16,7 @@ const styles = {
 export const AllBlogPost = ({ postTag }) => {
   const [allPost, setAllPost] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get('https://dev.to/api/articles').then((response) => {
       setAllPost(response.data);
@@ -31,6 +32,9 @@ export const AllBlogPost = ({ postTag }) => {
     );
     let Color = i + 1;
     setTextColor(Color);
+  };
+  const handlePostClick = (id) => {
+    navigate(`/${id}`);
   };
   return (
     <>
@@ -59,6 +63,7 @@ export const AllBlogPost = ({ postTag }) => {
           <div className={styles.postContainer}>
             {filteredData.map((el, index) => (
               <Post
+                onClick={() => handlePostClick(el.id)}
                 key={index}
                 img={el.social_image}
                 tag={el.tag_list[0]}
@@ -71,6 +76,7 @@ export const AllBlogPost = ({ postTag }) => {
           <div className={styles.postContainer}>
             {allPost.map((el, index) => (
               <Post
+                onClick={() => handlePostClick(el.id)}
                 key={index}
                 autorImg={el.user.profile_image}
                 autorName={el.user.name}
