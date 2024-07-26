@@ -16,7 +16,7 @@ export const Trending = ({ Content }) => {
     });
   }, []);
 
-  const CardContent = data.splice(5, 4);
+  const CardContent = data.slice(15, 19);
   return (
     <Link to="/BlogPost" className={styles.container}>
       <h2 className={styles.header}>Trending</h2>
