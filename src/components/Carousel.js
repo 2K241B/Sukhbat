@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { CarouselContent } from './CarouselContent.js';
+import { useNavigate } from 'react-router-dom';
 const styles = {
   section: 'max-w-[1200px] overflow-hidden',
   sliderContainer: ' flex transition-transform duration-500 ease-out',
@@ -10,6 +11,7 @@ const styles = {
 };
 export const Carousel = ({ Content }) => {
   const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
   const leftClick = () => {
     if (current >= 0) {
       setCurrent(current === Content.length - 1 ? 0 : current - 1);
@@ -20,6 +22,9 @@ export const Carousel = ({ Content }) => {
       setCurrent(current === Content.length - 1 ? 0 : current + 1);
     }
   };
+  const handlePostClick = (id) => {
+    navigate(`/${id}`);
+  };
   return (
     <div className={styles.section}>
       <div
@@ -28,6 +33,7 @@ export const Carousel = ({ Content }) => {
       >
         {Content.map((el, i) => (
           <CarouselContent
+            onClick={() => handlePostClick(el.id)}
             img={el.social_image}
             tag={el.tag_list[0]}
             title={el.title}

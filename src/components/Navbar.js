@@ -68,7 +68,10 @@ export const Navbar = () => {
           {isShow ? (
             <div className="absolute top-[40px] left-0 bg-[#F4F4F5] w-[280px] px-2 py-2 rounded-[5px] flex flex-col gap-2 z-20">
               {x.map((el, i) => (
-                <div className="flex flex-col gap-1 border-b-2 last:border-0 p-2">
+                <div
+                  className="flex flex-col gap-1 border-b-2 last:border-0 p-2 cursor-pointer"
+                  onClick={() => handlePostClick(el.id)}
+                >
                   <p className="text-[#4B6BFB]">{el.tag_list[0]}</p>
                   <p className="font-medium">{el.title}</p>
                   <p className="text-[#97989F]">{el.published_at}</p>

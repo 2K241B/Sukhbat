@@ -1,6 +1,6 @@
 import { Tag } from './Tag';
 
-export const Card = ({ image, tag, title }) => {
+export const Card = ({ image, tag, title, onClick }) => {
   const styles = {
     container:
       'max-w-[293px] h-[320px] rounded-xl flex flex-col justify-end gap-4 p-8 bg-center bg-cover relative',
@@ -12,6 +12,7 @@ export const Card = ({ image, tag, title }) => {
     <div
       style={{ backgroundImage: `url('${image}')` }}
       className={styles.container}
+      onClick={onClick}
     >
       <div className="w-full h-full bg-[#00000040] rounded-xl absolute top-0 left-0"></div>
       <div className={styles.content}>
