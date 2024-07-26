@@ -66,7 +66,7 @@ export const Navbar = () => {
             />
           </div>
           {isShow ? (
-            <div className="absolute top-[40px] left-0 bg-[#F4F4F5] w-[280px] px-2 py-2 rounded-[5px] flex flex-col gap-2 z-20">
+            <div className="absolute top-[40px] left-0 bg-[#F4F4F5] w-[280px] px-2 py-2 rounded-[5px] flex flex-col gap-2 z-20 h-[560px] overflow-auto">
               {x.map((el, i) => (
                 <div
                   className="flex flex-col gap-1 border-b-2 last:border-0 p-2 cursor-pointer"
