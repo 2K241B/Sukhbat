@@ -35,6 +35,7 @@ const AllBlogPostTag = [
 export const AllBlogPost = ({ postTag }) => {
   const [allPost, setAllPost] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [isShow, setIsShow] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     axios.get('https://dev.to/api/articles').then((response) => {
@@ -50,7 +51,9 @@ export const AllBlogPost = ({ postTag }) => {
   const handleClick = (i) => {
     if (AllBlogPostTag[i] === 'all') {
       setFilteredData(allPost.slice(0, 9));
+      setIsShow(true);
     } else {
+      setIsShow(false);
       setFilteredData(
         allPost.filter((el) => el.tag_list[0] === AllBlogPostTag[i])
       );
@@ -117,7 +120,7 @@ export const AllBlogPost = ({ postTag }) => {
           </div>
         )}
       </div>
-      {postTag ? <LoadMore onclick={HandleClickLoadMore} /> : <></>}
+      {isShow ? <LoadMore onclick={HandleClickLoadMore} /> : <></>}
     </>
   );
 };
