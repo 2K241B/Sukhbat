@@ -9,6 +9,8 @@ const styles = {
     'flex flex-col w-[1216px] gap-8 text-[#495057] font-bold self-strech',
   header: 'font-bold text-2xl leading-7 text-[#181A2A]',
   tag: 'text-[#495057] text-sm font-bold leading-[25px] hover:text-[#D4A373] capitalize',
+  activeTag:
+    'text-[#D4A373] text-sm font-bold leading-[25px] hover:text-[#D4A373] capitalize',
   postContainer: 'flex flex-wrap w-[1216px] gap-5',
   button:
     'py-3 px-5 items-center rounded-[6px] border-[#696A754D] border-[1px] mb-[80px]',
@@ -72,11 +74,7 @@ export const AllBlogPost = ({ postTag }) => {
               <div className="flex flex-wrap gap-5 ">
                 {AllBlogPostTag.map((el, i) => (
                   <p
-                    className={
-                      i === textColor
-                        ? 'text-[#D4A373] text-sm font-bold leading-[25px] hover:text-[#D4A373] capitalize'
-                        : styles.tag
-                    }
+                    className={i === textColor ? styles.activeTag : styles.tag}
                     onClick={() => handleClick(i)}
                   >
                     {el}
