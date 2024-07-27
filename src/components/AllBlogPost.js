@@ -11,6 +11,7 @@ const styles = {
   postContainer: 'flex flex-wrap w-[1216px] gap-5',
   button:
     'py-3 px-5 items-center rounded-[6px] border-[#696A754D] border-[1px] mb-[80px]',
+  tagContainer: 'flex cursor-pointer justify-between text-center gap-3',
 };
 
 export const AllBlogPost = ({ postTag }) => {
@@ -23,13 +24,34 @@ export const AllBlogPost = ({ postTag }) => {
       setFilteredData(response.data.slice(0, 9));
     });
   }, []);
-  const AllBlogPostTag = allPost.map((el) => `${el.tag_list[0]}`);
+  const AllBlogPostTag = [
+    'all',
+    'watercooler',
+    'devchallenge',
+    'news',
+    'webdev',
+    'jokes',
+    'crowdstrike',
+    'ai',
+    'javascript',
+    'senior',
+    'windows',
+    'errors',
+    'stellarchallenge',
+    'productivity',
+  ];
+  // const AllBlogPostTag = allPost.map((el) => `${el.tag_list[0]}`);
   const [textColor, setTextColor] = useState(1);
 
   const handleClick = (i) => {
-    setFilteredData(
-      allPost.filter((el) => el.tag_list[0] === AllBlogPostTag[i])
-    );
+    if (AllBlogPostTag[i] === 'all') {
+      setFilteredData(allPost.slice(0, 9));
+    } else {
+      setFilteredData(
+        allPost.filter((el) => el.tag_list[0] === AllBlogPostTag[i])
+      );
+    }
+
     let Color = i + 1;
     setTextColor(Color);
   };
@@ -42,14 +64,14 @@ export const AllBlogPost = ({ postTag }) => {
         <div className={styles.textContainer}>
           <h1 className={styles.header}>All Blog Post</h1>
           {postTag ? (
-            <div className="flex cursor-pointer justify-between text-center gap-3">
+            <div className={styles.tagContainer}>
               <div className="flex flex-wrap gap-5 ">
-                {postTag.map((el, i) => (
+                {AllBlogPostTag.map((el, i) => (
                   <p
                     className={`${styles.tag} [&:nth-child(${textColor})]:text-[#D4A373]`}
                     onClick={() => handleClick(i)}
                   >
-                    {el.tag_list[0]}
+                    {el}
                   </p>
                 ))}
               </div>
