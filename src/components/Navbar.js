@@ -36,7 +36,7 @@ export const Navbar = () => {
     el.title.toLowerCase().includes(text.toLowerCase())
   );
   const handlePostClick = (id) => {
-    navigate(`/${id}`);
+    navigate(`/Post/${id}`);
   };
   return (
     <div className={styles.container}>

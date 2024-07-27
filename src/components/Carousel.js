@@ -23,7 +23,7 @@ export const Carousel = ({ Content }) => {
     }
   };
   const handlePostClick = (id) => {
-    navigate(`/${id}`);
+    navigate(`/Post/${id}`);
   };
   return (
     <div className={styles.section}>

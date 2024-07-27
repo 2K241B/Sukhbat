@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Post } from './Post.js';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { LoadMore } from '../components/LoadMore.js';
+import { Post } from '../components/Post.js';
 const styles = {
   conatiner: 'flex flex-col items-center gap-8',
   textContainer:
@@ -13,7 +14,22 @@ const styles = {
     'py-3 px-5 items-center rounded-[6px] border-[#696A754D] border-[1px] mb-[80px]',
   tagContainer: 'flex cursor-pointer justify-between text-center gap-3',
 };
-
+const AllBlogPostTag = [
+  'all',
+  'watercooler',
+  'devchallenge',
+  'news',
+  'webdev',
+  'jokes',
+  'crowdstrike',
+  'ai',
+  'javascript',
+  'senior',
+  'windows',
+  'errors',
+  'stellarchallenge',
+  'productivity',
+];
 export const AllBlogPost = ({ postTag }) => {
   const [allPost, setAllPost] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -24,24 +40,10 @@ export const AllBlogPost = ({ postTag }) => {
       setFilteredData(response.data.slice(0, 9));
     });
   }, []);
-  const AllBlogPostTag = [
-    'all',
-    'watercooler',
-    'devchallenge',
-    'news',
-    'webdev',
-    'jokes',
-    'crowdstrike',
-    'ai',
-    'javascript',
-    'senior',
-    'windows',
-    'errors',
-    'stellarchallenge',
-    'productivity',
-  ];
+
   // const AllBlogPostTag = allPost.map((el) => `${el.tag_list[0]}`);
   const [textColor, setTextColor] = useState(1);
+  let [load, setLoad] = useState(9);
 
   const handleClick = (i) => {
     if (AllBlogPostTag[i] === 'all') {
@@ -56,7 +58,11 @@ export const AllBlogPost = ({ postTag }) => {
     setTextColor(Color);
   };
   const handlePostClick = (id) => {
-    navigate(`/${id}`);
+    navigate(`/Post/${id}`);
+  };
+  const HandleClickLoadMore = () => {
+    setLoad(load + 3);
+    setFilteredData(allPost.slice(0, load));
   };
   return (
     <>
@@ -111,6 +117,11 @@ export const AllBlogPost = ({ postTag }) => {
           </div>
         )}
       </div>
+      {postTag ? (
+        <LoadMore text={'Load More'} onclick={HandleClickLoadMore} />
+      ) : (
+        <></>
+      )}
     </>
   );
 };

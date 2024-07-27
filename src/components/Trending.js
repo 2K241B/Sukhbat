@@ -18,7 +18,7 @@ export const Trending = ({ Content }) => {
     });
   }, []);
   const handlePostClick = (id) => {
-    navigate(`/${id}`);
+    navigate(`/Post/${id}`);
   };
   const CardContent = data.slice(15, 19);
   return (

@@ -2,13 +2,8 @@ import './App.css';
 import { ScrollToTop } from './components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { BasicLayout } from './layout/BasicLayout';
-import {
-  AllBlogPostPage,
-  BlogPost,
-  ContactPage,
-  ErrorPage,
-  HomePage,
-} from './Pages';
+import { BlogPost, ContactPage, ErrorPage, HomePage } from './Pages';
+import { AllBlogPost } from './Pages/AllBlogPost';
 
 function App() {
   return (
@@ -18,9 +13,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/Home" element={<HomePage />} />
-          <Route path="/Blog" element={<AllBlogPostPage />} />
+          <Route path="/Blog" element={<AllBlogPost />} />
           <Route path="/Contact" element={<ContactPage />} />
-          <Route path=":id" element={<BlogPost />} />
+          <Route path="/Post/:id" element={<BlogPost />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BasicLayout>

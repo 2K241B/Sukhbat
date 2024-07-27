@@ -1,9 +1,8 @@
 import { Carousel } from '../components/Carousel.js';
 import { Trending } from '../components/Trending.js';
-import { AllBlogPost } from '../components/AllBlogPost.js';
+import { AllBlogPost } from './AllBlogPost.js';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { LoadMore } from '../components/LoadMore.js';
 export const HomePage = () => {
   const [data, setData] = useState([]);
 
@@ -18,7 +17,6 @@ export const HomePage = () => {
       <Carousel Content={data} />
       <Trending Content={data} />
       <AllBlogPost postTag={data} Content={data} />
-      <LoadMore />
     </div>
   );
 };
