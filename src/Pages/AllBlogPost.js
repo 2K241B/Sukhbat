@@ -42,7 +42,7 @@ export const AllBlogPost = ({ postTag }) => {
   }, []);
 
   // const AllBlogPostTag = allPost.map((el) => `${el.tag_list[0]}`);
-  const [textColor, setTextColor] = useState(1);
+  const [textColor, setTextColor] = useState(0);
   let [load, setLoad] = useState(9);
 
   const handleClick = (i) => {
@@ -53,9 +53,7 @@ export const AllBlogPost = ({ postTag }) => {
         allPost.filter((el) => el.tag_list[0] === AllBlogPostTag[i])
       );
     }
-
-    let Color = i + 1;
-    setTextColor(Color);
+    setTextColor(i);
   };
   const handlePostClick = (id) => {
     navigate(`/Post/${id}`);
@@ -74,7 +72,11 @@ export const AllBlogPost = ({ postTag }) => {
               <div className="flex flex-wrap gap-5 ">
                 {AllBlogPostTag.map((el, i) => (
                   <p
-                    className={`${styles.tag} [&:nth-child(${textColor})]:text-[#D4A373]`}
+                    className={
+                      i === textColor
+                        ? 'text-[#D4A373] text-sm font-bold leading-[25px] hover:text-[#D4A373] capitalize'
+                        : styles.tag
+                    }
                     onClick={() => handleClick(i)}
                   >
                     {el}
@@ -117,11 +119,7 @@ export const AllBlogPost = ({ postTag }) => {
           </div>
         )}
       </div>
-      {postTag ? (
-        <LoadMore text={'Load More'} onclick={HandleClickLoadMore} />
-      ) : (
-        <></>
-      )}
+      {postTag ? <LoadMore onclick={HandleClickLoadMore} /> : <></>}
     </>
   );
 };
