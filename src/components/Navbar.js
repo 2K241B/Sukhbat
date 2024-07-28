@@ -7,7 +7,7 @@ import axios from 'axios';
 const styles = {
   container:
     'flex gap-[118px] py-8 justify-start items-start max-w-[1130px] mr-[90px]',
-  navbarContainer: 'flex gap-[21px]',
+  navbarContainer: 'flex gap-[21px] items-center',
   menu: 'flex gap-10 w-[667px] justify-center items-center',
   inputContainer:
     'flex flex-col py-2 pr-2 pl-4 bg-[#F4F4F5] rounded-[5px] items-center w-[166px] gap-3  relative',
@@ -82,6 +82,12 @@ export const Navbar = () => {
             <></>
           )}
         </div>
+        <Link
+          to="/Login"
+          className="px-3 py-[7px] font-medium rounded-2xl  w-fit  text-[14px] bg-[#4B6BFB] text-white capitalize"
+        >
+          Login
+        </Link>
       </div>
     </div>
   );
