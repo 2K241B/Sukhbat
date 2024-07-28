@@ -1,7 +1,5 @@
 import { Card } from './Card';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 const styles = {
   container:
     'flex flex-col gap-[30px] items-start w-[1231px] hover:cursor-pointer',
@@ -10,17 +8,11 @@ const styles = {
 };
 
 export const Trending = ({ Content }) => {
-  const [data, setData] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    axios.get('https://dev.to/api/articles').then((response) => {
-      setData(response.data);
-    });
-  }, []);
   const handlePostClick = (id) => {
     navigate(`/Post/${id}`);
   };
-  const CardContent = data.slice(15, 19);
+  const CardContent = Content.slice(10, 14);
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Trending</h2>
