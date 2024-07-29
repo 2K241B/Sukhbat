@@ -1,9 +1,6 @@
 // navbar
 export const Menutext = ['Home', 'Blog', 'Contact'];
 // trending
-export const content = ['', '', '', ''];
-// allblogpost
-
 export const facebooksvg = (
   <svg
     xmlns="http://www.w3.org/2000/svg"

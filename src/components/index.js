@@ -5,3 +5,4 @@ export * from './Post';
 export * from './CarouselContent';
 export * from './Footer';
 export * from './ScrollToTop';
+export * from './Tag';

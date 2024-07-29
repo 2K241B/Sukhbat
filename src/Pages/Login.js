@@ -21,16 +21,16 @@ export const Login = () => {
   const passwordOnChange = (event) => {
     setPass(event.target.value);
   };
-  const Usernames = [user.map((el) => `${el.user.username}`)];
+  const Usernames = [user.map((el) => el.user.username)];
   const handlerClick = () => {
     console.log(Usernames);
     Usernames.map((el, i) =>
       el[i] === name && el[i] === pass
         ? (setMassege('login saccess'),
           setToHome('/Home'),
-          console.log(el[i]),
+          console.log(el),
           setLogin('Login'))
-        : setMassege('wrong  username & password!!!')
+        : setMassege('Wrong  Username or Password!!!')
     );
   };
   return (
