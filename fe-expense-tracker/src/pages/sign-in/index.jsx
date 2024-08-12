@@ -1,11 +1,11 @@
-import { LogoIcon } from "@/components/icon/logoIcon";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import React from "react";
+import { LogoIcon } from '@/components/icon/logoIcon';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import React from 'react';
 const SigninPage = () => {
   return (
     <div className="grid grid-cols-2 w-full h-screen">
-      <div className="flex flex-col justify-center items-center w-[384px] gap-10">
+      <div className="flex flex-col justify-center items-center gap-10">
         <LogoIcon />
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-2xl leading-8 font-semibold text-[#0F172A]">
@@ -15,7 +15,7 @@ const SigninPage = () => {
             Welcome back, Please enter your details
           </p>
         </div>
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-[384px] flex flex-col gap-4">
           <Input
             className="p-4 items-center bg-[#F3F4F6] text-[#A3A3A3] h-12"
             type="email"
