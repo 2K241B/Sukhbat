@@ -2,7 +2,8 @@ import { LogoIcon } from '@/components/icon/logoIcon';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import axios from 'axios';
 const styles = {
   container: 'grid grid-cols-2 w-full h-screen',
   contentContainer: 'flex flex-col justify-center items-center gap-10',
@@ -16,10 +17,29 @@ const styles = {
   routerButton: 'bg-white text-[#0166FF] hover:bg-white',
 };
 const SigninPage = () => {
+  const [error, setError] = useState('');
   const router = useRouter();
+  const BASE_URL = 'http://localhost:8000';
+  const formRef = useRef(null);
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const { data } = await axios.post(BASE_URL + '/api/signin', {
+      email: formRef.current[0].value,
+      password: formRef.current[1].value,
+    });
+    if (data.success === true) {
+      router.push('/dashboard');
+    } else {
+      setError('Email or Password Wrong');
+    }
+  };
   return (
     <div className={styles.container}>
-      <div className={styles.contentContainer}>
+      <form
+        className={styles.contentContainer}
+        onSubmit={onSubmit}
+        ref={formRef}
+      >
         <LogoIcon />
         <div className={styles.headTextContainer}>
           <h1 className={styles.header}>Welcome Back</h1>
@@ -34,7 +54,10 @@ const SigninPage = () => {
             type="password"
             placeholder="Password"
           />
-          <Button className={styles.button}>Log in</Button>
+          <p className="text-red-500 font-semibold">{error}</p>
+          <Button className={styles.button} type="submit">
+            Log in
+          </Button>
         </div>
         <div className={styles.bottomTextContainer}>
           <p>Don’t have account?</p>
@@ -45,7 +68,7 @@ const SigninPage = () => {
             Sign up
           </Button>
         </div>
-      </div>
+      </form>
       <div className="bg-[#0166FF]"></div>
     </div>
   );

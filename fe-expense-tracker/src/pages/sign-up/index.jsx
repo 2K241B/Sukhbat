@@ -2,6 +2,8 @@ import { LogoIcon } from '@/components/icon/LogoIcon';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { useRef } from 'react';
 const styles = {
   container: 'grid grid-cols-2 w-full h-screen',
   contentContainer: 'flex flex-col justify-center items-center gap-10',
@@ -16,9 +18,26 @@ const styles = {
 };
 const SignupPage = () => {
   const router = useRouter();
+  const BASE_URL = 'http://localhost:8000';
+  const formRef = useRef(null);
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const { data } = await axios.post(BASE_URL + '/api/signup', {
+      name: formRef.current[0].value,
+      email: formRef.current[1].value,
+      password: formRef.current[2].value,
+    });
+    if (data) {
+      router.push('/sign-up-step');
+    }
+  };
   return (
     <div className={styles.container}>
-      <div className={styles.contentContainer}>
+      <form
+        className={styles.contentContainer}
+        onSubmit={onSubmit}
+        ref={formRef}
+      >
         <LogoIcon />
         <div className={styles.headTextContainer}>
           <h1 className={styles.header}>Create Geld account</h1>
@@ -39,7 +58,9 @@ const SignupPage = () => {
             type="email"
             placeholder="Re-password"
           />
-          <Button className={styles.button}>Sign up</Button>
+          <Button className={styles.button} type="submit">
+            Sign up
+          </Button>
         </div>
         <div className={styles.bottomTextContainer}>
           <p>Already have account?</p>
@@ -50,7 +71,7 @@ const SignupPage = () => {
             Login
           </Button>
         </div>
-      </div>
+      </form>
       <div className="bg-[#0166FF]"></div>
     </div>
   );
