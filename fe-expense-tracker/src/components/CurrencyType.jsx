@@ -15,7 +15,9 @@ export const CurrencyType = () => {
     <div>
       <div className="flex flex-col items-center gap-4 mb-6">
         <CurrencyIcon />
-        <h1 className="text-2xl font-semibold">Select base currency</h1>
+        <h1 className="text-2xl font-semibold text-[#0F172A]">
+          Select base currency
+        </h1>
       </div>
       <Select>
         <SelectTrigger className="w-full h-[64px] p-4 text-[16px] font-semibold">
