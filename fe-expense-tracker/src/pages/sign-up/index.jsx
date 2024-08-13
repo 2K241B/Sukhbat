@@ -55,7 +55,7 @@ const SignupPage = () => {
           />
           <Input
             className={styles.input}
-            type="email"
+            type="password"
             placeholder="Re-password"
           />
           <Button className={styles.button} type="submit">
