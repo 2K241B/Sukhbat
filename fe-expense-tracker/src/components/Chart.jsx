@@ -36,17 +36,17 @@ const chartConfig = {
 export const Chart = () => {
   return (
     <Card className="h-[284px]">
-      <CardHeader className="h-6 px-6">
-        <CardTitle className="text-[16px]">Income - Expense</CardTitle>
+      <CardHeader className="py-4 px-6 border-b-[1px]">
+        <CardTitle className="text-[16px] ">Income - Expense</CardTitle>
       </CardHeader>
-      <CardContent className="py-8 px-6 flex flex-row gap-10">
+      <CardContent className="py-8 px-6 flex gap-4 justify-between ">
         <div className="flex flex-col gap-4">
           <p>3'000'000</p>
           <p>2'000'000</p>
           <p>1'000'000</p>
           <p>0</p>
         </div>
-        <ChartContainer className="h-[162px]" config={chartConfig}>
+        <ChartContainer className="h-[162px] w-full" config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -60,8 +60,18 @@ export const Chart = () => {
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+            <Bar
+              dataKey="desktop"
+              fill="var(--color-desktop)"
+              radius={6}
+              barSize={14}
+            />
+            <Bar
+              dataKey="mobile"
+              fill="var(--color-mobile)"
+              radius={6}
+              barSize={14}
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>

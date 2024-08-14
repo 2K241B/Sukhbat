@@ -4,6 +4,7 @@ import DashboardLogo from './icon/DashboardLogo';
 import { Button } from './ui/button';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] h-screen',
   ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] h-screen',
@@ -16,11 +17,13 @@ export const Layout = ({ children, ChildStyle = false }) => {
       <div className="bg-white flex justify-center w-full">
         <div className="flex justify-between items-center py-[16px] w-[1200px]">
           <div className="flex items items-center gap-6">
-            <DashboardLogo />
+            <Link href="/dashboard">
+              <DashboardLogo />
+            </Link>
             {content.map((el) => (
               <p
                 onClick={() => router.push(`/${el}`)}
-                className="capitalize cursor-pointer"
+                className="capitalize cursor-pointer leading-6 text-[#0F172A]"
               >
                 {el}
               </p>

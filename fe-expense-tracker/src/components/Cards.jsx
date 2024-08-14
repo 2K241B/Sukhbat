@@ -9,6 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import CircleArrowUp from './icon/CircleArrowUp';
+import CircleArrowDown from './icon/CircleArrowDown';
 export const Cards = () => {
   return (
     <div className="grid grid-cols-3 gap-6 max-h-[220px]">
@@ -30,27 +32,37 @@ export const Cards = () => {
         </CardFooter>
       </Card>
       <Card className="rounded-[18px]">
-        <CardHeader>
-          <CardTitle>Your Income</CardTitle>
+        <CardHeader className="border-b-[1px] p-0">
+          <p className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
+            <div className="size-2 bg-[#84CC16] rounded-full"></div>Your Income
+          </p>
         </CardHeader>
-        <CardContent>
-          <p>1,200,000$</p>
-          <p>Your Income Amount</p>
+        <CardContent className="px-6 py-5 flex flex-col gap-1">
+          <p className=" text-[36px] font-semibold leading-[48px]">
+            1,200,000$
+          </p>
+          <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>
         </CardContent>
-        <CardFooter>
-          <p>32% from last month</p>
+        <CardFooter className="flex gap-2">
+          <CircleArrowUp />
+          <p className="text-[18px] leading-7">32% from last month</p>
         </CardFooter>
       </Card>
       <Card className="rounded-[18px]">
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
+        <CardHeader className="border-b-[1px] p-0">
+          <p className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
+            <div className="size-2 bg-[#84CC16] rounded-full"></div>Your Income
+          </p>
         </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
+        <CardContent className="px-6 py-5 flex flex-col gap-1">
+          <p className=" text-[36px] font-semibold leading-[48px]">
+            -1,200,000$
+          </p>
+          <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>
         </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
+        <CardFooter className="flex gap-2">
+          <CircleArrowDown />
+          <p className="text-[18px] leading-7">32% from last month</p>
         </CardFooter>
       </Card>
     </div>
