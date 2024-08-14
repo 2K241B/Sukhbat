@@ -1,9 +1,12 @@
 import DashboardLogo from './icon/DashboardLogo';
 import { Button } from './ui/button';
 import Image from 'next/image';
-
+const styles = {
+  ChildrenStyle: 'flex flex-col gap-6 w-[1200px] h-screen',
+  ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] h-screen',
+};
 const content = ['Dashboard', 'Records'];
-export const Layout = ({ children }) => {
+export const Layout = ({ children, ChildStyle = false }) => {
   return (
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
       <div className="bg-white flex justify-center w-full">
@@ -22,7 +25,11 @@ export const Layout = ({ children }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-6 w-[1200px] h-screen">{children}</div>
+      <div
+        className={ChildStyle ? styles.ChildrenStyle2 : styles.ChildrenStyle}
+      >
+        {children}
+      </div>
     </div>
   );
 };
