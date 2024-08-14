@@ -18,24 +18,24 @@ export const Cards = () => {
         <CardHeader>
           <LogoWhite />
         </CardHeader>
-        <CardFooter className="items-end justify-between pb-0 pr-[40px] pt-11">
+        <CardFooter className="items-end justify-between pr-[30px] pt-12">
           <div>
             <h1 className="text-base font-normal leading-6 text-[#FFFFFF] opacity-50">
               Cash
             </h1>
-            <h1 className="text-2xl font-semibold text-white">10,000,00</h1>
+            <h1 className="text-2xl font-semibold text-white">10,000,000</h1>
           </div>
           <Wi />
-          <div className="absolute right-0 top-0">
+          <div className="absolute right-0 bottom-0">
             <Abstract />
           </div>
         </CardFooter>
       </Card>
-      <Card className="rounded-[18px]">
+      <Card className=" max-h-[220px] rounded-[18px]">
         <CardHeader className="border-b-[1px] p-0">
-          <p className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
+          <div className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
             <div className="size-2 bg-[#84CC16] rounded-full"></div>Your Income
-          </p>
+          </div>
         </CardHeader>
         <CardContent className="px-6 py-5 flex flex-col gap-1">
           <p className=" text-[36px] font-semibold leading-[48px]">
@@ -48,11 +48,11 @@ export const Cards = () => {
           <p className="text-[18px] leading-7">32% from last month</p>
         </CardFooter>
       </Card>
-      <Card className="rounded-[18px]">
+      <Card className=" max-h-[220px] rounded-[18px]">
         <CardHeader className="border-b-[1px] p-0">
-          <p className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
+          <div className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
             <div className="size-2 bg-[#84CC16] rounded-full"></div>Your Income
-          </p>
+          </div>
         </CardHeader>
         <CardContent className="px-6 py-5 flex flex-col gap-1">
           <p className=" text-[36px] font-semibold leading-[48px]">

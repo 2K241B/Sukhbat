@@ -8,6 +8,9 @@ import Link from 'next/link';
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] h-screen',
   ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] h-screen',
+  contentStyle: 'capitalize cursor-pointer leading-6 text-[#0F172A]',
+  contentStyle2:
+    'capitalize cursor-pointer leading-6 text-[#0F172A] font-semibold',
 };
 const content = ['dashboard', 'records'];
 export const Layout = ({ children, ChildStyle = false }) => {
@@ -20,10 +23,10 @@ export const Layout = ({ children, ChildStyle = false }) => {
             <Link href="/dashboard">
               <DashboardLogo />
             </Link>
-            {content.map((el) => (
+            {content.map((el, i) => (
               <p
                 onClick={() => router.push(`/${el}`)}
-                className="capitalize cursor-pointer leading-6 text-[#0F172A]"
+                className={styles.contentStyle}
               >
                 {el}
               </p>
@@ -35,7 +38,7 @@ export const Layout = ({ children, ChildStyle = false }) => {
               Record
             </Button>
             <Image
-              className="object-cover w-[40px] h-[40px] rounded-full"
+              className="w-[40px] h-[40px] rounded-full object-cover"
               src="https://pe-images.s3.amazonaws.com/basics/cc/image-size-resolution/resize-images-for-print/image-cropped-8x10.jpg"
               width={40}
               height={40}
