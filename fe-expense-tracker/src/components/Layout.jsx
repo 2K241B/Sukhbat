@@ -1,12 +1,16 @@
+import { PlusIcon } from 'lucide-react';
+import { Style } from './Constants';
 import DashboardLogo from './icon/DashboardLogo';
 import { Button } from './ui/button';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] h-screen',
   ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] h-screen',
 };
-const content = ['Dashboard', 'Records'];
+const content = ['dashboard', 'records'];
 export const Layout = ({ children, ChildStyle = false }) => {
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
       <div className="bg-white flex justify-center w-full">
@@ -14,14 +18,26 @@ export const Layout = ({ children, ChildStyle = false }) => {
           <div className="flex items items-center gap-6">
             <DashboardLogo />
             {content.map((el) => (
-              <p>{el}</p>
+              <p
+                onClick={() => router.push(`/${el}`)}
+                className="capitalize cursor-pointer"
+              >
+                {el}
+              </p>
             ))}
           </div>
           <div className="flex items-center gap-6">
-            <Button className="rounded-[20px] px-3 bg-[#0166FF]">
-              + Record
+            <Button className={Style.buttonStyle2}>
+              <PlusIcon />
+              Record
             </Button>
-            <Image src="/profile.png" width={40} height={40} alt="Avatar" />
+            <Image
+              className="object-cover w-[40px] h-[40px] rounded-full"
+              src="https://pe-images.s3.amazonaws.com/basics/cc/image-size-resolution/resize-images-for-print/image-cropped-8x10.jpg"
+              width={40}
+              height={40}
+              alt="Avatar"
+            />
           </div>
         </div>
       </div>

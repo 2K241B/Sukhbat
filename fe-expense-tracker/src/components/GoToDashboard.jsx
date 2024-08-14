@@ -1,5 +1,4 @@
 import { CorrectIcon } from '@/components/icon/CorrectIcon';
-
 export const GoToDashboard = () => {
   return (
     <div>

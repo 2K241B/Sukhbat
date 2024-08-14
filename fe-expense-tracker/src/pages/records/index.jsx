@@ -1,5 +1,5 @@
+import { Style } from '@/components/Constants';
 import Layout from '@/components/Layout';
-import RecordList from '@/components/RecordList';
 import RecordsListTable from '@/components/RecordsListTable';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,23 +13,19 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from '@/components/ui/command';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-
+import { PlusIcon } from 'lucide-react';
 const Records = () => {
   return (
     <Layout ChildStyle={true}>
-      <Command className="w-[250px] bg-white rounded-[12px] px-4 py-6 flex gap-6">
+      <Command className="w-[250px] h-fit bg-white rounded-[12px] px-4 py-6 flex gap-6">
         <h1>Records</h1>
-        <Button>+Add</Button>
-        <CommandInput placeholder="Search" />
+        <Button className={Style.buttonStyle2}>
+          <PlusIcon />
+          Add
+        </Button>
+        <div className={Style.buttonStyle3}>
+          <CommandInput placeholder="Search" />
+        </div>
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Types">

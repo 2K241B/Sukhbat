@@ -39,6 +39,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+const styles = {
+  arrowButton:
+    'p-0 size-8 rounded-[8px] flex justify-center items-center gap-1 bg-[#E5E7EB] text-[#0F172A]',
+};
 
 const data = [
   {
@@ -183,13 +187,13 @@ export const RecordsListTable = () => {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        <div className="flex gap-4">
-          <Button className="size-8">
-            <ChevronLeft size={20} color="white" />
+        <div className="flex gap-4 items-center">
+          <Button className={styles.arrowButton}>
+            <ChevronLeft size={20} />
           </Button>
           <p>Last 30 Days</p>
-          <Button className="size-8">
-            <ChevronRight />
+          <Button className={styles.arrowButton}>
+            <ChevronRight size={20} />
           </Button>
         </div>
         <DropdownMenu>
@@ -220,8 +224,8 @@ export const RecordsListTable = () => {
         </DropdownMenu>
       </div>
       <div className="rounded-md border bg-white">
-        <Table className="">
-          <TableHeader className="">
+        <Table>
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
