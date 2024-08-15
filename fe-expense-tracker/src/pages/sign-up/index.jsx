@@ -3,7 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import Link from 'next/link';
 const styles = {
   container: 'grid grid-cols-2 w-full h-screen',
   contentContainer: 'flex flex-col justify-center items-center gap-10',
@@ -17,6 +18,7 @@ const styles = {
   routerButton: 'bg-white text-[#0166FF] hover:bg-white',
 };
 const SignupPage = () => {
+  const [id, setId] = useState();
   const router = useRouter();
   const BASE_URL = 'http://localhost:8000';
   const formRef = useRef(null);
@@ -28,7 +30,8 @@ const SignupPage = () => {
       password: formRef.current[2].value,
     });
     if (data) {
-      router.push('/sign-up-step');
+      setId(data);
+      console.log(data);
     }
   };
   return (
@@ -58,9 +61,16 @@ const SignupPage = () => {
             type="password"
             placeholder="Re-password"
           />
-          <Button className={styles.button} type="submit">
+          <Link
+            href={{
+              pathname: '/sign-up-step',
+              query: { id },
+            }}
+            className={styles.button}
+            type="submit"
+          >
             Sign up
-          </Button>
+          </Link>
         </div>
         <div className={styles.bottomTextContainer}>
           <p>Already have account?</p>

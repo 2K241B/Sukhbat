@@ -6,6 +6,7 @@ import { CurrencyType } from '@/components/CurrencyType';
 import { SelectCashBalance } from '@/components/SelectCashBalance';
 import { GoToDashboard } from '@/components/GoToDashboard';
 import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 const styles = {
   tag: 'size-6 bg-[#E5E7EB] rounded-full text-center',
   activeTag: 'size-6 bg-[#0166FF] rounded-full text-center text-white',
@@ -24,9 +25,12 @@ const Process = ['Currency', 'Balance', 'Finish'];
 const SignUpStep = () => {
   const router = useRouter();
   const [showSelect, setShowSelect] = useState(1);
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
 
   const handlerClick = () => {
     setShowSelect(showSelect + 1);
+    console.log(id);
     if (showSelect >= 3) {
       router.push('/dashboard');
     }
