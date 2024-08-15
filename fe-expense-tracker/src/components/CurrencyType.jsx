@@ -1,6 +1,6 @@
 import { CurrencyIcon } from '@/components/icon/CurrencyIcon';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -8,9 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SelectOption } from '@/components/SelectOption';
-
-export const CurrencyType = () => {
+export const CurrencyType = ({ setOnboard }) => {
   return (
     <div>
       <div className="flex flex-col items-center gap-4 mb-6">
@@ -19,7 +17,7 @@ export const CurrencyType = () => {
           Select base currency
         </h1>
       </div>
-      <Select>
+      <Select onValueChange={(e) => setOnboard(e)}>
         <SelectTrigger className="w-full h-[64px] p-4 text-[16px] font-semibold">
           <SelectValue placeholder="MNT - Mongolian Tugrik" />
         </SelectTrigger>

@@ -30,8 +30,7 @@ const SignupPage = () => {
       password: formRef.current[2].value,
     });
     if (data) {
-      setId(data);
-      console.log(data);
+      localStorage.setItem('user', JSON.stringify(data));
     }
   };
   return (
@@ -61,16 +60,13 @@ const SignupPage = () => {
             type="password"
             placeholder="Re-password"
           />
-          <Link
-            href={{
-              pathname: '/sign-up-step',
-              query: { id },
-            }}
-            className={styles.button}
+          <Button
+            onClick={() => router.push('/sign-up-step')}
+            className="w-full bg-[#0166FF] px-16 rounded-[20px] flex justify-center items-center text-[20px] leading-7 text-white h-[48px]"
             type="submit"
           >
             Sign up
-          </Link>
+          </Button>
         </div>
         <div className={styles.bottomTextContainer}>
           <p>Already have account?</p>

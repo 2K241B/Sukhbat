@@ -6,7 +6,7 @@ import { CurrencyType } from '@/components/CurrencyType';
 import { SelectCashBalance } from '@/components/SelectCashBalance';
 import { GoToDashboard } from '@/components/GoToDashboard';
 import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
+import axios from 'axios';
 const styles = {
   tag: 'size-6 bg-[#E5E7EB] rounded-full text-center',
   activeTag: 'size-6 bg-[#0166FF] rounded-full text-center text-white',
@@ -25,13 +25,18 @@ const Process = ['Currency', 'Balance', 'Finish'];
 const SignUpStep = () => {
   const router = useRouter();
   const [showSelect, setShowSelect] = useState(1);
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
 
-  const handlerClick = () => {
+  const [onboard, setOnboard] = useState('');
+
+  const handlerClick = async () => {
     setShowSelect(showSelect + 1);
-    console.log(id);
+    console.log(onboard);
+
     if (showSelect >= 3) {
+      let userId = localStorage.getItem('user');
+      await axios.put(`http://localhost:8000/user/${userId.id}`, {
+        currency_type: onboard,
+      });
       router.push('/dashboard');
     }
   };
@@ -60,9 +65,9 @@ const SignUpStep = () => {
         </div>
       </div>
       <div className={styles.showContent}>
-        {showSelect === 1 ? <CurrencyType /> : <></>}
-        {showSelect === 2 ? <SelectCashBalance /> : <></>}
-        {showSelect === 3 ? <GoToDashboard /> : <></>}
+        {showSelect === 1 && <CurrencyType setOnboard={setOnboard} />}
+        {showSelect === 2 && <SelectCashBalance />}
+        {showSelect === 3 && <GoToDashboard />}
         <Button className={styles.button} onClick={handlerClick}>
           Confirm
         </Button>

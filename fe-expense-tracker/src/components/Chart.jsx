@@ -1,5 +1,5 @@
 import { TrendingUp } from 'lucide-react';
-import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import {
   Card,
   CardContent,
@@ -40,15 +40,10 @@ export const Chart = () => {
         <CardTitle className="text-[16px] ">Income - Expense</CardTitle>
       </CardHeader>
       <CardContent className="py-8 px-6 flex gap-4 justify-between ">
-        <div className="flex flex-col gap-4">
-          <p>3'000'000</p>
-          <p>2'000'000</p>
-          <p>1'000'000</p>
-          <p>0</p>
-        </div>
         <ChartContainer className="h-[162px] w-full" config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
+            <YAxis />
             <XAxis
               dataKey="month"
               tickLine={false}

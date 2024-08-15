@@ -16,7 +16,7 @@ VALUES ($1,$2,$3,$4) RETURNING *
         hash,
         avatar_img,
       ]);
-      res.send(user.rows[0].id);
+      res.send(user.rows[0]);
     });
   } catch (error) {
     return res.send(error);
@@ -76,18 +76,13 @@ export const GetUser = async (req, res) => {
 };
 export const userUpdate = async (req, res) => {
   const { id } = req.params;
-  const { name, email, currency_type } = req.body;
+  const { currency_type } = req.body;
 
   const tableQueryText = `
-UPDATE users SET name = $1, email = $2,currency_type =$3 WHERE  id = $4 RETURNING *
+UPDATE users SET currency_type =$1 WHERE  id = $2 RETURNING *
   `;
   try {
-    const users = await db.query(tableQueryText, [
-      name,
-      email,
-      currency_type,
-      id,
-    ]);
+    const users = await db.query(tableQueryText, [currency_type, id]);
     return res.send(users.rows);
   } catch (error) {
     return res.send(error);
