@@ -13,11 +13,13 @@ import CircleArrowUp from './icon/CircleArrowUp';
 import CircleArrowDown from './icon/CircleArrowDown';
 import { useEffect, useState } from 'react';
 export const Cards = ({ recordData, currency }) => {
-  const amount = [];
-  let [totalAmount, setTotalAmount] = useState();
+  let [totalAmount, setTotalAmount] = useState([]);
   useEffect(() => {
-    // recude ashiglana;
+    recordData.map((el) => totalAmount.push(el.amount));
+    const sum = totalAmount.reduce((total, num) => total + num, 0);
+    setTotalAmount(sum);
   }, []);
+
   return (
     <div className="grid grid-cols-3 gap-6 max-h-[220px]">
       <Card className="bg-[#0166FF] max-h-[220px] relative rounded-[18px]">
@@ -48,7 +50,8 @@ export const Cards = ({ recordData, currency }) => {
         </CardHeader>
         <CardContent className="px-6 py-5 flex flex-col gap-1">
           <p className=" text-[36px] font-semibold leading-[48px]">
-            1,200,000{currency == 'USD' ? '$' : '₮'}
+            {totalAmount}
+            {currency == 'USD' ? '$' : '₮'}
           </p>
           <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>
         </CardContent>
@@ -61,13 +64,13 @@ export const Cards = ({ recordData, currency }) => {
         <CardHeader className="border-b-[1px] p-0">
           <div className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
             <div className="size-2 bg-[#0166FF] rounded-full"></div>
-            {totalAmount}
-            Expenses
+            Total Expenses
           </div>
         </CardHeader>
         <CardContent className="px-6 py-5 flex flex-col gap-1">
           <p className=" text-[36px] font-semibold leading-[48px]">
-            -{currency == 'USD' ? '$' : '₮'}
+            -{totalAmount}
+            {currency == 'USD' ? '$' : '₮'}
           </p>
           <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>
         </CardContent>

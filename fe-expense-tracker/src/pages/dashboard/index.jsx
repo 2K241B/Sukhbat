@@ -27,7 +27,7 @@ const Dashboard = () => {
         <></>
       )}
       <div className="grid grid-cols-2 gap-6 h-[284px]">
-        <Chart />
+        <Chart recordData={recordData} />
         <PieDashboardChart />
       </div>
       <div className="rounded-[12px] bg-white">

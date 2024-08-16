@@ -5,16 +5,52 @@ import { Button } from './ui/button';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+import { Input } from './ui/input';
+import { DatePicker } from './DatePicker';
 const styles = {
-  ChildrenStyle: 'flex flex-col gap-6 w-[1200px] h-screen',
+  ChildrenStyle: 'flex flex-col gap-6 w-[1200px] h-fit pb-10',
   ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] h-screen',
   contentStyle: 'capitalize cursor-pointer leading-6 text-[#0F172A]',
   contentStyle2:
     'capitalize cursor-pointer leading-6 text-[#0F172A] font-semibold',
 };
 const content = ['dashboard', 'records'];
+
 export const Layout = ({ children, ChildStyle = false }) => {
   const router = useRouter();
+  // useEffect(() => {
+  //   let user = localStorage.getItem('user');
+  //   const data = JSON.parse(user);
+  //   const userId = data.user.id;
+  //   axios.get('http://localhost:8000/record/create'),
+  //     {
+  //       user_id: userId,
+  //       name: 'income',
+  //       amount: 222222,
+  //       transaction_type: 'EXP',
+  //       description: 'blabla',
+  //       category_id: '758efb1b-969c-49a2-b030-55ca0033944d',
+  //     };
+  // }, []);
   return (
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
       <div className="bg-white flex justify-center w-full">
@@ -33,10 +69,53 @@ export const Layout = ({ children, ChildStyle = false }) => {
             ))}
           </div>
           <div className="flex items-center gap-6">
-            <Button className={Style.buttonStyle2}>
-              <PlusIcon />
-              Record
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger className="bg-[#0166FF] h-8 text-white flex items-center justify-center gap-1 px-3 rounded-[20px] leading-6">
+                <PlusIcon />
+                Record
+              </AlertDialogTrigger>
+              <AlertDialogContent className="min-w-[744px] h-fit p-0">
+                <AlertDialogHeader className="border-b-[1px] px-6 py-5">
+                  <AlertDialogTitle>Add Record</AlertDialogTitle>
+                </AlertDialogHeader>
+                <div className="grid grid-cols-2">
+                  <form className="p-6 pt-5 flex flex-col gap-5">
+                    <div className="flex">
+                      <Button className="w-full">Expence</Button>
+                      <Button className="w-full">Income</Button>
+                    </div>
+                    <div className="flex flex-col gap-5">
+                      <Input />
+                      <h1>Category</h1>
+                      <Select>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Theme" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="light">Light</SelectItem>
+                          <SelectItem value="dark">Dark</SelectItem>
+                          <SelectItem value="system">System</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <div className="flex flex-col gap-8">
+                        <div>
+                          <h1>Date</h1>
+                          <DatePicker />
+                        </div>
+                        <Button className="w-full">Add Record</Button>
+                      </div>
+                    </div>
+                  </form>
+                  <div className="pt-11 p-6 flex flex-col">
+                    <h1>Payee</h1>
+                    <Input />
+                    <h2>Note</h2>
+                    <Input className="h-[248px] w-full" />
+                  </div>
+                </div>
+              </AlertDialogContent>
+            </AlertDialog>
+
             <Image
               className="w-[40px] h-[40px] rounded-full object-cover"
               src="https://pe-images.s3.amazonaws.com/basics/cc/image-size-resolution/resize-images-for-print/image-cropped-8x10.jpg"

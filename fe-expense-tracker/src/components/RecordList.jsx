@@ -1,4 +1,8 @@
 import ListLogo from '@/components/icon/ListLogo';
+const styles = {
+  transTypeInc: 'text-[#84CC16] font-semibold leading-[24px]',
+  transTypeExp: 'text-[#F54949] font-semibold leading-[24px]',
+};
 export const RecordList = ({ recordData, currency }) => {
   return (
     <div>
@@ -8,10 +12,19 @@ export const RecordList = ({ recordData, currency }) => {
             <ListLogo />
             <div>
               <h1>{el.name}</h1>
-              <p>{el.updatedat}</p>
+              <p className="text-[12px] leading-4 text-[#6B7280]">
+                {el.updatedat}
+              </p>
             </div>
           </div>
-          <p>
+          <p
+            className={
+              el.transaction_type == 'INC'
+                ? styles.transTypeInc
+                : styles.transTypeExp
+            }
+          >
+            {el.transaction_type == 'INC' ? '+' : '-'}
             {el.amount}
             {currency == 'USD' ? '$' : '₮'}
           </p>
