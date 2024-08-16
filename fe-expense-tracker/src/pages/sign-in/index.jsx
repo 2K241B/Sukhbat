@@ -28,6 +28,7 @@ const SigninPage = () => {
       password: formRef.current[1].value,
     });
     if (data.success === true) {
+      localStorage.setItem('user', JSON.stringify(data.user));
       router.push('/dashboard');
     } else {
       setError('Email or Password Wrong');

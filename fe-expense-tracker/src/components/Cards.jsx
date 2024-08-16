@@ -51,7 +51,7 @@ export const Cards = () => {
       <Card className=" max-h-[220px] rounded-[18px]">
         <CardHeader className="border-b-[1px] p-0">
           <div className="flex items-center gap-2 px-6 py-4 font-semibold leading-6 text-[#0F172A]">
-            <div className="size-2 bg-[#84CC16] rounded-full"></div>Your Income
+            <div className="size-2 bg-[#0166FF] rounded-full"></div>Your Income
           </div>
         </CardHeader>
         <CardContent className="px-6 py-5 flex flex-col gap-1">

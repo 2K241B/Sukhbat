@@ -16,7 +16,7 @@ VALUES ($1,$2,$3,$4) RETURNING *
         hash,
         avatar_img,
       ]);
-      res.send(user.rows[0]);
+      res.send({ user: user.rows[0] });
     });
   } catch (error) {
     return res.send(error);

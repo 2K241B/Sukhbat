@@ -30,11 +30,10 @@ const SignUpStep = () => {
 
   const handlerClick = async () => {
     setShowSelect(showSelect + 1);
-    console.log(onboard);
-
     if (showSelect >= 3) {
-      let userId = localStorage.getItem('user');
-      await axios.put(`http://localhost:8000/user/${userId.id}`, {
+      let user = localStorage.getItem('user');
+      const userId = JSON.parse(user);
+      await axios.put(`http://localhost:8000/user/${userId.user.id}`, {
         currency_type: onboard,
       });
       router.push('/dashboard');
