@@ -20,14 +20,14 @@ export const DatePicker = ({ className }) => {
     to: addDays(new Date(2022, 0, 20), 20),
   });
   return (
-    <div className={cn('grid gap-2', className)}>
+    <div className={cn('grid gap-2 ', className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant={'outline'}
             className={cn(
-              'w-full justify-start text-left font-normal',
+              'w-full justify-start text-left font-normal bg-[#F3F4F6] border-[#D1D5DB] text-[#171717]',
               !date && 'text-muted-foreground'
             )}
           >

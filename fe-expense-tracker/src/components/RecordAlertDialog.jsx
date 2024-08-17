@@ -1,7 +1,5 @@
-import React from 'react';
-import { Toggle } from '@/components/ui/toggle';
+import React, { useEffect, useRef, useState } from 'react';
 import { PlusIcon } from 'lucide-react';
-import { Style } from './Constants';
 import { Button } from './ui/button';
 import {
   AlertDialog,
@@ -23,7 +21,49 @@ import {
 } from '@/components/ui/select';
 import { Input } from './ui/input';
 import { DatePicker } from './DatePicker';
+import axios from 'axios';
+const styles = {
+  button1default:
+    'w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]',
+  button1focus:
+    'w-full px-3 text-[#1F2937] rounded-[20px] bg-[#F3F4F6] hover:bg-[#F3F4F6]',
+  button2default:
+    'w-full bg-[#F3F4F6] hover:bg-[#F3F4F6] rounded-[20px] text-[#1F2937]',
+  button2focus:
+    'w-full bg-[#16A34A] hover:bg-[#16A34A] rounded-[20px] text-white',
+};
+
 export const RecordAlertDialog = () => {
+  const [buttonStyles, setButtonStyles] = useState(styles.button1default);
+  const [buttonStyles2, setButtonStyles2] = useState(styles.button2default);
+  const [transType, setTransType] = useState('EXP');
+  const [input, setInput] = useState();
+  const formRef = useRef();
+  const formRef2 = useRef();
+  const buttonHandler = () => {
+    setButtonStyles(styles.button1default);
+    setButtonStyles2(styles.button2default);
+    setTransType('EXP');
+  };
+  const buttonHandler2 = () => {
+    setButtonStyles2(styles.button2focus);
+    setButtonStyles(styles.button1focus);
+    setTransType('INC');
+  };
+  const handlerClick = async () => {
+    let user = localStorage.getItem('user');
+    const data = JSON.parse(user);
+    const userId = data.user.id;
+    await axios.post('http://localhost:8000/record/create'),
+      {
+        user_id: '31d7309b-b125-4447-8f61-0adbc7b137cd',
+        name: 'hehe',
+        amount: 99000,
+        transaction_type: 'EXP',
+        description: 'blabla',
+        category_id: '758efb1b-969c-49a2-b030-55ca0033944d',
+      };
+  };
   return (
     <AlertDialog>
       <AlertDialogTrigger className="bg-[#0166FF] h-8 text-white flex items-center justify-center gap-1 px-3 rounded-[20px] leading-6">
@@ -35,45 +75,60 @@ export const RecordAlertDialog = () => {
           <AlertDialogTitle>Add Record</AlertDialogTitle>
         </AlertDialogHeader>
         <div className="grid grid-cols-2">
-          <form className="p-6 pt-5 flex flex-col gap-5">
+          <div className="p-6 pt-5 flex flex-col gap-5">
             <div className="flex bg-[#F3F4F6] rounded-[20px]">
-              <Toggle className="w-full px-3 focus:text-white rounded-[20px] text-[#1F2937] focus:bg-[#0166FF] ">
+              <Button className={buttonStyles} onClick={buttonHandler}>
                 Expense
-              </Toggle>
-              <Toggle className="w-full bg-[#F3F4F6] focus:text-white  focus:bg-[#16A34A] rounded-[20px] text-[#1F2937]">
+              </Button>
+              <Button className={buttonStyles2} onClick={buttonHandler2}>
                 Income
-              </Toggle>
+              </Button>
             </div>
-            <div className="flex flex-col gap-5">
-              <Input />
-              <h1>Category</h1>
-              <Select>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Theme" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="light">Light</SelectItem>
-                  <SelectItem value="dark">Dark</SelectItem>
-                  <SelectItem value="system">System</SelectItem>
-                </SelectContent>
-              </Select>
+            <form ref={formRef} className="flex flex-col gap-5">
+              <div className="bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px]">
+                <p className="text-[#171717]">Amount</p>
+                <input
+                  className="bg-[#F3F4F6] text-[#D1D5DB] focus:outline-none"
+                  placeholder="000,00"
+                />
+              </div>
+              <div>
+                <h1>Category</h1>
+                <Select>
+                  <SelectTrigger className=" w-full bg-[#F3F4F6] border-[#D1D5DB] text-[#171717]">
+                    <SelectValue placeholder="Choose" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">Light</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="flex flex-col gap-8">
                 <div>
                   <h1>Date</h1>
                   <DatePicker />
                 </div>
-                <Button className="w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]">
-                  Add Record
-                </Button>
               </div>
-            </div>
-          </form>
-          <div className="pt-11 p-6 flex flex-col">
-            <h1>Payee</h1>
-            <Input />
-            <h2>Note</h2>
-            <Input className="h-[248px] w-full" />
+            </form>
+            <Button
+              onClick={handlerClick}
+              className={
+                buttonStyles == styles.button1default
+                  ? styles.button1default
+                  : styles.button2focus
+              }
+            >
+              Add Record
+            </Button>
           </div>
+          <form ref={formRef2} className="p-6 pt-3 flex flex-col">
+            <div>
+              <h1>Payee</h1>
+              <Input className="bg-[#F3F4F6] border-[#D1D5DB] text-[#171717] mt-1 mb-5 " />
+            </div>
+            <h2>Note</h2>
+            <Input className="h-full w-full bg-[#F3F4F6] border-[#D1D5DB] text-[#171717] mt-1 " />
+          </form>
         </div>
       </AlertDialogContent>
     </AlertDialog>

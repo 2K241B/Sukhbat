@@ -2,7 +2,7 @@ import DashboardLogo from './icon/DashboardLogo';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import AlertDialog, { RecordAlertDialog } from './RecordAlertDialog';
+import { RecordAlertDialog } from './RecordAlertDialog';
 
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
@@ -15,20 +15,6 @@ const content = ['dashboard', 'records'];
 
 export const Layout = ({ children, ChildStyle = false }) => {
   const router = useRouter();
-  // useEffect(() => {
-  //   let user = localStorage.getItem('user');
-  //   const data = JSON.parse(user);
-  //   const userId = data.user.id;
-  //   axios.get('http://localhost:8000/record/create'),
-  //     {
-  //       user_id: userId,
-  //       name: 'income',
-  //       amount: 222222,
-  //       transaction_type: 'EXP',
-  //       description: 'blabla',
-  //       category_id: '758efb1b-969c-49a2-b030-55ca0033944d',
-  //     };
-  // }, []);
   return (
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
       <div className="bg-white flex justify-center w-full">
