@@ -21,11 +21,7 @@ const Dashboard = () => {
   }, []);
   return (
     <Layout>
-      {recordData ? (
-        <Cards recordData={recordData} currency={currency} />
-      ) : (
-        <></>
-      )}
+      {recordData && <Cards recordData={recordData} currency={currency} />}
       <div className="grid grid-cols-2 gap-6 h-[284px]">
         <Chart recordData={recordData} />
         <PieDashboardChart />
@@ -34,10 +30,8 @@ const Dashboard = () => {
         <div className="py-4 px-6 border-b-[1px] border-[#E2E8F0]">
           Last Records
         </div>
-        {recordData ? (
+        {recordData && (
           <RecordList recordData={recordData} currency={currency} />
-        ) : (
-          <></>
         )}
       </div>
     </Layout>

@@ -4,20 +4,28 @@ import Wi from '@/components/icon/Wi';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import CircleArrowUp from './icon/CircleArrowUp';
 import CircleArrowDown from './icon/CircleArrowDown';
 import { useEffect, useState } from 'react';
 export const Cards = ({ recordData, currency }) => {
-  let [totalAmount, setTotalAmount] = useState([]);
+  let [totalIncome, setTotalIncome] = useState([]);
+  let [totalExpense, settotalExpense] = useState([]);
   useEffect(() => {
-    recordData.map((el) => totalAmount.push(el.amount));
-    const sum = totalAmount.reduce((total, num) => total + num, 0);
-    setTotalAmount(sum);
+    {
+      recordData &&
+        recordData.map((el) =>
+          el.transaction_type == 'INC'
+            ? totalIncome.push(el.amount)
+            : totalExpense.push(el.amount)
+        );
+    }
+    const sumInc = totalIncome.reduce((total, num) => total + num, 0);
+    const sumExp = totalExpense.reduce((total, num) => total + num, 0);
+    setTotalIncome(sumInc);
+    settotalExpense(sumExp);
   }, []);
 
   return (
@@ -32,7 +40,7 @@ export const Cards = ({ recordData, currency }) => {
               Cash
             </h1>
             <h1 className="text-2xl font-semibold text-white">
-              1'000'000
+              {totalIncome - totalExpense}
               {currency == 'USD' ? '$' : '₮'}
             </h1>
           </div>
@@ -50,7 +58,7 @@ export const Cards = ({ recordData, currency }) => {
         </CardHeader>
         <CardContent className="px-6 py-5 flex flex-col gap-1">
           <p className=" text-[36px] font-semibold leading-[48px]">
-            {totalAmount}
+            {totalIncome}
             {currency == 'USD' ? '$' : '₮'}
           </p>
           <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>
@@ -69,7 +77,7 @@ export const Cards = ({ recordData, currency }) => {
         </CardHeader>
         <CardContent className="px-6 py-5 flex flex-col gap-1">
           <p className=" text-[36px] font-semibold leading-[48px]">
-            -{totalAmount}
+            -{totalExpense}
             {currency == 'USD' ? '$' : '₮'}
           </p>
           <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>

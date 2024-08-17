@@ -5,6 +5,8 @@ import { Button } from './ui/button';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Toggle } from '@/components/ui/toggle';
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,9 +28,10 @@ import {
 
 import { Input } from './ui/input';
 import { DatePicker } from './DatePicker';
+
 const styles = {
-  ChildrenStyle: 'flex flex-col gap-6 w-[1200px] h-fit pb-10',
-  ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] h-screen',
+  ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
+  ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] min-h-screen pb-10',
   contentStyle: 'capitalize cursor-pointer leading-6 text-[#0F172A]',
   contentStyle2:
     'capitalize cursor-pointer leading-6 text-[#0F172A] font-semibold',
@@ -55,11 +58,11 @@ export const Layout = ({ children, ChildStyle = false }) => {
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
       <div className="bg-white flex justify-center w-full">
         <div className="flex justify-between items-center py-[16px] w-[1200px]">
-          <div className="flex items items-center gap-6">
+          <div className="flex items-center gap-6">
             <Link href="/dashboard">
               <DashboardLogo />
             </Link>
-            {content.map((el, i) => (
+            {content.map((el) => (
               <p
                 onClick={() => router.push(`/${el}`)}
                 className={styles.contentStyle}
@@ -80,9 +83,13 @@ export const Layout = ({ children, ChildStyle = false }) => {
                 </AlertDialogHeader>
                 <div className="grid grid-cols-2">
                   <form className="p-6 pt-5 flex flex-col gap-5">
-                    <div className="flex">
-                      <Button className="w-full">Expence</Button>
-                      <Button className="w-full">Income</Button>
+                    <div className="flex bg-[#F3F4F6] rounded-[20px]">
+                      <Toggle className="w-full px-3 focus:text-white rounded-[20px] text-[#1F2937] focus:bg-[#0166FF] hover:bg-[#0166FF]">
+                        Expense
+                      </Toggle>
+                      <Toggle className="w-full bg-[#F3F4F6] focus:text-white  target:bg-[#16A34A] hover:bg-[#16A34A] rounded-[20px] text-[#1F2937]">
+                        Income
+                      </Toggle>
                     </div>
                     <div className="flex flex-col gap-5">
                       <Input />
@@ -102,7 +109,9 @@ export const Layout = ({ children, ChildStyle = false }) => {
                           <h1>Date</h1>
                           <DatePicker />
                         </div>
-                        <Button className="w-full">Add Record</Button>
+                        <Button className="w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]">
+                          Add Record
+                        </Button>
                       </div>
                     </div>
                   </form>
