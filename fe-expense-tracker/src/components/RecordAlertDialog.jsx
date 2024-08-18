@@ -54,15 +54,14 @@ export const RecordAlertDialog = () => {
     let user = localStorage.getItem('user');
     const data = JSON.parse(user);
     const userId = data.user.id;
-    await axios.post('http://localhost:8000/record/create'),
-      {
-        user_id: '31d7309b-b125-4447-8f61-0adbc7b137cd',
-        name: 'hehe',
-        amount: 99000,
-        transaction_type: 'EXP',
-        description: 'blabla',
-        category_id: '758efb1b-969c-49a2-b030-55ca0033944d',
-      };
+    await axios.post('http://localhost:8000/record/create', {
+      user_id: userId,
+      name: formRef2.current[0].value,
+      amount: formRef.current[0].value,
+      transaction_type: transType,
+      description: formRef2.current[1].value,
+      category_id: '758efb1b-969c-49a2-b030-55ca0033944d',
+    });
   };
   return (
     <AlertDialog>
