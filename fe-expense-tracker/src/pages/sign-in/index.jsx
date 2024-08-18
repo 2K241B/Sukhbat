@@ -15,6 +15,7 @@ const styles = {
   input: 'p-4 items-center bg-[#F3F4F6] text-[#A3A3A3] h-12',
   bottomTextContainer: 'flex items-center',
   routerButton: 'bg-white text-[#0166FF] hover:bg-white',
+  errorMsg: 'text-red-500 font-semibold',
 };
 const SigninPage = () => {
   const [error, setError] = useState('');
@@ -55,7 +56,7 @@ const SigninPage = () => {
             type="password"
             placeholder="Password"
           />
-          <p className="text-red-500 font-semibold">{error}</p>
+          <p className={styles.errorMsg}>{error}</p>
           <Button className={styles.button} type="submit">
             Log in
           </Button>

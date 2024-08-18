@@ -12,14 +12,15 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from '@/components/ui/command';
+import MenuCheckbox from './MenuCheckbox';
 
 export const CategoryMenu = () => {
   return (
-    <Command className="w-[250px] h-fit bg-white rounded-[12px] px-4 py-6 flex gap-6">
+    <Command className="w-[250px] h-fit bg-white rounded-[12px] px-4 py-6 flex gap-6 ">
       <h1>Records</h1>
       <Button className={Style.buttonStyle2}>
         <PlusIcon />
-        Add
+        Add Category
       </Button>
       <div className={Style.buttonStyle3}>
         <CommandInput placeholder="Search" />
@@ -27,9 +28,7 @@ export const CategoryMenu = () => {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Types">
-          <CommandItem>All</CommandItem>
-          <CommandItem>Income</CommandItem>
-          <CommandItem>Expense</CommandItem>
+          <MenuCheckbox />
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Category">

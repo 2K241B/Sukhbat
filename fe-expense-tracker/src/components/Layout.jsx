@@ -1,20 +1,23 @@
 import DashboardLogo from './icon/DashboardLogo';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { RecordAlertDialog } from './RecordAlertDialog';
+import { useState } from 'react';
 
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
   ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] min-h-screen pb-10',
-  contentStyle: 'capitalize cursor-pointer leading-6 text-[#0F172A]',
-  contentStyle2:
-    'capitalize cursor-pointer leading-6 text-[#0F172A] font-semibold',
+  contentStyle: 'capitalize leading-6 text-[#0F172A]',
+  contentStyle2: 'capitalize  leading-6 text-[#0F172A] font-semibold',
 };
 const content = ['dashboard', 'records'];
 
 export const Layout = ({ children, ChildStyle = false }) => {
-  const router = useRouter();
+  const [currentIndex, setCurrentIndex] = useState();
+  const handlerClick = (index) => {
+    setCurrentIndex(index);
+    console.log(currentIndex);
+  };
   return (
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
       <div className="bg-white flex justify-center w-full">
@@ -23,13 +26,18 @@ export const Layout = ({ children, ChildStyle = false }) => {
             <Link href="/dashboard">
               <DashboardLogo />
             </Link>
-            {content.map((el) => (
-              <p
-                onClick={() => router.push(`/${el}`)}
-                className={styles.contentStyle}
+            {content.map((el, i) => (
+              <Link
+                href={el}
+                className={
+                  i === currentIndex
+                    ? styles.contentStyle2
+                    : styles.contentStyle
+                }
+                onClick={() => handlerClick(i)}
               >
                 {el}
-              </p>
+              </Link>
             ))}
           </div>
           <div className="flex items-center gap-6">
