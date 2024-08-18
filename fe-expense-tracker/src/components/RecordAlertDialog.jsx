@@ -62,6 +62,7 @@ export const RecordAlertDialog = () => {
       description: formRef2.current[1].value,
       category_id: '758efb1b-969c-49a2-b030-55ca0033944d',
     });
+    location.reload();
   };
   return (
     <AlertDialog>
@@ -109,7 +110,7 @@ export const RecordAlertDialog = () => {
                 </div>
               </div>
             </form>
-            <Button
+            <AlertDialogAction
               onClick={handlerClick}
               className={
                 buttonStyles == styles.button1default
@@ -118,7 +119,7 @@ export const RecordAlertDialog = () => {
               }
             >
               Add Record
-            </Button>
+            </AlertDialogAction>
           </div>
           <form ref={formRef2} className="p-6 pt-3 flex flex-col">
             <div>
