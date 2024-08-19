@@ -38,7 +38,7 @@ export const records = async (req, res) => {
   `;
   try {
     const users = await db.query(tableQueryText);
-    return console.log(users.rows);
+    return res.send(users.rows);
   } catch (error) {
     return res.send(error);
   }
