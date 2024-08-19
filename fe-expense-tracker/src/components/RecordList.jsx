@@ -1,4 +1,5 @@
 import ListLogo from '@/components/icon/ListLogo';
+import _ from 'lodash';
 import { useEffect, useState } from 'react';
 const styles = {
   transTypeInc: 'text-[#84CC16] font-semibold leading-[24px]',
@@ -7,9 +8,11 @@ const styles = {
     'flex justify-between items-center h-[40] py-[20px] mx-6 border-b-[1px] last:border-0',
 };
 export const RecordList = ({ recordData, currency }) => {
-  const [reverseRecord, setReversedRecord] = useState([]);
+  const [sortedRecord, setSortedRecord] = useState([]);
   useEffect(() => {
-    setReversedRecord(recordData.reverse());
+    const sort = _.sortBy(recordData, ['createdat']);
+    console.log(sort);
+    setSortedRecord(sort.reverse());
   }, []);
 
   const DiffHours = (time) => {
@@ -21,14 +24,14 @@ export const RecordList = ({ recordData, currency }) => {
   };
   return (
     <div>
-      {reverseRecord.map((el) => (
+      {sortedRecord.map((el) => (
         <div className={styles.listContainer}>
           <div className="flex items-center gap-4">
             <ListLogo />
             <div>
               <h1 className="text-[#000] font-semibold ">{el.name}</h1>
               <p className="text-[12px] leading-4 text-[#6B7280]">
-                {DiffHours(el.updatedat)} hours Ago
+                {DiffHours(el.createdat)} hours Ago
               </p>
             </div>
           </div>

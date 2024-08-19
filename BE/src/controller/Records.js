@@ -1,13 +1,36 @@
 import { db } from '../../db.js';
+import _ from 'lodash';
+
 export const getBarChartData = async (req, res) => {
-  const tableQueryText = `
-   SELECT * from records
-  `;
+  const { id } = req.params;
+  const queryText = `   SELECT * from records
+   WHERE user_id = $1`;
   try {
-    const users = await db.query(tableQueryText);
-    return res.send(users.rows);
+    const result = await db.query(queryText, [id]);
+
+    const groupedData = _.groupBy(result.rows, (el) => {
+      const moonLanding = new Date(el.createdat);
+      return moonLanding.getMonth() + 1;
+    });
+
+    const response = _.map(groupedData, (monthRecords, month) => {
+      const totalAmount = monthRecords.reduce(
+        (acc, record) => {
+          if (record.transaction_type === 'INC') {
+            acc.income += record.amount;
+          } else {
+            acc.expense += record.amount;
+          }
+          return acc;
+        },
+        { income: 0, expense: 0 }
+      );
+
+      return { month, ...totalAmount };
+    });
+    return res.send(response);
   } catch (error) {
-    return res.send(error);
+    console.error(error);
   }
 };
 

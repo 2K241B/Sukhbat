@@ -14,31 +14,19 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-const chartData = [
-  { month: 'January', income: 20000, expense: 12000 },
-  { month: 'February', income: 21000, expense: 13000 },
-  { month: 'March', income: 22000, expense: 11000 },
-  { month: 'April', income: 21500, expense: 14000 },
-  { month: 'May', income: 23000, expense: 15000 },
-  { month: 'June', income: 24000, expense: 16000 },
-  { month: 'July', income: 21400, expense: 14000 },
-  { month: 'August', income: 25000, expense: 17500 },
-  { month: 'September', income: 26000, expense: 18000 },
-  { month: 'October', income: 27000, expense: 19000 },
-  { month: 'November', income: 28000, expense: 20000 },
-  { month: 'December', income: 30000, expense: 22000 },
-];
+import { useEffect, useState } from 'react';
+
 const chartConfig = {
-  desktop: {
-    label: 'Income',
+  income: {
+    label: 'income',
     color: '#0166FF',
   },
-  mobile: {
-    label: 'Expense',
+  expense: {
+    label: 'expense',
     color: '#F54949',
   },
 };
-export const Chart = ({ recordData }) => {
+export const Chart = ({ getBarChartData }) => {
   return (
     <Card className="h-[284px]">
       <CardHeader className="py-4 px-6 border-b-[1px]">
@@ -46,7 +34,7 @@ export const Chart = ({ recordData }) => {
       </CardHeader>
       <CardContent className="py-8 px-6 flex gap-4 justify-between ">
         <ChartContainer className="h-[162px] w-full" config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart accessibilityLayer data={getBarChartData}>
             <CartesianGrid
               vertical={false}
               strokeDasharray="3 3"

@@ -15,6 +15,7 @@ const styles = {
 const Dashboard = () => {
   const [recordData, setRecordData] = useState();
   const [currency, setCurrency] = useState('MNT');
+  const [getBarChartData, setGetBarChartData] = useState();
 
   useEffect(() => {
     let user = localStorage.getItem('user');
@@ -25,13 +26,18 @@ const Dashboard = () => {
     axios
       .get(`http://localhost:8000/record/id/${userId}`)
       .then((res) => setRecordData(res.data));
+    axios
+      .get(`http://localhost:8000/record/getBarChartData/${userId}`)
+      .then((response) => setGetBarChartData(response.data));
   }, []);
 
   return (
     <Layout>
-      {recordData && <Cards recordData={recordData} currency={currency} />}
+      {getBarChartData && (
+        <Cards getBarChartData={getBarChartData} currency={currency} />
+      )}
       <div className={styles.chartContainer}>
-        <Chart recordData={recordData} />
+        <Chart getBarChartData={getBarChartData} />
         <PieDashboardChart />
       </div>
       <div className={styles.recordListContainer}>
