@@ -1,4 +1,15 @@
 import { db } from '../../db.js';
+export const getBarChartData = async (req, res) => {
+  const tableQueryText = `
+   SELECT * from records
+  `;
+  try {
+    const users = await db.query(tableQueryText);
+    return res.send(users.rows);
+  } catch (error) {
+    return res.send(error);
+  }
+};
 
 export const createRecord = async (req, res) => {
   const { user_id, name, amount, transaction_type, description, category_id } =
@@ -27,7 +38,7 @@ export const records = async (req, res) => {
   `;
   try {
     const users = await db.query(tableQueryText);
-    return res.send(users.rows);
+    return console.log(users.rows);
   } catch (error) {
     return res.send(error);
   }
