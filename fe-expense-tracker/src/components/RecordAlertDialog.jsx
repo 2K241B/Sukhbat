@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { PlusIcon } from 'lucide-react';
+import { PlusIcon, X } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   AlertDialog,
@@ -71,8 +71,11 @@ export const RecordAlertDialog = () => {
         Record
       </AlertDialogTrigger>
       <AlertDialogContent className="min-w-[744px] h-fit p-0">
-        <AlertDialogHeader className="border-b-[1px] px-6 py-5">
+        <AlertDialogHeader className="border-b-[1px] px-6 py-5 flex flex-row justify-between items-center">
           <AlertDialogTitle>Add Record</AlertDialogTitle>
+          <AlertDialogCancel className="border-0 p-0 items-start hover:bg-white">
+            <X />
+          </AlertDialogCancel>
         </AlertDialogHeader>
         <div className="grid grid-cols-2">
           <div className="p-6 pt-5 flex flex-col gap-5">

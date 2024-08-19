@@ -17,7 +17,7 @@ VALUES ($1,$2,$3,$4,$5,$6) RETURNING *
       category_id,
     ]);
   } catch (error) {
-    console.error(error);
+    return res.send(error);
   }
   res.send('CREATE RECORD');
 };

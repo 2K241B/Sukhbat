@@ -2,7 +2,7 @@ import DashboardLogo from './icon/DashboardLogo';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RecordAlertDialog } from './RecordAlertDialog';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
@@ -16,7 +16,6 @@ export const Layout = ({ children, ChildStyle = false }) => {
   const [currentIndex, setCurrentIndex] = useState();
   const handlerClick = (index) => {
     setCurrentIndex(index);
-    console.log(currentIndex);
   };
   return (
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
