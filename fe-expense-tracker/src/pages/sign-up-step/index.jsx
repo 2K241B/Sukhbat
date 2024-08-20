@@ -33,9 +33,13 @@ const SignUpStep = () => {
     if (showSelect >= 3) {
       let user = localStorage.getItem('user');
       const userId = JSON.parse(user);
-      await axios.put(`http://localhost:8000/user/${userId.user.id}`, {
-        currency_type: onboard,
-      });
+      const data = await axios.put(
+        `http://localhost:8000/user/${userId.user.id}`,
+        {
+          currency_type: onboard,
+        }
+      );
+      localStorage.setItem('user', JSON.stringify(data.data));
       router.push('/dashboard');
     }
   };

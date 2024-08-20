@@ -82,8 +82,8 @@ export const userUpdate = async (req, res) => {
 UPDATE users SET currency_type =$1 WHERE  id = $2 RETURNING *
   `;
   try {
-    const users = await db.query(tableQueryText, [currency_type, id]);
-    return res.send(users.rows);
+    const user = await db.query(tableQueryText, [currency_type, id]);
+    return res.send({ user: user.rows[0] });
   } catch (error) {
     return res.send(error);
   }
