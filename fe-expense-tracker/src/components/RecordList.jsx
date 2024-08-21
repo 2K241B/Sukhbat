@@ -11,7 +11,6 @@ export const RecordList = ({ recordData, currency }) => {
   const [sortedRecord, setSortedRecord] = useState([]);
   useEffect(() => {
     const sort = _.sortBy(recordData, ['createdat']);
-    console.log(sort);
     setSortedRecord(sort.reverse());
   }, []);
 

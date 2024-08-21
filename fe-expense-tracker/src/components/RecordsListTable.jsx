@@ -8,7 +8,6 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -19,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import RecordList from './RecordList';
+import RecordDateList from './RecordDateList';
 
 const styles = {
   arrowButton:
@@ -46,7 +46,7 @@ export const RecordsListTable = ({ recordData, currency }) => {
           </DropdownMenuTrigger>
         </DropdownMenu>
       </div>
-      <RecordList recordData={recordData} currency={currency} Checkbox={true} />
+      <RecordDateList />
     </div>
   );
 };

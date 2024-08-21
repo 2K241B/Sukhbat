@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { RecordAlertDialog } from './RecordAlertDialog';
 import { useEffect, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { User, UserRoundX } from 'lucide-react';
 
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
@@ -41,13 +43,12 @@ export const Layout = ({ children, ChildStyle = false }) => {
           </div>
           <div className="flex items-center gap-6">
             <RecordAlertDialog />
-            <Image
-              className="w-[40px] h-[40px] rounded-full object-cover"
-              src="https://pe-images.s3.amazonaws.com/basics/cc/image-size-resolution/resize-images-for-print/image-cropped-8x10.jpg"
-              width={40}
-              height={40}
-              alt="Avatar"
-            />
+            <Avatar>
+              <AvatarImage src="" />
+              <AvatarFallback>
+                <User />
+              </AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </div>
