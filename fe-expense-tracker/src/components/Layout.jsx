@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { RecordAlertDialog } from './RecordAlertDialog';
 import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, UserRoundX } from 'lucide-react';
+import { User } from 'lucide-react';
 
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
@@ -16,6 +16,20 @@ const content = ['dashboard', 'records'];
 
 export const Layout = ({ children, ChildStyle = false }) => {
   const [currentIndex, setCurrentIndex] = useState();
+  const [imageUrl, setImageUrl] = useState('');
+  // useEffect(() => {
+  //   let user = localStorage.getItem('user');
+  //   const data = JSON.parse(user);
+  //   const userAvatar = data.user.avatar_img.data.toString();
+  //   const numbers = userAvatar
+  //     .trim()
+  //     .split(/\s*,\s*/g)
+  //     .map((x) => x / 1);
+  //   const binstr = String.fromCharCode(...numbers);
+  //   const b64str = btoa(binstr);
+  //   const src = 'data:image/jpeg;base64,' + b64str;
+  //   console.log(src);
+  // }, []);
   const handlerClick = (index) => {
     setCurrentIndex(index);
   };
@@ -44,7 +58,7 @@ export const Layout = ({ children, ChildStyle = false }) => {
           <div className="flex items-center gap-6">
             <RecordAlertDialog />
             <Avatar>
-              <AvatarImage src="" />
+              <AvatarImage src={imageUrl} alt="" />
               <AvatarFallback>
                 <User />
               </AvatarFallback>

@@ -1,48 +1,40 @@
-import CircleArrowUp from './icon/CircleArrowUp';
-import CircleArrowDown from './icon/CircleArrowDown';
 import { useEffect, useState } from 'react';
 import { DashboardCard } from './DashboardCard';
 import { CardCircle } from './icon/CardCircle';
 import BalanceCard from './BalanceCard';
 
 export const Cards = ({ getBarChartData, currency }) => {
-  let [totalIncome, setTotalIncome] = useState([]);
-  let [totalExpense, settotalExpense] = useState([]);
+  const [prevTotal, setPrevTotal] = useState([]);
+  const [nextTotal, setNextTotal] = useState([]);
   useEffect(() => {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1;
-    getBarChartData &&
-      getBarChartData.map(
-        (el) =>
-          Number(el.month) === currentMonth &&
-          (totalIncome.push(el.income), totalExpense.push(el.expense))
-      );
-    const sumInc = totalIncome.reduce((total, num) => total + num, 0);
-    const sumExp = totalExpense.reduce((total, num) => total + num, 0);
-    setTotalIncome(sumInc);
-    settotalExpense(sumExp);
+    const lastIndex = getBarChartData.length;
+    const [prev, next] = getBarChartData.slice(lastIndex - 2, lastIndex);
+    setPrevTotal(prev);
+    setNextTotal(next);
   }, []);
 
   return (
     <div className="grid grid-cols-3 gap-6 max-h-[220px]">
       <BalanceCard
-        totalIncome={totalIncome}
-        totalExpense={totalExpense}
+        totalIncome={nextTotal.income}
+        totalExpense={nextTotal.expense}
         currency={currency}
       />
       <DashboardCard
         header={'Your Income'}
-        total={totalIncome}
+        total={nextTotal.income}
+        totalLast={prevTotal.income}
         currency={currency}
-        icon={<CircleArrowUp />}
         circle={<CardCircle color="#84CC16" />}
+        colorArrow={'#84CC16'}
       />
       <DashboardCard
         header={'Total Expenses'}
-        total={totalExpense}
+        total={nextTotal.expense}
+        totalLast={prevTotal.expense}
         currency={currency}
-        icon={<CircleArrowDown />}
         circle={<CardCircle color="#0166FF" />}
+        colorArrow={'#0166FF'}
       />
     </div>
   );

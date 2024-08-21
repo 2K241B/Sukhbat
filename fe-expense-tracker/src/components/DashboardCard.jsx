@@ -4,7 +4,18 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-export const DashboardCard = ({ header, total, currency, icon, circle }) => {
+import CircleArrowUp from './icon/CircleArrowUp';
+import CircleArrowDown from './icon/CircleArrowDown';
+export const DashboardCard = ({
+  header,
+  totalLast,
+  total,
+  currency,
+  icon,
+  circle,
+  colorArrow,
+}) => {
+  const percentage = Math.floor((total / totalLast - 1) * 100);
   return (
     <Card className=" max-h-[220px] rounded-[18px]">
       <CardHeader className="border-b-[1px] p-0">
@@ -21,8 +32,12 @@ export const DashboardCard = ({ header, total, currency, icon, circle }) => {
         <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>
       </CardContent>
       <CardFooter className="flex gap-2">
-        {icon}
-        <p className="text-[18px] leading-7">32% from last month</p>
+        {percentage > 0 ? (
+          <CircleArrowUp colorArrow={colorArrow} />
+        ) : (
+          <CircleArrowDown colorArrow={colorArrow} />
+        )}
+        <p className="text-[18px] leading-7">{percentage} % from last month</p>
       </CardFooter>
     </Card>
   );

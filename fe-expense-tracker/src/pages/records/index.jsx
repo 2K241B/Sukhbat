@@ -11,12 +11,11 @@ const Records = () => {
     let user = localStorage.getItem('user');
     const data = JSON.parse(user);
     const userId = data.user.id;
-    const currenryType = data.user.currency_type;
-    setCurrency(currenryType);
+    const currencyType = data.user.currency_type;
+    setCurrency(currencyType);
     axios
       .get(`http://localhost:8000/record/id/${userId}`)
       .then((res) => setRecordData(res.data));
-    console.log(recordData);
   }, []);
   return (
     <Layout ChildStyle={true}>

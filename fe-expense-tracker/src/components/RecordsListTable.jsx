@@ -46,7 +46,7 @@ export const RecordsListTable = ({ recordData, currency }) => {
           </DropdownMenuTrigger>
         </DropdownMenu>
       </div>
-      <RecordDateList />
+      <RecordDateList recordData={recordData} currency={currency} />
     </div>
   );
 };
