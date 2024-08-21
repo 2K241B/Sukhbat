@@ -22,6 +22,7 @@ import {
 import { Input } from './ui/input';
 import { DatePicker } from './DatePicker';
 import axios from 'axios';
+import TimePicker from './TimePicker';
 const styles = {
   button1default:
     'w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]',
@@ -37,9 +38,16 @@ export const RecordAlertDialog = () => {
   const [buttonStyles, setButtonStyles] = useState(styles.button1default);
   const [buttonStyles2, setButtonStyles2] = useState(styles.button2default);
   const [transType, setTransType] = useState('EXP');
-  const [input, setInput] = useState();
+  const [categories, setCategories] = useState();
   const formRef = useRef();
   const formRef2 = useRef();
+  useEffect(() => {
+    {
+      axios.get('http://localhost:8000/category/').then((response) => {
+        setCategories(response.data);
+      }, []);
+    }
+  }, []);
   const buttonHandler = () => {
     setButtonStyles(styles.button1default);
     setButtonStyles2(styles.button2default);
@@ -54,13 +62,14 @@ export const RecordAlertDialog = () => {
     let user = localStorage.getItem('user');
     const data = JSON.parse(user);
     const userId = data.user.id;
+    console.log(formRef);
     await axios.post('http://localhost:8000/record/create', {
       user_id: userId,
       name: formRef2.current[0].value,
       amount: formRef.current[0].value,
       transaction_type: transType,
       description: formRef2.current[1].value,
-      category_id: '758efb1b-969c-49a2-b030-55ca0033944d',
+      category_id: formRef.current[2].value,
     });
     location.reload();
   };
@@ -102,14 +111,20 @@ export const RecordAlertDialog = () => {
                     <SelectValue placeholder="Choose" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
+                    {categories &&
+                      categories.map((el) => (
+                        <SelectItem value={el.id}>{el.name}</SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
               </div>
               <div className="flex flex-col gap-8">
                 <div>
                   <h1>Date</h1>
-                  <DatePicker />
+                  <div className="grid grid-cols-2 w-full">
+                    <DatePicker />
+                    <TimePicker />
+                  </div>
                 </div>
               </div>
             </form>

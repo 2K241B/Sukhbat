@@ -1,47 +1,9 @@
-import { useEffect, useState } from 'react';
 import CheckboxList from './CheckboxList';
 import CheckboxRecord from './CheckboxRecord';
 import ListLogo from './icon/ListLogo';
 import _ from 'lodash';
 
 export const RecordDateList = ({ recordData, currency, transType }) => {
-  const [sortedRecord, setSortedRecord] = useState();
-  useEffect(() => {
-    const mockData = [
-      {
-        balance: 10000,
-        userId: 'user-3',
-      },
-      {
-        balance: 20000,
-        userId: 'user-2',
-      },
-      {
-        balance: 30000,
-        userId: 'user-1',
-      },
-      {
-        balance: 40000,
-        userId: 'user-3',
-      },
-      {
-        balance: 50000,
-        userId: 'user-2',
-      },
-      {
-        balance: 60000,
-        userId: 'user-1',
-      },
-    ];
-
-    const group = _.groupBy(mockData, 'userId');
-    console.log(group);
-
-    console.log(avarage);
-
-    // const sort = _.groupBy(recordData, 'createdat');
-    // setSortedRecord(sort);
-  }, []);
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full h-fit py-3 px-6 rounded-[12px] border-[1px] flex items-center justify-between bg-white">

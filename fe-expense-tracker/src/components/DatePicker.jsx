@@ -13,9 +13,7 @@ import { useEffect, useState } from 'react';
 
 export const DatePicker = () => {
   const [date, setDate] = useState(Date);
-  useEffect(() => {
-    console.log(date);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Popover>

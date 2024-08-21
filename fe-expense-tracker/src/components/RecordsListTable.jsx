@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import RecordList from './RecordList';
 import RecordDateList from './RecordDateList';
+import { record } from 'zod';
 
 const styles = {
   arrowButton:
@@ -46,7 +47,9 @@ export const RecordsListTable = ({ recordData, currency }) => {
           </DropdownMenuTrigger>
         </DropdownMenu>
       </div>
-      <RecordDateList recordData={recordData} currency={currency} />
+      {recordData && (
+        <RecordDateList recordData={recordData} currency={currency} />
+      )}
     </div>
   );
 };

@@ -23,12 +23,16 @@ const Dashboard = () => {
     const userId = data.user.id;
     const currenryType = data.user.currency_type;
     setCurrency(currenryType);
-    axios
-      .get(`http://localhost:8000/record/id/${userId}`)
-      .then((res) => setRecordData(res.data));
-    axios
-      .get(`http://localhost:8000/record/getBarChartData/${userId}`)
-      .then((response) => setGetBarChartData(response.data));
+    {
+      axios
+        .get(`http://localhost:8000/record/id/${userId}`)
+        .then((res) => setRecordData(res.data));
+    }
+    {
+      axios
+        .get(`http://localhost:8000/record/getBarChartData/${userId}`)
+        .then((response) => setGetBarChartData(response.data));
+    }
   }, []);
 
   return (

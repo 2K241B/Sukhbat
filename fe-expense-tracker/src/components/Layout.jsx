@@ -17,19 +17,7 @@ const content = ['dashboard', 'records'];
 export const Layout = ({ children, ChildStyle = false }) => {
   const [currentIndex, setCurrentIndex] = useState();
   const [imageUrl, setImageUrl] = useState('');
-  // useEffect(() => {
-  //   let user = localStorage.getItem('user');
-  //   const data = JSON.parse(user);
-  //   const userAvatar = data.user.avatar_img.data.toString();
-  //   const numbers = userAvatar
-  //     .trim()
-  //     .split(/\s*,\s*/g)
-  //     .map((x) => x / 1);
-  //   const binstr = String.fromCharCode(...numbers);
-  //   const b64str = btoa(binstr);
-  //   const src = 'data:image/jpeg;base64,' + b64str;
-  //   console.log(src);
-  // }, []);
+
   const handlerClick = (index) => {
     setCurrentIndex(index);
   };

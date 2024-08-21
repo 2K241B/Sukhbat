@@ -7,20 +7,25 @@ import { useEffect, useState } from 'react';
 const Records = () => {
   const [recordData, setRecordData] = useState();
   const [currency, setCurrency] = useState('MNT');
+  const [categories, setCategories] = useState();
   useEffect(() => {
     let user = localStorage.getItem('user');
     const data = JSON.parse(user);
     const userId = data.user.id;
     const currencyType = data.user.currency_type;
     setCurrency(currencyType);
-    axios
-      .get(`http://localhost:8000/record/id/${userId}`)
-      .then((res) => setRecordData(res.data));
+    {
+      axios
+        .get(`http://localhost:8000/record/id/${userId}`)
+        .then((res) => setRecordData(res.data));
+    }
   }, []);
   return (
     <Layout ChildStyle={true}>
-      <CategoryMenu />
-      <RecordsListTable recordData={recordData} currency={currency} />
+      {categories && <CategoryMenu categories={categories} />}
+      {recordData && (
+        <RecordsListTable recordData={recordData} currency={currency} />
+      )}
     </Layout>
   );
 };

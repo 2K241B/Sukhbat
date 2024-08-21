@@ -13,8 +13,14 @@ import {
   CommandShortcut,
 } from '@/components/ui/command';
 import MenuCheckbox from './MenuCheckbox';
+import { useEffect, useState } from 'react';
 
-export const CategoryMenu = () => {
+export const CategoryMenu = ({ categories }) => {
+  const [sortedCategories, setSortedCategories] = useState();
+  useEffect(() => {
+    const sort = _.orderBy(categories, [(category) => category.name], ['asc']);
+    setSortedCategories(sort);
+  }, []);
   return (
     <Command className="w-[250px] h-fit bg-white rounded-[12px] px-4 py-6 flex gap-6 ">
       <h1>Records</h1>
@@ -32,9 +38,8 @@ export const CategoryMenu = () => {
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Category">
-          <CommandItem>Food & Drinks</CommandItem>
-          <CommandItem>Shopping</CommandItem>
-          <CommandItem>Housing</CommandItem>
+          {sortedCategories &&
+            sortedCategories.map((el) => <CommandItem>{el.name}</CommandItem>)}
           <Button className="bg-white text-[#1F2937]">Add Catecory</Button>
         </CommandGroup>
       </CommandList>
