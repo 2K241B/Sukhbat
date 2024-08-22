@@ -29,7 +29,7 @@ const chartConfig = {
     label: 'Others',
     color: '#0166FF',
   },
-  safari: {
+  Bills: {
     label: 'Shopping',
     color: '#E74694',
   },
@@ -49,18 +49,23 @@ const chartConfig = {
 
 export const PieDashboardChart = ({ getPieChartData }) => {
   const [pieChartData, setPieChartData] = useState();
+
   useEffect(() => {
     const result = _.groupBy(getPieChartData, (el) => el.categoryname);
     const response = _.map(result, (records) => {
-      const result = records.reduce((acc, el) => {
-        acc.amount += el.amount;
-        return acc;
-      });
+      const result = records.reduce(
+        (acc, el) => {
+          const amount = (acc.amount += el.amount);
+          return { categoryname: el.categoryname, amount };
+        },
+        { amount: 0 }
+      );
       return result;
     });
-
     setPieChartData(response);
+    console.log(getPieChartData);
   }, []);
+
   return (
     <Card className="flex flex-col h-[284px]">
       <CardHeader className="items-start px-8 py-4 border-b-[1px]">

@@ -22,7 +22,6 @@ import {
 import { Input } from './ui/input';
 import { DatePicker } from './DatePicker';
 import axios from 'axios';
-import TimePicker from './TimePicker';
 const styles = {
   button1default:
     'w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]',
@@ -62,7 +61,6 @@ export const RecordAlertDialog = () => {
     let user = localStorage.getItem('user');
     const data = JSON.parse(user);
     const userId = data.user.id;
-    console.log(formRef);
     await axios.post('http://localhost:8000/record/create', {
       user_id: userId,
       name: formRef2.current[0].value,
@@ -121,10 +119,7 @@ export const RecordAlertDialog = () => {
               <div className="flex flex-col gap-8">
                 <div>
                   <h1>Date</h1>
-                  <div className="grid grid-cols-2 w-full">
-                    <DatePicker />
-                    <TimePicker />
-                  </div>
+                  <DatePicker />
                 </div>
               </div>
             </form>
