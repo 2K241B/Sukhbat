@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { TrendingUp } from 'lucide-react';
 import { Label, Pie, PieChart } from 'recharts';
 import {
   Card,
@@ -15,6 +13,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import { useEffect, useState } from 'react';
 const chartData = [
   { category: 'Food & Drinks', expense: 275, fill: 'var(--color-chrome)' },
   { category: 'Shopping', expense: 200, fill: 'var(--color-safari)' },
@@ -26,8 +25,8 @@ const chartConfig = {
   expense: {
     label: 'Visitors',
   },
-  chrome: {
-    label: 'Food & Drinks',
+  Others: {
+    label: 'Others',
     color: '#0166FF',
   },
   safari: {
@@ -48,21 +47,40 @@ const chartConfig = {
   },
 };
 
-export const PieDashboardChart = () => {
+export const PieDashboardChart = ({ getPieChartData }) => {
+  const [pieChartData, setPieChartData] = useState();
+  useEffect(() => {
+    const result = _.groupBy(getPieChartData, (el) => el.categoryname);
+    const response = _.map(result, (records) => {
+      const result = records.reduce((acc, el) => {
+        acc.amount += el.amount;
+        return acc;
+      });
+      return result;
+    });
+
+    setPieChartData(response);
+  }, []);
   return (
     <Card className="flex flex-col h-[284px]">
       <CardHeader className="items-start px-8 py-4 border-b-[1px]">
         <CardTitle className="text-[16px]">Income - Expense</CardTitle>
       </CardHeader>
       <CardContent className=" flex flex-row-reverse justify-between items-center p-0 pr-6 ">
-        <div className="flex justify-between items-center w-full">
-          <div className="flex items-center gap-2">
-            <div className="size-3 bg-blue-600 rounded-full"></div>
-            <p>Food & Drinks</p>
-          </div>
-          <p>5'000'000</p>
-          <p>15.50%</p>
+        <div className="flex flex-col gap-3 w-full">
+          {pieChartData &&
+            pieChartData.map((el) => (
+              <div className="flex justify-between items-center w-full">
+                <div className="flex items-center gap-2">
+                  <div className="size-3 bg-blue-600 rounded-full"></div>
+                  <p>{el.categoryname}</p>
+                </div>
+                <p>{el.amount}</p>
+                <p>15.50%</p>
+              </div>
+            ))}
         </div>
+
         <ChartContainer
           config={chartConfig}
           className="aspect-square h-[240px]"
@@ -73,9 +91,9 @@ export const PieDashboardChart = () => {
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={chartData}
-              dataKey="expense"
-              nameKey="category"
+              data={pieChartData}
+              dataKey="amount"
+              nameKey="categoryname"
               innerRadius={50}
               strokeWidth={5}
             >

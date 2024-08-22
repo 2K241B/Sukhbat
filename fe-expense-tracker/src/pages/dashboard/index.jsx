@@ -5,7 +5,7 @@ import { PieDashboardChart } from '@/components/PieDashboardChart';
 import RecordList from '@/components/RecordList';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import _ from 'lodash';
 const styles = {
   chartContainer: 'grid grid-cols-2 gap-6 h-[284px]',
   recordListContainer: 'rounded-[12px] bg-white',
@@ -16,6 +16,7 @@ const Dashboard = () => {
   const [recordData, setRecordData] = useState();
   const [currency, setCurrency] = useState('MNT');
   const [getBarChartData, setGetBarChartData] = useState();
+  const [getPieChartData, setGetPieChartData] = useState();
 
   useEffect(() => {
     let user = localStorage.getItem('user');
@@ -23,18 +24,19 @@ const Dashboard = () => {
     const userId = data.user.id;
     const currenryType = data.user.currency_type;
     setCurrency(currenryType);
-    {
-      axios
-        .get(`http://localhost:8000/record/id/${userId}`)
-        .then((res) => setRecordData(res.data));
-    }
-    {
-      axios
-        .get(`http://localhost:8000/record/getBarChartData/${userId}`)
-        .then((response) => setGetBarChartData(response.data));
-    }
-  }, []);
 
+    axios
+      .get(`http://localhost:8000/record/recordPieChart/${userId}`)
+      .then((resp) => setGetPieChartData(resp.data));
+
+    axios
+      .get(`http://localhost:8000/record/id/${userId}`)
+      .then((res) => setRecordData(res.data));
+
+    axios
+      .get(`http://localhost:8000/record/getBarChartData/${userId}`)
+      .then((response) => setGetBarChartData(response.data));
+  }, []);
   return (
     <Layout>
       {getBarChartData && (
@@ -42,7 +44,9 @@ const Dashboard = () => {
       )}
       <div className={styles.chartContainer}>
         <Chart getBarChartData={getBarChartData} />
-        <PieDashboardChart />
+        {getPieChartData && (
+          <PieDashboardChart getPieChartData={getPieChartData} />
+        )}
       </div>
       <div className={styles.recordListContainer}>
         <div className={styles.recordListHeader}>Last Records</div>

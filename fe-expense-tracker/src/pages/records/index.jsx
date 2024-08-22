@@ -19,6 +19,11 @@ const Records = () => {
         .get(`http://localhost:8000/record/id/${userId}`)
         .then((res) => setRecordData(res.data));
     }
+    {
+      axios.get('http://localhost:8000/category/').then((response) => {
+        setCategories(response.data);
+      });
+    }
   }, []);
   return (
     <Layout ChildStyle={true}>

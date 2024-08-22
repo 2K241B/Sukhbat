@@ -45,7 +45,7 @@ export const RecordAlertDialog = () => {
     {
       axios.get('http://localhost:8000/category/').then((response) => {
         setCategories(response.data);
-      }, []);
+      });
     }
   }, []);
   const buttonHandler = () => {
@@ -100,7 +100,7 @@ export const RecordAlertDialog = () => {
               <div className="bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px]">
                 <p className="text-[#171717]">Amount</p>
                 <input
-                  className="bg-[#F3F4F6] text-[#D1D5DB] focus:outline-none"
+                  className="bg-[#F3F4F6] focus:outline-none"
                   placeholder="000,00"
                 />
               </div>

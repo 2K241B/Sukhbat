@@ -66,6 +66,21 @@ export const records = async (req, res) => {
     return res.send(error);
   }
 };
+export const RecordPieChart = async (req, res) => {
+  const { id } = req.params;
+  const tableQueryText = `
+   SELECT records.*, category.name AS categoryName
+   FROM records
+   INNER JOIN category ON records.category_id = category.id
+   WHERE user_id = $1 AND transaction_type = 'EXP'
+  `;
+  try {
+    const users = await db.query(tableQueryText, [id]);
+    return res.send(users.rows);
+  } catch (error) {
+    return res.send(error);
+  }
+};
 export const Record = async (req, res) => {
   const { id } = req.params;
   const tableQueryText = `
