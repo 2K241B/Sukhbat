@@ -8,6 +8,7 @@ const Records = () => {
   const [recordData, setRecordData] = useState();
   const [currency, setCurrency] = useState('MNT');
   const [categories, setCategories] = useState();
+  const [categoryValue, setCategoryValue] = useState();
   useEffect(() => {
     let user = localStorage.getItem('user');
     const data = JSON.parse(user);
@@ -27,9 +28,18 @@ const Records = () => {
   }, []);
   return (
     <Layout ChildStyle={true}>
-      {categories && <CategoryMenu categories={categories} />}
+      {categories && (
+        <CategoryMenu
+          categories={categories}
+          setCategoryValue={setCategoryValue}
+        />
+      )}
       {recordData && (
-        <RecordsListTable recordData={recordData} currency={currency} />
+        <RecordsListTable
+          recordData={recordData}
+          currency={currency}
+          categoryValue={categoryValue}
+        />
       )}
     </Layout>
   );

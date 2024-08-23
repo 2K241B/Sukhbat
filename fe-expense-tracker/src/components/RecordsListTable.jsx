@@ -26,7 +26,7 @@ const styles = {
     'p-0 size-8 rounded-[8px] flex justify-center items-center gap-1 bg-[#E5E7EB] text-[#0F172A]',
 };
 
-export const RecordsListTable = ({ recordData, currency }) => {
+export const RecordsListTable = ({ recordData, currency, categoryValue }) => {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
@@ -42,13 +42,17 @@ export const RecordsListTable = ({ recordData, currency }) => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
+              Newest First <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
         </DropdownMenu>
       </div>
       {recordData && (
-        <RecordDateList recordData={recordData} currency={currency} />
+        <RecordDateList
+          recordData={recordData}
+          currency={currency}
+          categoryValue={categoryValue}
+        />
       )}
     </div>
   );

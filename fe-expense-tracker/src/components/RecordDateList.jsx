@@ -1,9 +1,21 @@
+import { useEffect, useState } from 'react';
 import CheckboxList from './CheckboxList';
 import CheckboxRecord from './CheckboxRecord';
 import ListLogo from './icon/ListLogo';
 import _ from 'lodash';
 
-export const RecordDateList = ({ recordData, currency, transType }) => {
+export const RecordDateList = ({
+  recordData,
+  currency,
+  transType,
+  categoryValue,
+}) => {
+  const [recordFiltered, setRecordFiltered] = useState(recordData);
+  useEffect(() => {
+    setRecordFiltered(
+      recordData.filter((el) => el.category_id === categoryValue)
+    );
+  }, [categoryValue]);
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full h-fit py-3 px-6 rounded-[12px] border-[1px] flex items-center justify-between bg-white">
@@ -12,8 +24,8 @@ export const RecordDateList = ({ recordData, currency, transType }) => {
       </div>
       <h1>Today</h1>
       <div className="flex flex-col gap-3">
-        {recordData &&
-          recordData.map((el) => (
+        {recordFiltered &&
+          recordFiltered.map((el) => (
             <CheckboxList
               id={'bla'}
               content={
