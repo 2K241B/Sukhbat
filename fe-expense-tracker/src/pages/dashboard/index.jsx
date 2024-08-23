@@ -38,14 +38,17 @@ const Dashboard = () => {
       .then((response) => setGetBarChartData(response.data));
   }, []);
   return (
-    <Layout>
+    <div className="flex flex-col gap-6">
       {getBarChartData && (
         <Cards getBarChartData={getBarChartData} currency={currency} />
       )}
       <div className={styles.chartContainer}>
         <Chart getBarChartData={getBarChartData} />
         {getPieChartData && (
-          <PieDashboardChart getPieChartData={getPieChartData} />
+          <PieDashboardChart
+            getPieChartData={getPieChartData}
+            currency={currency}
+          />
         )}
       </div>
       <div className={styles.recordListContainer}>
@@ -54,7 +57,7 @@ const Dashboard = () => {
           <RecordList recordData={recordData} currency={currency} />
         )}
       </div>
-    </Layout>
+    </div>
   );
 };
 export default Dashboard;

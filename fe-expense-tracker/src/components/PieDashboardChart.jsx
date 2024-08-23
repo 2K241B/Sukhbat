@@ -48,7 +48,7 @@ const chartConfig = {
   },
 };
 
-export const PieDashboardChart = ({ getPieChartData }) => {
+export const PieDashboardChart = ({ getPieChartData, currency }) => {
   const [pieChartData, setPieChartData] = useState();
 
   useEffect(() => {
@@ -74,16 +74,19 @@ export const PieDashboardChart = ({ getPieChartData }) => {
       <CardHeader className="items-start px-8 py-4 border-b-[1px]">
         <CardTitle className="text-[16px]">Income - Expense</CardTitle>
       </CardHeader>
-      <CardContent className=" flex flex-row-reverse justify-between items-center p-0 pr-6 ">
-        <div className="flex flex-col gap-3 w-full">
+      <CardContent className=" flex flex-row-reverse justify-between items-center p-0">
+        <div className="flex flex-col gap-2 w-full pb-6 pr-6">
           {pieChartData &&
             pieChartData.map((el) => (
-              <div className="flex justify-between items-center w-full">
+              <div className="grid grid-cols-3 text-sm w-full text-end">
                 <div className="flex items-center gap-2">
                   <div className="size-3 bg-blue-600 rounded-full"></div>
                   <p>{el.categoryname}</p>
                 </div>
-                <p>{el.amount}</p>
+                <p>
+                  {el.amount}
+                  {currency == 'USD' ? '$' : '₮'}
+                </p>
                 <p>15.50%</p>
               </div>
             ))}

@@ -7,17 +7,26 @@ export const Cards = ({ getBarChartData, currency }) => {
   const [prevTotal, setPrevTotal] = useState([]);
   const [nextTotal, setNextTotal] = useState([]);
   useEffect(() => {
-    console.log(getBarChartData);
     const lastIndex = getBarChartData.length;
-    const [prev, next] = getBarChartData.slice(lastIndex - 2, lastIndex);
-    setPrevTotal(prev);
-    setNextTotal(next);
+    if (lastIndex <= 1) {
+      const next = getBarChartData.slice(lastIndex - 1, lastIndex);
+      setNextTotal(next);
+      setPrevTotal({
+        month: '7',
+        income: 1000000,
+        expense: 1000000,
+      });
+    } else {
+      const [prev, next] = getBarChartData.slice(lastIndex - 2, lastIndex);
+      setPrevTotal(prev);
+      setNextTotal(next);
+    }
   }, []);
 
   return (
     <div className="grid grid-cols-3 gap-6 max-h-[220px]">
       <BalanceCard
-        totalIncome={nextTotal.income}
+        nextTotaltotalIncome={nextTotal.income}
         totalExpense={nextTotal.expense}
         currency={currency}
       />
@@ -29,6 +38,7 @@ export const Cards = ({ getBarChartData, currency }) => {
         circle={<CardCircle color="#84CC16" />}
         colorArrow={'#84CC16'}
       />
+
       <DashboardCard
         header={'Total Expenses'}
         total={nextTotal.expense}

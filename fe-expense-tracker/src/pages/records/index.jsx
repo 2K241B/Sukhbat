@@ -27,7 +27,7 @@ const Records = () => {
     }
   }, []);
   return (
-    <Layout ChildStyle={true}>
+    <div className="flex flex-row gap-6 w-[1200px] min-h-screen pb-10">
       {categories && (
         <CategoryMenu
           categories={categories}
@@ -41,7 +41,7 @@ const Records = () => {
           categoryValue={categoryValue}
         />
       )}
-    </Layout>
+    </div>
   );
 };
 
