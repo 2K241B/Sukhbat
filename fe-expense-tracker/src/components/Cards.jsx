@@ -7,6 +7,7 @@ export const Cards = ({ getBarChartData, currency }) => {
   const [prevTotal, setPrevTotal] = useState([]);
   const [nextTotal, setNextTotal] = useState([]);
   useEffect(() => {
+    console.log(getBarChartData);
     const lastIndex = getBarChartData.length;
     const [prev, next] = getBarChartData.slice(lastIndex - 2, lastIndex);
     setPrevTotal(prev);

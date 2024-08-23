@@ -28,7 +28,6 @@ export const CategoryMenu = ({ categories, setCategoryValue }) => {
 
   const handlerClick = (name) => {
     setCategoryValue(name);
-    console.log(setTypeValue);
   };
   return (
     <Command className="w-[350px] h-fit bg-white rounded-[12px] px-4 py-6 flex gap-6 ">

@@ -33,7 +33,7 @@ const chartConfig = {
     label: 'Shopping',
     color: '#E74694',
   },
-  firefox: {
+  Food: {
     label: 'Housing',
     color: '#FDBA8C',
   },
@@ -62,7 +62,9 @@ export const PieDashboardChart = ({ getPieChartData }) => {
       );
       return result;
     });
-    setPieChartData(response);
+    setPieChartData(
+      response.map((el) => ({ ...el, fill: `var(--color-${el.categoryname})` }))
+    );
     console.log(getPieChartData);
   }, []);
 

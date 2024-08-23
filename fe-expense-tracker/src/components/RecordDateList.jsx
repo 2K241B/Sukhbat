@@ -3,6 +3,7 @@ import CheckboxList from './CheckboxList';
 import CheckboxRecord from './CheckboxRecord';
 import ListLogo from './icon/ListLogo';
 import _ from 'lodash';
+import { record } from 'zod';
 
 export const RecordDateList = ({
   recordData,
@@ -11,11 +12,15 @@ export const RecordDateList = ({
   categoryValue,
 }) => {
   const [recordFiltered, setRecordFiltered] = useState(recordData);
+
   useEffect(() => {
     setRecordFiltered(
       recordData.filter((el) => el.category_id === categoryValue)
     );
   }, [categoryValue]);
+  useEffect(() => {
+    setRecordFiltered(recordData);
+  }, []);
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full h-fit py-3 px-6 rounded-[12px] border-[1px] flex items-center justify-between bg-white">
