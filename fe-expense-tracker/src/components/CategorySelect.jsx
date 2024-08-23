@@ -21,9 +21,9 @@ const icons = {
   gift: <GiftIcon />,
 };
 
-export const CategorySelect = () => {
+export const CategorySelect = ({ formRef }) => {
   return (
-    <Select>
+    <Select ref={formRef}>
       <SelectTrigger className="w-[50px] bg-[#F9FAFB] outline-none border-none p-0 max-h-[24px]">
         <SelectValue placeholder={<CategorySelectAdd />} />
       </SelectTrigger>

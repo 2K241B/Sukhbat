@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { DashboardCard } from './DashboardCard';
 import { CardCircle } from './icon/CardCircle';
 import BalanceCard from './BalanceCard';
+import { get } from 'react-hook-form';
 
 export const Cards = ({ getBarChartData, currency }) => {
   const [prevTotal, setPrevTotal] = useState([]);
@@ -9,13 +10,8 @@ export const Cards = ({ getBarChartData, currency }) => {
   useEffect(() => {
     const lastIndex = getBarChartData.length;
     if (lastIndex <= 1) {
-      const next = getBarChartData.slice(lastIndex - 1, lastIndex);
-      setNextTotal(next);
-      setPrevTotal({
-        month: '7',
-        income: 1000000,
-        expense: 1000000,
-      });
+      setNextTotal(getBarChartData[0]);
+      setPrevTotal(getBarChartData[0]);
     } else {
       const [prev, next] = getBarChartData.slice(lastIndex - 2, lastIndex);
       setPrevTotal(prev);

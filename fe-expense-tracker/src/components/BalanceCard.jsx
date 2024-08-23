@@ -2,7 +2,11 @@ import Abstract from '@/components/icon/Abstract';
 import LogoWhite from '@/components/icon/LogoWhite';
 import Wi from '@/components/icon/Wi';
 import { Card, CardFooter, CardHeader } from '@/components/ui/card';
-export const BalanceCard = ({ totalIncome, totalExpense, currency }) => {
+export const BalanceCard = ({
+  nextTotaltotalIncome,
+  totalExpense,
+  currency,
+}) => {
   return (
     <Card className="bg-[#0166FF] max-h-[220px] relative rounded-[18px]">
       <CardHeader>
@@ -14,7 +18,7 @@ export const BalanceCard = ({ totalIncome, totalExpense, currency }) => {
             Cash
           </h1>
           <h1 className="text-2xl font-semibold text-white">
-            {totalIncome - totalExpense}
+            {nextTotaltotalIncome - totalExpense}
             {currency == 'USD' ? '$' : '₮'}
           </h1>
         </div>

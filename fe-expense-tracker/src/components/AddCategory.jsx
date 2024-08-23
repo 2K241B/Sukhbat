@@ -22,12 +22,13 @@ import CategorySelect from './CategorySelect';
 export const AddCategory = () => {
   const formRef = useRef();
   const handlerClick = async () => {
-    await axios.post('http://localhost:8000/category/create', {
-      name: formRef.current[0].value,
-      description: formRef.current[0].value,
-      category_image: '',
-    });
-    location.reload();
+    console.log(formRef);
+    // await axios.post('http://localhost:8000/category/create', {
+    //   name: formRef.current[0].value,
+    //   description: formRef.current[0].value,
+    //   category_image: '',
+    // });
+    // location.reload();
   };
   return (
     <AlertDialog>
@@ -43,15 +44,15 @@ export const AddCategory = () => {
           </AlertDialogCancel>
         </AlertDialogHeader>
         <div className="flex flex-col gap-8 p-6 w-full">
-          <form ref={formRef} className="flex items-center w-full gap-3">
+          <div className="flex items-center w-full gap-3">
             <div className="flex items-center p-4 rounded-[8px] bg-[#F9FAFB] border-[#94A3B8] border-[1px]">
-              <CategorySelect />
+              <CategorySelect formRef={formRef} />
             </div>
             <div className="p-4 rounded-[8px] bg-[#F9FAFB] border-[#94A3B8] border-[1px] flex items-center justify-between w-full">
               <input className="bg-[#F9FAFB] outline-none" />
               <ArrowDropDown />
             </div>
-          </form>
+          </div>
           <AlertDialogAction
             onClick={handlerClick}
             className="w-full bg-[#16A34A] hover:bg-[#16A34A] rounded-[20px] text-white"

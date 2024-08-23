@@ -5,6 +5,7 @@ import { RecordAlertDialog } from './RecordAlertDialog';
 import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User } from 'lucide-react';
+import { useRouter } from 'next/router';
 
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
@@ -15,12 +16,14 @@ const styles = {
 const content = ['dashboard', 'records'];
 
 export const Layout = ({ children, ChildStyle = false }) => {
+  const router = useRouter();
+
   const [currentIndex, setCurrentIndex] = useState();
+  useEffect(() => {
+    router.pathname === '/dashboard' ? setCurrentIndex(0) : setCurrentIndex(1);
+  }, [router]);
   const [imageUrl, setImageUrl] = useState('');
 
-  const handlerClick = (index) => {
-    setCurrentIndex(index);
-  };
   return (
     <div className="flex flex-col items-center bg-[#F3F4F6] gap-6">
       <div className="bg-white flex justify-center w-full">
@@ -37,7 +40,6 @@ export const Layout = ({ children, ChildStyle = false }) => {
                     ? styles.contentStyle2
                     : styles.contentStyle
                 }
-                onClick={() => handlerClick(i)}
               >
                 {el}
               </Link>

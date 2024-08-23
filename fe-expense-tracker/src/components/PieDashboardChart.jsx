@@ -14,13 +14,6 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { useEffect, useState } from 'react';
-const chartData = [
-  { category: 'Food & Drinks', expense: 275, fill: 'var(--color-chrome)' },
-  { category: 'Shopping', expense: 200, fill: 'var(--color-safari)' },
-  { category: 'Housing', expense: 287, fill: 'var(--color-firefox)' },
-  { category: 'Vehicle', expense: 173, fill: 'var(--color-edge)' },
-  { category: 'other', expense: 190, fill: 'var(--color-other)' },
-];
 const chartConfig = {
   expense: {
     label: 'Visitors',
@@ -46,12 +39,21 @@ const chartConfig = {
     label: 'Vehicle',
     color: '#16BDCA',
   },
+  Vehicle: {
+    label: 'Vehicle',
+    color: '#FF3131',
+  },
 };
 
 export const PieDashboardChart = ({ getPieChartData, currency }) => {
   const [pieChartData, setPieChartData] = useState();
-
+  const [totalExpense, setTotalExpense] = useState();
   useEffect(() => {
+    const totalExpense = getPieChartData.reduce(
+      (acc, el) => (acc += el.amount),
+      0
+    );
+    setTotalExpense(totalExpense);
     const result = _.groupBy(getPieChartData, (el) => el.categoryname);
     const response = _.map(result, (records) => {
       const result = records.reduce(
@@ -66,7 +68,6 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
     setPieChartData(
       response.map((el) => ({ ...el, fill: `var(--color-${el.categoryname})` }))
     );
-    console.log(getPieChartData);
   }, []);
 
   return (
@@ -78,7 +79,7 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
         <div className="flex flex-col gap-2 w-full pb-6 pr-6">
           {pieChartData &&
             pieChartData.map((el) => (
-              <div className="grid grid-cols-3 text-sm w-full text-end">
+              <div className="grid grid-cols-3 text-sm w-full text-end text-[#111827]">
                 <div className="flex items-center gap-2">
                   <div className="size-3 bg-blue-600 rounded-full"></div>
                   <p>{el.categoryname}</p>
@@ -87,7 +88,7 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
                   {el.amount}
                   {currency == 'USD' ? '$' : '₮'}
                 </p>
-                <p>15.50%</p>
+                <p>{Math.floor(el.amount / (totalExpense / 100))}%</p>
               </div>
             ))}
         </div>

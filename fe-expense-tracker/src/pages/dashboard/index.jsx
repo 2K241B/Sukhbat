@@ -1,6 +1,5 @@
 import Cards from '@/components/Cards';
 import { Chart } from '@/components/Chart';
-import Layout from '@/components/Layout';
 import { PieDashboardChart } from '@/components/PieDashboardChart';
 import RecordList from '@/components/RecordList';
 import axios from 'axios';
@@ -20,22 +19,24 @@ const Dashboard = () => {
 
   useEffect(() => {
     let user = localStorage.getItem('user');
-    const data = JSON.parse(user);
-    const userId = data.user.id;
-    const currenryType = data.user.currency_type;
-    setCurrency(currenryType);
+    if (user) {
+      const data = JSON.parse(user);
+      const userId = data.user.id;
+      const currenryType = data.user.currency_type;
+      setCurrency(currenryType);
 
-    axios
-      .get(`http://localhost:8000/record/recordPieChart/${userId}`)
-      .then((resp) => setGetPieChartData(resp.data));
+      axios
+        .get(`http://localhost:8000/record/recordPieChart/${userId}`)
+        .then((resp) => setGetPieChartData(resp.data));
 
-    axios
-      .get(`http://localhost:8000/record/id/${userId}`)
-      .then((res) => setRecordData(res.data));
+      axios
+        .get(`http://localhost:8000/record/id/${userId}`)
+        .then((res) => setRecordData(res.data));
 
-    axios
-      .get(`http://localhost:8000/record/getBarChartData/${userId}`)
-      .then((response) => setGetBarChartData(response.data));
+      axios
+        .get(`http://localhost:8000/record/getBarChartData/${userId}`)
+        .then((response) => setGetBarChartData(response.data));
+    }
   }, []);
   return (
     <div className="flex flex-col gap-6">
