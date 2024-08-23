@@ -37,13 +37,14 @@ const chartConfig = {
     label: 'Housing',
     color: '#FDBA8C',
   },
-  edge: {
-    label: 'Vehicle',
-    color: '#16BDCA',
-  },
-  other: {
+
+  Shopping: {
     label: 'Other',
     color: '#F2901C',
+  },
+  Insurance: {
+    label: 'Vehicle',
+    color: '#16BDCA',
   },
 };
 

@@ -22,6 +22,7 @@ import {
 import { Input } from './ui/input';
 import { DatePicker } from './DatePicker';
 import axios from 'axios';
+import CategorySelectAdd from './icon/CategorySelectAdd';
 const styles = {
   button1default:
     'w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]',
@@ -95,10 +96,11 @@ export const RecordAlertDialog = () => {
               </Button>
             </div>
             <form ref={formRef} className="flex flex-col gap-5">
-              <div className="bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px]">
+              <div className="w-full">
                 <p className="text-[#171717]">Amount</p>
                 <input
-                  className="bg-[#F3F4F6] focus:outline-none"
+                  type="number"
+                  className="bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px] w-full"
                   placeholder="000,00"
                 />
               </div>
