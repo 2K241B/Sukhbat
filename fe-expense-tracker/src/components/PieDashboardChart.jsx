@@ -1,4 +1,4 @@
-import { Label, Pie, PieChart } from 'recharts';
+import { Label, LabelList, Pie, PieChart, Tooltip } from 'recharts';
 import {
   Card,
   CardContent,
@@ -10,33 +10,33 @@ import {
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { useEffect, useState } from 'react';
+import { object } from 'zod';
 const chartConfig = {
-  expense: {
-    label: 'Visitors',
-  },
   Others: {
     label: 'Others',
     color: '#0166FF',
   },
-  Bills: {
+  Shopping: {
     label: 'Shopping',
     color: '#E74694',
   },
   Food: {
-    label: 'Housing',
+    label: 'Food',
     color: '#FDBA8C',
   },
 
-  Shopping: {
-    label: 'Other',
+  Bills: {
+    label: 'Bills',
     color: '#F2901C',
   },
   Insurance: {
-    label: 'Vehicle',
+    label: 'Insurance',
     color: '#16BDCA',
   },
   Vehicle: {
@@ -65,6 +65,7 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
       );
       return result;
     });
+
     setPieChartData(
       response.map((el) => ({ ...el, fill: `var(--color-${el.categoryname})` }))
     );
@@ -81,7 +82,7 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
             pieChartData.map((el) => (
               <div className="grid grid-cols-3 text-sm w-full text-end text-[#111827]">
                 <div className="flex items-center gap-2">
-                  <div className="size-3 bg-blue-600 rounded-full"></div>
+                  <div className={`size-3 rounded-full`}></div>
                   <p>{el.categoryname}</p>
                 </div>
                 <p>
@@ -95,18 +96,19 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
 
         <ChartContainer
           config={chartConfig}
-          className="aspect-square h-[240px]"
+          className="aspect-square h-[250px]"
         >
           <PieChart className="pb-6">
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
+
             <Pie
               data={pieChartData}
               dataKey="amount"
               nameKey="categoryname"
-              innerRadius={50}
+              innerRadius={40}
               strokeWidth={5}
             >
               <Label

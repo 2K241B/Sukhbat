@@ -1,11 +1,10 @@
-import DashboardLogo from './icon/DashboardLogo';
-import Image from 'next/image';
 import Link from 'next/link';
-import { RecordAlertDialog } from './RecordAlertDialog';
 import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User } from 'lucide-react';
 import { useRouter } from 'next/router';
+import DashboardLogo from '../icon/DashboardLogo';
+import { RecordAlertDialog } from '../RecordAlertDialog';
 
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
