@@ -7,15 +7,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Eye, Gift, House } from 'lucide-react';
-import HouseIcon from './icon/HouseIcon';
-import GiftIcon from './icon/GiftIcon';
-import FoodIcon from './icon/FoodIcon';
-import ShoppingIcon from './icon/ShoppingIcon';
-import TaxiIcon from './icon/TaxiIcon';
-import DrinkIcon from './icon/DrinkIcon';
-import CategorySelectAdd from './icon/CategorySelectAdd';
-import { useState } from 'react';
+import {
+  CategorySelectAdd,
+  DrinkIcon,
+  FoodIcon,
+  GiftIcon,
+  HouseIcon,
+  ShoppingIcon,
+  TaxiIcon,
+} from './icon';
 
 const icons = {
   gift: <GiftIcon />,
@@ -29,7 +29,7 @@ export const CategorySelect = ({ formRef }) => {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup className="grid grid-cols-3 p-6">
-          <SelectItem value={HouseIcon}>
+          <SelectItem value="House">
             <HouseIcon />
           </SelectItem>
           <SelectItem value="gift">

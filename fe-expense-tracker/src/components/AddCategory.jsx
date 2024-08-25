@@ -9,13 +9,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
-import PlusIcon from './icon/PlusIcon';
-import { styles } from './RecordList';
-import { Style } from './Constants';
-import { House, X } from 'lucide-react';
-import ArrowDropDown from './icon/ArrowDropDown';
-import { useEffect, useRef } from 'react';
+
+import { PlusIcon, ArrowDropDown } from './icon';
+
+import { X } from 'lucide-react';
+import { useRef } from 'react';
 import axios from 'axios';
 import CategorySelect from './CategorySelect';
 
