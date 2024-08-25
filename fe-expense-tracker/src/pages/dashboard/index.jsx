@@ -1,10 +1,6 @@
-import Cards from '@/components/Cards';
-import { Chart } from '@/components/Chart';
-import { PieDashboardChart } from '@/components/PieDashboardChart';
-import RecordList from '@/components/RecordList';
+import { Cards, Chart, PieDashboardChart, RecordList } from '@/components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import _ from 'lodash';
 const styles = {
   chartContainer: 'grid grid-cols-2 gap-6 h-[284px]',
   recordListContainer: 'rounded-[12px] bg-white',

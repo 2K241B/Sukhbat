@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button';
 import { Style } from '@/components/Constants';
-import { PlusIcon } from 'lucide-react';
 import {
   Command,
   CommandDialog,
@@ -12,11 +10,9 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from '@/components/ui/command';
-import MenuCheckbox from './MenuCheckbox';
+import { MenuCheckbox, AddCategory } from '@/components';
 import { useEffect, useState } from 'react';
-import Eye from './icon/Eye';
-import Leading from './icon/Leading';
-import AddCategory from './AddCategory';
+import { Eye, Leading } from './icon';
 
 export const CategoryMenu = ({ categories, setCategoryValue }) => {
   const [sortedCategories, setSortedCategories] = useState();

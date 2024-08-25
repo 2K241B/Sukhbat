@@ -4,8 +4,7 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-import CircleArrowUp from './icon/CircleArrowUp';
-import CircleArrowDown from './icon/CircleArrowDown';
+import { CircleArrowDown, CircleArrowUp } from './icon';
 export const DashboardCard = ({
   header,
   totalLast,
@@ -37,7 +36,9 @@ export const DashboardCard = ({
         ) : (
           <CircleArrowDown colorArrow={colorArrow} />
         )}
-        <p className="text-[18px] leading-7">{percentage} % from last month</p>
+        <p className="text-[18px] leading-7">
+          {total === 0 || totalLast === 0 ? 0 : percentage} % from last month
+        </p>
       </CardFooter>
     </Card>
   );

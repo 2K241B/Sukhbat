@@ -1,7 +1,5 @@
-import Abstract from '@/components/icon/Abstract';
-import LogoWhite from '@/components/icon/LogoWhite';
-import Wi from '@/components/icon/Wi';
 import { Card, CardFooter, CardHeader } from '@/components/ui/card';
+import { Abstract, LogoWhite, Wi } from './icon';
 export const BalanceCard = ({
   nextTotaltotalIncome,
   totalExpense,

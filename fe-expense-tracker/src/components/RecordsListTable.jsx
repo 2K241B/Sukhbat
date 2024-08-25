@@ -1,12 +1,4 @@
-import * as React from 'react';
-import {
-  ArrowUpDown,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  MoreHorizontal,
-} from 'lucide-react';
-
+import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -17,9 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import RecordList from './RecordList';
 import RecordDateList from './RecordDateList';
-import { record } from 'zod';
 
 const styles = {
   arrowButton:

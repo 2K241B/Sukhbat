@@ -1,4 +1,3 @@
-import { TrendingUp } from 'lucide-react';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import {
   Card,
@@ -14,15 +13,14 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { useEffect, useState } from 'react';
 
 const chartConfig = {
   income: {
-    label: 'income',
+    label: 'Income',
     color: '#0166FF',
   },
   expense: {
-    label: 'expense',
+    label: 'Expense',
     color: '#F54949',
   },
 };

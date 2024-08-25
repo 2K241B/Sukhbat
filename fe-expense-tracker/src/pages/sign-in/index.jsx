@@ -1,8 +1,8 @@
-import { LogoIcon } from '@/components/icon/logoIcon';
+import { LogoIcon } from '@/components/icon';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 const styles = {
   container: 'grid grid-cols-2 w-full h-screen',

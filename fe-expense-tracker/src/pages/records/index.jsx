@@ -1,5 +1,4 @@
-import CategoryMenu from '@/components/CategoryMenu';
-import RecordsListTable from '@/components/RecordsListTable';
+import { CategoryMenu, RecordsListTable } from '@/components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 

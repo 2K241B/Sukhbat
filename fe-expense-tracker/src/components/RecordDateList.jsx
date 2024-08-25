@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import CheckboxList from './CheckboxList';
 import CheckboxRecord from './CheckboxRecord';
 import ListLogo from './icon/ListLogo';
-import _ from 'lodash';
-import { record } from 'zod';
 
 export const RecordDateList = ({
   recordData,

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { DashboardCard } from './DashboardCard';
-import { CardCircle } from './icon/CardCircle';
-import BalanceCard from './BalanceCard';
-import { get } from 'react-hook-form';
+import { CardCircle } from './icon';
+import { DashboardCard, BalanceCard } from '@/components';
 
 export const Cards = ({ getBarChartData, currency }) => {
   const [prevTotal, setPrevTotal] = useState([]);
@@ -22,14 +20,14 @@ export const Cards = ({ getBarChartData, currency }) => {
   return (
     <div className="grid grid-cols-3 gap-6 max-h-[220px]">
       <BalanceCard
-        nextTotaltotalIncome={nextTotal.income}
-        totalExpense={nextTotal.expense}
+        nextTotaltotalIncome={nextTotal ? nextTotal.income : 0}
+        totalExpense={nextTotal ? nextTotal.expense : 0}
         currency={currency}
       />
       <DashboardCard
         header={'Your Income'}
-        total={nextTotal.income}
-        totalLast={prevTotal.income}
+        total={nextTotal ? nextTotal.income : 0}
+        totalLast={prevTotal ? prevTotal.income : 0}
         currency={currency}
         circle={<CardCircle color="#84CC16" />}
         colorArrow={'#84CC16'}
@@ -37,8 +35,8 @@ export const Cards = ({ getBarChartData, currency }) => {
 
       <DashboardCard
         header={'Total Expenses'}
-        total={nextTotal.expense}
-        totalLast={prevTotal.expense}
+        total={nextTotal ? nextTotal.expense : 0}
+        totalLast={prevTotal ? prevTotal.expense : 0}
         currency={currency}
         circle={<CardCircle color="#0166FF" />}
         colorArrow={'#0166FF'}

@@ -70,6 +70,7 @@ export const RecordAlertDialog = () => {
       description: formRef2.current[1].value,
       category_id: formRef.current[2].value,
     });
+
     location.reload();
   };
   return (
@@ -100,8 +101,8 @@ export const RecordAlertDialog = () => {
                 <p className="text-[#171717]">Amount</p>
                 <input
                   type="number"
-                  className="bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px] w-full"
-                  placeholder="000,00"
+                  className="bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px] w-full outline-none"
+                  placeholder="1'000'00"
                 />
               </div>
               <div>

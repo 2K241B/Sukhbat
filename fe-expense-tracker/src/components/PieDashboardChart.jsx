@@ -16,7 +16,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { useEffect, useState } from 'react';
-import { object } from 'zod';
+import _ from 'lodash';
 const chartConfig = {
   Others: {
     label: 'Others',
@@ -74,7 +74,7 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
   return (
     <Card className="flex flex-col h-[284px]">
       <CardHeader className="items-start px-8 py-4 border-b-[1px]">
-        <CardTitle className="text-[16px]">Income - Expense</CardTitle>
+        <CardTitle className="text-[16px]">Expense</CardTitle>
       </CardHeader>
       <CardContent className=" flex flex-row-reverse justify-between items-center p-0">
         <div className="flex flex-col gap-2 w-full pb-6 pr-6">

@@ -1,12 +1,9 @@
-import { LogoIcon } from '@/components/icon/logoIcon';
+import { LogoIcon } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import React from 'react';
-import { CurrencyType } from '@/components/CurrencyType';
-import { SelectCashBalance } from '@/components/SelectCashBalance';
-import { GoToDashboard } from '@/components/GoToDashboard';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { CurrencyType, GoToDashboard, SelectCashBalance } from '@/components';
 const styles = {
   tag: 'size-6 bg-[#E5E7EB] rounded-full text-center',
   activeTag: 'size-6 bg-[#0166FF] rounded-full text-center text-white',
