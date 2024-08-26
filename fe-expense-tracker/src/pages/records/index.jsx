@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const Records = () => {
+  const [typeValue, setTypeValue] = useState('ALL');
+
   const [recordData, setRecordData] = useState();
   const [currency, setCurrency] = useState('MNT');
   const [categories, setCategories] = useState();
@@ -26,6 +28,7 @@ const Records = () => {
     <div className="flex flex-row gap-6 w-[1200px] min-h-screen pb-10">
       {categories && (
         <CategoryMenu
+          setTypeValue={setTypeValue}
           categories={categories}
           setCategoryValue={setCategoryValue}
         />
@@ -35,6 +38,7 @@ const Records = () => {
           recordData={recordData}
           currency={currency}
           categoryValue={categoryValue}
+          typeValue={typeValue}
         />
       )}
     </div>

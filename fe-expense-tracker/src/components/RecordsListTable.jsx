@@ -18,7 +18,12 @@ const styles = {
     'p-0 size-8 rounded-[8px] flex justify-center items-center gap-1 bg-white text-[#0F172A] border-[#E5E7EB] border-[1px]',
 };
 
-export const RecordsListTable = ({ recordData, currency, categoryValue }) => {
+export const RecordsListTable = ({
+  recordData,
+  currency,
+  categoryValue,
+  typeValue,
+}) => {
   return (
     <div className="w-full">
       <div className="flex items-center py-4 justify-between">
@@ -38,6 +43,7 @@ export const RecordsListTable = ({ recordData, currency, categoryValue }) => {
           recordData={recordData}
           currency={currency}
           categoryValue={categoryValue}
+          typeValue={typeValue}
         />
       )}
     </div>

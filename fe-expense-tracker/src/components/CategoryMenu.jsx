@@ -18,9 +18,13 @@ import { Button } from './ui/button';
 import { PlusIcon } from 'lucide-react';
 import { Input } from './ui/input';
 
-export const CategoryMenu = ({ categories, setCategoryValue }) => {
+export const CategoryMenu = ({
+  categories,
+  setCategoryValue,
+  setTypeValue,
+}) => {
   const [sortedCategories, setSortedCategories] = useState();
-  const [typeValue, setTypeValue] = useState();
+
   useEffect(() => {
     const sort = _.orderBy(categories, [(category) => category.name], ['asc']);
     setSortedCategories(sort);

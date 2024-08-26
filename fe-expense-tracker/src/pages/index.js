@@ -1,9 +1,9 @@
-import Dashboard from './dashboard';
+import SigninPage from './sign-in';
 
 export default function Home() {
   return (
     <main>
-      <Dashboard />
+      <SigninPage />
     </main>
   );
 }

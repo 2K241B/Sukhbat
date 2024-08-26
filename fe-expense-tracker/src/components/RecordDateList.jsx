@@ -8,22 +8,47 @@ export const RecordDateList = ({
   currency,
   transType,
   categoryValue,
+  typeValue,
 }) => {
   const [recordFiltered, setRecordFiltered] = useState(recordData);
-
+  const [filterData, setFilterData] = useState(recordFiltered);
+  const [totalAmount, setTotalAmount] = useState(0);
   useEffect(() => {
     setRecordFiltered(
-      recordData.filter((el) => el.category_id === categoryValue)
+      recordData.filter((el) => el.transaction_type === typeValue)
     );
+    setFilterData(recordData.filter((el) => el.transaction_type === typeValue));
+    if (typeValue === 'ALL') {
+      setRecordFiltered(recordData);
+      setFilterData(recordData);
+    }
+    total();
+  }, [typeValue]);
+  useEffect(() => {
+    setRecordFiltered(
+      filterData.filter((el) => el.category_id === categoryValue)
+    );
+    total();
   }, [categoryValue]);
   useEffect(() => {
     setRecordFiltered(recordData);
   }, []);
+  const dateToTime = (d) => {
+    const date = new Date(d);
+    console.log(date);
+    const gettime = (date.getHours() < 10 ? '0' : '') + date.getHours();
+    const getMunites = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+    console.log(getMunites);
+    return [`${gettime}:${getMunites}`];
+  };
+  const total = () => {
+    setTotalAmount(recordFiltered.reduce((acc, el) => (acc += el.amount), 0));
+  };
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full h-fit py-3 px-6 rounded-[12px] border-[1px] flex items-center justify-between bg-white">
         <CheckboxRecord id={'selectAll'} content={'Select All'} />
-        <p>-35000</p>
+        <p>{totalAmount}</p>
       </div>
       <h1>Today</h1>
       <div className="flex flex-col gap-3">
@@ -37,7 +62,7 @@ export const RecordDateList = ({
                   <div className="flex flex-col gap-1">
                     <h1 className="text-[#000] font-semibold ">{el.name}</h1>
                     <p className="text-[12px] leading-4 text-[#6B7280]">
-                      {el.updateat} hours Ago
+                      {dateToTime(el.createdat)}
                     </p>
                   </div>
                 </div>
