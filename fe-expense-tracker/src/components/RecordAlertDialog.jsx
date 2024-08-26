@@ -138,7 +138,7 @@ export const RecordAlertDialog = () => {
           </div>
           <form ref={formRef2} className="p-6 pt-3 flex flex-col">
             <div>
-              <h1>Payee</h1>
+              <h1>Name</h1>
               <Input className="bg-[#F3F4F6] border-[#D1D5DB] text-[#171717] mt-1 mb-5 " />
             </div>
             <h2>Note</h2>

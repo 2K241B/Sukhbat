@@ -1,6 +1,7 @@
-export const DashboardLogo = () => {
+export const DashboardLogo = ({ onClick }) => {
   return (
     <svg
+      onClick={onClick}
       width="41"
       height="40"
       viewBox="0 0 41 40"

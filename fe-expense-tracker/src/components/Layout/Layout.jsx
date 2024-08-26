@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User } from 'lucide-react';
@@ -9,18 +8,20 @@ import { RecordAlertDialog } from '../RecordAlertDialog';
 const styles = {
   ChildrenStyle: 'flex flex-col gap-6 w-[1200px] min-h-screen pb-10',
   ChildrenStyle2: 'flex flex-row gap-6 w-[1200px] min-h-screen pb-10',
-  contentStyle: 'capitalize leading-6 text-[#0F172A]',
-  contentStyle2: 'capitalize  leading-6 text-[#0F172A] font-semibold',
+  contentStyle: 'capitalize leading-6 text-[#0F172A] cursor-pointer',
+  contentStyle2:
+    'capitalize  leading-6 text-[#0F172A] font-semibold cursor-pointer',
 };
 const content = ['dashboard', 'records'];
 
 export const Layout = ({ children, ChildStyle = false }) => {
   const router = useRouter();
-
   const [currentIndex, setCurrentIndex] = useState();
+
   useEffect(() => {
     router.pathname === '/dashboard' ? setCurrentIndex(0) : setCurrentIndex(1);
   }, [router]);
+
   const [imageUrl, setImageUrl] = useState('');
 
   return (
@@ -28,12 +29,10 @@ export const Layout = ({ children, ChildStyle = false }) => {
       <div className="bg-white flex justify-center w-full">
         <div className="flex justify-between items-center py-[16px] w-[1200px]">
           <div className="flex items-center gap-6">
-            <Link href="/dashboard">
-              <DashboardLogo />
-            </Link>
+            <DashboardLogo onClick={() => router.push('/dashboard')} />
             {content.map((el, i) => (
-              <Link
-                href={el}
+              <p
+                onClick={() => router.push(`/${el}`)}
                 className={
                   i === currentIndex
                     ? styles.contentStyle2
@@ -41,7 +40,7 @@ export const Layout = ({ children, ChildStyle = false }) => {
                 }
               >
                 {el}
-              </Link>
+              </p>
             ))}
           </div>
           <div className="flex items-center gap-6">
