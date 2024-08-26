@@ -227,7 +227,14 @@ const ChartLegend = RechartsPrimitive.Legend;
 
 const ChartLegendContent = React.forwardRef(
   (
-    { className, hideIcon = false, payload, verticalAlign = 'bottom', nameKey },
+    {
+      className,
+      hideIcon = false,
+      payload,
+      verticalAlign = 'bottom',
+      nameKey,
+      amount,
+    },
     ref
   ) => {
     const { config } = useChart();
@@ -260,7 +267,7 @@ const ChartLegendContent = React.forwardRef(
                 <itemConfig.icon />
               ) : (
                 <div
-                  className="h-2 w-2 shrink-0 rounded-[2px]"
+                  className="size-3 shrink-0 rounded-full"
                   style={{
                     backgroundColor: item.color,
                   }}

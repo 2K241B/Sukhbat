@@ -1,4 +1,4 @@
-import { Label, LabelList, Pie, PieChart, Tooltip } from 'recharts';
+import { Label, LabelList, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import {
   Card,
   CardContent,
@@ -72,20 +72,28 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
   }, []);
 
   return (
-    <Card className="flex flex-col h-[284px]">
+    <Card className="h-[284px] flex flex-col ">
       <CardHeader className="items-start px-8 py-4 border-b-[1px]">
-        <CardTitle className="text-[16px]">Expense</CardTitle>
+        <CardTitle className="text-base">Expense</CardTitle>
       </CardHeader>
-      <CardContent className=" flex flex-row-reverse justify-between items-center p-0">
-        <div className="flex flex-col gap-2 w-full pb-6 pr-6">
+      <CardContent className="p-0 flex gap-16">
+        <ChartContainer config={chartConfig} className="h-[230px] w-[330px]">
+          <PieChart>
+            <Pie data={pieChartData} dataKey="amount" innerRadius={40} />
+            <Legend
+              layout="vertical"
+              verticalAlign="middle"
+              align="right"
+              content={<ChartLegendContent nameKey="categoryname" />}
+              className="flex flex-col items-start p-0"
+            />
+          </PieChart>
+        </ChartContainer>
+        <div className="flex flex-col pt-7">
           {pieChartData &&
             pieChartData.map((el) => (
-              <div className="grid grid-cols-3 text-sm w-full text-end text-[#111827]">
-                <div className="flex items-center gap-2">
-                  <div className={`size-3 rounded-full`}></div>
-                  <p>{el.categoryname}</p>
-                </div>
-                <p>
+              <div className="pb-4 grid grid-cols-2 text-xs w-full text-end text-[#111827] gap-16">
+                <p className="">
                   {el.amount}
                   {currency == 'USD' ? '$' : '₮'}
                 </p>
@@ -93,52 +101,6 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
               </div>
             ))}
         </div>
-
-        <ChartContainer
-          config={chartConfig}
-          className="aspect-square h-[250px]"
-        >
-          <PieChart className="pb-6">
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-
-            <Pie
-              data={pieChartData}
-              dataKey="amount"
-              nameKey="categoryname"
-              innerRadius={40}
-              strokeWidth={5}
-            >
-              <Label
-                content={({ viewBox }) => {
-                  if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
-                    return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                      >
-                        <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
-                        ></tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
-                        ></tspan>
-                      </text>
-                    );
-                  }
-                }}
-              />
-            </Pie>
-          </PieChart>
-        </ChartContainer>
       </CardContent>
     </Card>
   );
