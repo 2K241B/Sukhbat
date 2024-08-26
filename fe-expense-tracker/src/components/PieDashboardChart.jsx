@@ -89,10 +89,10 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
             />
           </PieChart>
         </ChartContainer>
-        <div className="flex flex-col pt-7">
+        <div className="flex flex-col items-center justify-center">
           {pieChartData &&
             pieChartData.map((el) => (
-              <div className="pb-4 grid grid-cols-2 text-xs w-full text-end text-[#111827] gap-16">
+              <div className="grid pb-4 last:pb-0 grid-cols-2 text-xs w-full text-end text-[#111827] gap-16">
                 <p className="">
                   {el.amount}
                   {currency == 'USD' ? '$' : '₮'}
