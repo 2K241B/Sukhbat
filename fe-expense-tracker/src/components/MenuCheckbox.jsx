@@ -7,7 +7,7 @@ export const MenuCheckbox = ({ setTypeValue }) => {
     setTypeValue(name);
   };
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       {content.map((el) => (
         <CheckboxRecord onClick={() => handlerClick(el)} id={el} content={el} />
       ))}
