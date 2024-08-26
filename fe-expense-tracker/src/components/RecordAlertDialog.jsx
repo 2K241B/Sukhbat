@@ -70,7 +70,6 @@ export const RecordAlertDialog = () => {
       description: formRef2.current[1].value,
       category_id: formRef.current[2].value,
     });
-
     location.reload();
   };
   return (

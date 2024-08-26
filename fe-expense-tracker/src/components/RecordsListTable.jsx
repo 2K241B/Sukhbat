@@ -10,16 +10,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import RecordDateList from './RecordDateList';
+import Records from '@/pages/records';
+import RecordsSortingSelect from './RecordsSortingSelect';
 
 const styles = {
   arrowButton:
-    'p-0 size-8 rounded-[8px] flex justify-center items-center gap-1 bg-[#E5E7EB] text-[#0F172A]',
+    'p-0 size-8 rounded-[8px] flex justify-center items-center gap-1 bg-white text-[#0F172A] border-[#E5E7EB] border-[1px]',
 };
 
 export const RecordsListTable = ({ recordData, currency, categoryValue }) => {
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 justify-between">
         <div className="flex gap-4 items-center">
           <Button className={styles.arrowButton}>
             <ChevronLeft size={20} />
@@ -29,13 +31,7 @@ export const RecordsListTable = ({ recordData, currency, categoryValue }) => {
             <ChevronRight size={20} />
           </Button>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Newest First <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-        </DropdownMenu>
+        <RecordsSortingSelect />
       </div>
       {recordData && (
         <RecordDateList

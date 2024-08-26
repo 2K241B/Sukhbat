@@ -30,7 +30,7 @@ export const CategoryMenu = ({ categories, setCategoryValue }) => {
     setCategoryValue(name);
   };
   return (
-    <Command className="w-[350px] h-fit bg-[#F9FAFB] border-[#E5E7EB] border-[1px] rounded-[12px] px-4 py-6 flex gap-6 ">
+    <Command className="w-[350px] h-fit border-[#E5E7EB] border-[1px] rounded-[12px] px-4 py-6 flex gap-6 ">
       <h1>Records</h1>
       <AddCategory />
       <div className={Style.buttonStyle3}>
@@ -62,10 +62,12 @@ export const CategoryMenu = ({ categories, setCategoryValue }) => {
           <div className="flex gap-3 pb-3">
             <Input
               className="bg-[#F3F4F6] border-[#D1D5DB] text-[#0F172A] outline-none"
+              defaultValue="0"
               type="number"
             />
             <Input
               className="bg-[#F3F4F6] border-[#D1D5DB] text-[#0F172A] outline-none"
+              defaultValue="1000"
               type="number"
             />
           </div>
