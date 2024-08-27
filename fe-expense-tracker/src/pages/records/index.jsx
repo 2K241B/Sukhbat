@@ -28,6 +28,7 @@ const Records = () => {
     <div className="flex flex-row gap-6 w-[1200px] min-h-screen pb-10">
       {categories && (
         <CategoryMenu
+          typeValue={typeValue}
           setTypeValue={setTypeValue}
           categories={categories}
           setCategoryValue={setCategoryValue}

@@ -35,11 +35,12 @@ export const RecordDateList = ({
   }, []);
   const dateToTime = (d) => {
     const date = new Date(d);
-    console.log(date);
     const gettime = (date.getHours() < 10 ? '0' : '') + date.getHours();
     const getMunites = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-    console.log(getMunites);
-    return [`${gettime}:${getMunites}`];
+    const getDate = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    const getMonth = (date.getMonth() < 10 ? '0' : '') + (date.getMonth() + 1);
+    const getYear = (date.getFullYear() < 10 ? '0' : '') + date.getFullYear();
+    return [`${gettime}:${getMunites} ${getMonth}/${getDate}/${getYear}`];
   };
   const total = () => {
     setTotalAmount(recordFiltered.reduce((acc, el) => (acc += el.amount), 0));
@@ -47,8 +48,15 @@ export const RecordDateList = ({
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full h-fit py-3 px-6 rounded-[12px] border-[1px] flex items-center justify-between bg-white">
-        <CheckboxRecord id={'selectAll'} content={'Select All'} />
-        <p>{totalAmount}</p>
+        <CheckboxRecord
+          id={'selectAll'}
+          content={'Select All'}
+          currency={currency}
+        />
+        <p className="font-semibold">
+          {totalAmount}
+          {currency && currency == 'USD' ? '$' : '₮'}
+        </p>
       </div>
       <h1>Today</h1>
       <div className="flex flex-col gap-3">

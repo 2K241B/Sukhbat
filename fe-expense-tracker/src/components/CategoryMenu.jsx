@@ -22,6 +22,7 @@ export const CategoryMenu = ({
   categories,
   setCategoryValue,
   setTypeValue,
+  typeValue,
 }) => {
   const [sortedCategories, setSortedCategories] = useState();
 
@@ -42,7 +43,7 @@ export const CategoryMenu = ({
       </div>
       <CommandList>
         <CommandGroup heading="Types">
-          <MenuCheckbox setTypeValue={setTypeValue} />
+          <MenuCheckbox setTypeValue={setTypeValue} typeValue={typeValue} />
         </CommandGroup>
         <CommandGroup heading="Category">
           {sortedCategories &&

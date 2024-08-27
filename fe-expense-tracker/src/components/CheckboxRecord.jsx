@@ -1,12 +1,23 @@
 import { Checkbox } from '@/components/ui/checkbox';
 
-export const CheckboxRecord = ({ id, content, setTypeValue }) => {
+export const CheckboxRecord = ({
+  id,
+  content,
+  setTypeValue,
+  typeValue,
+  currency,
+}) => {
   return (
     <div className="items-top flex space-x-2 items-center gap-2">
       <Checkbox
-        onClick={() => setTypeValue(id)}
+        onClick={() => setTypeValue && setTypeValue(id)}
+        checked={typeValue && typeValue === id}
         id={id}
-        className="border-[#374151] opacity: 0.2 rounded-full"
+        className={
+          currency
+            ? 'border-[#E5E7EB] opacity: 0.2 rounded-sm size-6'
+            : 'border-[#E5E7EB] opacity: 0.2 rounded-full'
+        }
       />
       <div className="grid gap-1.5 leading-none">
         <label

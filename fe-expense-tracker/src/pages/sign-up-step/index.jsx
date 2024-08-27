@@ -23,7 +23,7 @@ const SignUpStep = () => {
   const router = useRouter();
   const [showSelect, setShowSelect] = useState(1);
 
-  const [onboard, setOnboard] = useState('');
+  const [onboard, setOnboard] = useState('MNT');
 
   const handlerClick = async () => {
     setShowSelect(showSelect + 1);
