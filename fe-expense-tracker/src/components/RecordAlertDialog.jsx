@@ -15,7 +15,9 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -23,6 +25,7 @@ import { Input } from './ui/input';
 import { DatePicker } from './DatePicker';
 import axios from 'axios';
 import CategorySelectAdd from './icon/CategorySelectAdd';
+import AddCategory from './AddCategory';
 const styles = {
   button1default:
     'w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]',
@@ -34,7 +37,7 @@ const styles = {
     'w-full bg-[#16A34A] hover:bg-[#16A34A] rounded-[20px] text-white',
 };
 
-export const RecordAlertDialog = () => {
+export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
   const [buttonStyles, setButtonStyles] = useState(styles.button1default);
   const [buttonStyles2, setButtonStyles2] = useState(styles.button2default);
   const [transType, setTransType] = useState('EXP');
@@ -76,7 +79,7 @@ export const RecordAlertDialog = () => {
     <AlertDialog>
       <AlertDialogTrigger className="bg-[#0166FF] h-8 text-white flex items-center justify-center gap-1 px-3 rounded-[20px] leading-6">
         <PlusIcon />
-        Record
+        {isButtonName}
       </AlertDialogTrigger>
       <AlertDialogContent className="min-w-[744px] h-fit p-0">
         <AlertDialogHeader className="border-b-[1px] px-6 py-5 flex flex-row justify-between items-center">
@@ -111,10 +114,15 @@ export const RecordAlertDialog = () => {
                     <SelectValue placeholder="Choose" />
                   </SelectTrigger>
                   <SelectContent>
-                    {categories &&
-                      categories.map((el) => (
-                        <SelectItem value={el.id}>{el.name}</SelectItem>
-                      ))}
+                    <SelectGroup>
+                      <SelectLabel className="p-2 border-b">
+                        <AddCategory isAlerShow={true} />
+                      </SelectLabel>
+                      {categories &&
+                        categories.map((el) => (
+                          <SelectItem value={el.id}>{el.name}</SelectItem>
+                        ))}
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>

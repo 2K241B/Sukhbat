@@ -10,28 +10,35 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
-import { PlusIcon, ArrowDropDown } from './icon';
+import { PlusIcon, ArrowDropDown, CategorySelectAdd } from './icon';
 
 import { X } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 import CategorySelect from './CategorySelect';
 
-export const AddCategory = () => {
+export const AddCategory = ({ isAlerShow = false }) => {
+  const [iconData, setIconData] = useState();
   const formRef = useRef();
+
   const handlerClick = async () => {
-    console.log(formRef);
+    console.log(iconData);
     // await axios.post('http://localhost:8000/category/create', {
     //   name: formRef.current[0].value,
     //   description: formRef.current[0].value,
     //   category_image: '',
     // });
-    // location.reload();
   };
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-[#0166FF] h-8 text-white flex items-center justify-center gap-1 px-3 rounded-[20px] leading-6">
-        <PlusIcon />
+      <AlertDialogTrigger
+        className={
+          isAlerShow
+            ? 'bg-white flex gap-2 h-8 leading-6 '
+            : 'bg-[#F9FAFB] h-8 flex items-center justify-center gap-1 rounded-[20px] leading-6'
+        }
+      >
+        {isAlerShow ? <CategorySelectAdd /> : <PlusIcon color="#0166FF" />}
         Add Category
       </AlertDialogTrigger>
       <AlertDialogContent className="min-w-[466px] h-fit p-0">
@@ -43,13 +50,14 @@ export const AddCategory = () => {
         </AlertDialogHeader>
         <div className="flex flex-col gap-8 p-6 w-full">
           <div className="flex items-center w-full gap-3">
-            <div className="flex items-center p-4 rounded-[8px] bg-[#F9FAFB] border-[#94A3B8] border-[1px]">
-              <CategorySelect formRef={formRef} />
-            </div>
-            <div className="p-4 rounded-[8px] bg-[#F9FAFB] border-[#94A3B8] border-[1px] flex items-center justify-between w-full">
+            <CategorySelect setIconData={setIconData} />
+            <form
+              ref={formRef}
+              className="p-4 rounded-[8px] bg-[#F9FAFB] border-[#94A3B8] border-[1px] flex items-center justify-between w-full"
+            >
               <input className="bg-[#F9FAFB] outline-none" />
               <ArrowDropDown />
-            </div>
+            </form>
           </div>
           <AlertDialogAction
             onClick={handlerClick}

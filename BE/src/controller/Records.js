@@ -84,7 +84,9 @@ export const RecordPieChart = async (req, res) => {
 export const Record = async (req, res) => {
   const { id } = req.params;
   const tableQueryText = `
-   SELECT * from records
+   SELECT records.*,category.category_image AS categoryImage
+   FROM records
+   INNER JOIN category ON records.category_id = category.id
    WHERE user_id = $1
   `;
   try {

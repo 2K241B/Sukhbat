@@ -11,7 +11,7 @@ import {
   CommandShortcut,
 } from '@/components/ui/command';
 import { Slider } from '@/components/ui/slider';
-import { MenuCheckbox, AddCategory } from '@/components';
+import { MenuCheckbox, AddCategory, RecordAlertDialog } from '@/components';
 import { useEffect, useState } from 'react';
 import { Eye, Leading } from './icon';
 import { Button } from './ui/button';
@@ -38,7 +38,7 @@ export const CategoryMenu = ({
   return (
     <Command className="w-[350px] h-fit border-[#E5E7EB] bg-[#F9FAFB] border-[1px] rounded-[12px] px-4 py-6 flex gap-6 ">
       <h1 className="text-[24px] font-semibold text-[#0F172A]">Records</h1>
-      <AddCategory />
+      <RecordAlertDialog isButtonName={'Add'} />
       <div className={Style.buttonStyle3}>
         <CommandInput placeholder="Search" />
       </div>
@@ -59,10 +59,7 @@ export const CategoryMenu = ({
                 <Leading />
               </div>
             ))}
-          <Button className="bg-white text-[#1F2937] flex h-8 justify-center items-center gap-2 font-normal text-base p-0">
-            <PlusIcon color="#0166FF" />
-            Add Category
-          </Button>
+          <AddCategory />
         </CommandGroup>
         <CommandGroup heading="Amount Range">
           <div className="flex gap-3 pb-3">
