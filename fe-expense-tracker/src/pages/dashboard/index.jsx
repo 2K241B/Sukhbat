@@ -49,7 +49,11 @@ const Dashboard = () => {
         )}
       </div>
       <div className={styles.recordListContainer}>
-        <div className={styles.recordListHeader}>Last Records</div>
+        <div
+          className={`${styles.recordListHeader} font-semibold text-[#0F172A]`}
+        >
+          Last Records
+        </div>
         {recordData && (
           <RecordList recordData={recordData} currency={currency} />
         )}

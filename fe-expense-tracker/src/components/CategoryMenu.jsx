@@ -25,6 +25,7 @@ export const CategoryMenu = ({
   typeValue,
 }) => {
   const [sortedCategories, setSortedCategories] = useState();
+  const [onChangeValue, setOnChangeValue] = useState(200000);
 
   useEffect(() => {
     const sort = _.orderBy(categories, [(category) => category.name], ['asc']);
@@ -35,8 +36,8 @@ export const CategoryMenu = ({
     setCategoryValue(name);
   };
   return (
-    <Command className="w-[350px] h-fit border-[#E5E7EB] border-[1px] rounded-[12px] px-4 py-6 flex gap-6 ">
-      <h1>Records</h1>
+    <Command className="w-[350px] h-fit border-[#E5E7EB] bg-[#F9FAFB] border-[1px] rounded-[12px] px-4 py-6 flex gap-6 ">
+      <h1 className="text-[24px] font-semibold text-[#0F172A]">Records</h1>
       <AddCategory />
       <div className={Style.buttonStyle3}>
         <CommandInput placeholder="Search" />
@@ -72,11 +73,22 @@ export const CategoryMenu = ({
             />
             <Input
               className="bg-[#F3F4F6] border-[#D1D5DB] text-[#0F172A] outline-none"
-              defaultValue="1000"
+              defaultValue={onChangeValue}
+              value={onChangeValue}
+              onChange={(e) => setOnChangeValue(e.target.value)}
               type="number"
             />
           </div>
-          <Slider defaultValue={[400000]} max={1000000} step={1} />
+          <Slider
+            onValueChange={(e) => setOnChangeValue(e)}
+            defaultValue={[onChangeValue]}
+            max={500000}
+            step={1}
+          />
+          <div className="flex justify-between px-1.5 text-[16px] leading-6">
+            <p>0</p>
+            <p>{onChangeValue}</p>
+          </div>
         </CommandGroup>
       </CommandList>
     </Command>

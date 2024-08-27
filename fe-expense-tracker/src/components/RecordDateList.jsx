@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import CheckboxList from './CheckboxList';
 import CheckboxRecord from './CheckboxRecord';
 import ListLogo from './icon/ListLogo';
@@ -11,35 +11,6 @@ export const RecordDateList = ({
   typeValue,
   sortingValues,
 }) => {
-  const [recordFiltered, setRecordFiltered] = useState(recordData);
-  const [filterData, setFilterData] = useState(recordFiltered);
-  const [totalAmount, setTotalAmount] = useState(0);
-  useEffect(() => {
-    setRecordFiltered(
-      recordData.filter((el) => el.transaction_type === typeValue)
-    );
-    setFilterData(recordData.filter((el) => el.transaction_type === typeValue));
-    if (typeValue === 'ALL') {
-      setRecordFiltered(recordData);
-      setFilterData(recordData);
-    }
-    total();
-  }, [typeValue]);
-  useEffect(() => {
-    setRecordFiltered(
-      filterData.filter((el) => el.category_id === categoryValue)
-    );
-    total();
-  }, [categoryValue]);
-  useEffect(() => {
-    if (sortingValues === 'oldest') {
-      setRecordFiltered(recordData.reverse());
-    }
-  }, [sortingValues]);
-  useEffect(() => {
-    setRecordFiltered(recordData);
-  }, []);
-
   const dateToTime = (d) => {
     const date = new Date(d);
     const gettime = (date.getHours() < 10 ? '0' : '') + date.getHours();
@@ -49,9 +20,30 @@ export const RecordDateList = ({
     const getYear = (date.getFullYear() < 10 ? '0' : '') + date.getFullYear();
     return [`${gettime}:${getMunites} - ${getMonth}-${getDate}-${getYear}`];
   };
-  const total = () => {
-    setTotalAmount(recordFiltered.reduce((acc, el) => (acc += el.amount), 0));
+  const total = (name) => {
+    setTotalAmount(name.reduce((acc, el) => (acc += el.amount), 0));
   };
+
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  const filteredArray = useMemo(() => {
+    const filterdata =
+      sortingValues === 'newest'
+        ? recordData
+        : _.sortBy(recordData, 'createdat');
+
+    const filterByType = filterdata.filter((record) =>
+      typeValue == 'ALL' ? recordData : record.transaction_type == typeValue
+    );
+    return filterByType.filter((record) =>
+      !categoryValue ? filterByType : record.category_id == categoryValue
+    );
+  }, [typeValue, categoryValue]);
+
+  useEffect(() => {
+    total(filteredArray);
+  }, [typeValue, categoryValue]);
+
   return (
     <div className="flex flex-col gap-6">
       <div className="w-full h-fit py-3 px-6 rounded-[12px] border-[1px] flex items-center justify-between bg-white">
@@ -60,15 +52,14 @@ export const RecordDateList = ({
           content={'Select All'}
           currency={currency}
         />
-        <p className="font-semibold">
+        <p className="font-semibold text-primary opacity-[0.6]">
           {totalAmount}
           {currency && currency == 'USD' ? '$' : '₮'}
         </p>
       </div>
-      <h1>Today</h1>
       <div className="flex flex-col gap-3">
-        {recordFiltered &&
-          recordFiltered.map((el) => (
+        {filteredArray &&
+          filteredArray.map((el) => (
             <CheckboxList
               id={'bla'}
               content={

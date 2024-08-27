@@ -12,11 +12,11 @@ import {
 import RecordDateList from './RecordDateList';
 import Records from '@/pages/records';
 import RecordsSortingSelect from './RecordsSortingSelect';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const styles = {
   arrowButton:
-    'p-0 size-8 rounded-[8px] flex justify-center items-center gap-1 bg-white text-[#0F172A] border-[#E5E7EB] border-[1px]',
+    'p-0 size-8 rounded-[8px] flex justify-center items-center gap-1 bg-white text-[#0F172A] border-[#E5E7EB] border-[1px] bg-[#F9FAFB]',
 };
 
 export const RecordsListTable = ({

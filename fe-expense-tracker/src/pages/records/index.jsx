@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 const Records = () => {
   const [typeValue, setTypeValue] = useState('ALL');
-
   const [recordData, setRecordData] = useState();
   const [currency, setCurrency] = useState('MNT');
   const [categories, setCategories] = useState();

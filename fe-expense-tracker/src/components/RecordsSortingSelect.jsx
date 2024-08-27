@@ -8,9 +8,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export const RecordsSortingSelect = ({ setStoringValues }) => {
+export const RecordsSortingSelect = ({ setSortingValues }) => {
   return (
-    <Select onValueChange={(e) => setStoringValues(e)}>
+    <Select onValueChange={(e) => setSortingValues(e)}>
       <SelectTrigger className="w-[170px]">
         <SelectValue placeholder="Newest first" />
       </SelectTrigger>
