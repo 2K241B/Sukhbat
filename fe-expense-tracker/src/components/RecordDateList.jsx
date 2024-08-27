@@ -9,6 +9,7 @@ export const RecordDateList = ({
   transType,
   categoryValue,
   typeValue,
+  sortingValues,
 }) => {
   const [recordFiltered, setRecordFiltered] = useState(recordData);
   const [filterData, setFilterData] = useState(recordFiltered);
@@ -31,8 +32,14 @@ export const RecordDateList = ({
     total();
   }, [categoryValue]);
   useEffect(() => {
+    if (sortingValues === 'oldest') {
+      setRecordFiltered(recordData.reverse());
+    }
+  }, [sortingValues]);
+  useEffect(() => {
     setRecordFiltered(recordData);
   }, []);
+
   const dateToTime = (d) => {
     const date = new Date(d);
     const gettime = (date.getHours() < 10 ? '0' : '') + date.getHours();
@@ -40,7 +47,7 @@ export const RecordDateList = ({
     const getDate = (date.getDate() < 10 ? '0' : '') + date.getDate();
     const getMonth = (date.getMonth() < 10 ? '0' : '') + (date.getMonth() + 1);
     const getYear = (date.getFullYear() < 10 ? '0' : '') + date.getFullYear();
-    return [`${gettime}:${getMunites} ${getMonth}/${getDate}/${getYear}`];
+    return [`${gettime}:${getMunites} - ${getMonth}-${getDate}-${getYear}`];
   };
   const total = () => {
     setTotalAmount(recordFiltered.reduce((acc, el) => (acc += el.amount), 0));

@@ -16,9 +16,11 @@ const Records = () => {
       const userId = data.user.id;
       const currencyType = data.user.currency_type;
       setCurrency(currencyType);
-      axios
-        .get(`http://localhost:8000/record/id/${userId}`)
-        .then((res) => setRecordData(res.data));
+      axios.get(`http://localhost:8000/record/id/${userId}`).then((res) => {
+        const records = res.data;
+        const sort = _.sortBy(records, ['createdat']);
+        setRecordData(sort.reverse());
+      });
     }
     axios.get('http://localhost:8000/category/').then((response) => {
       setCategories(response.data);

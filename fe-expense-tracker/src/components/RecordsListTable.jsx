@@ -12,6 +12,7 @@ import {
 import RecordDateList from './RecordDateList';
 import Records from '@/pages/records';
 import RecordsSortingSelect from './RecordsSortingSelect';
+import { useState } from 'react';
 
 const styles = {
   arrowButton:
@@ -24,6 +25,7 @@ export const RecordsListTable = ({
   categoryValue,
   typeValue,
 }) => {
+  const [sortingValues, setSortingValues] = useState('newest');
   return (
     <div className="w-full">
       <div className="flex items-center py-4 justify-between">
@@ -36,10 +38,11 @@ export const RecordsListTable = ({
             <ChevronRight size={20} />
           </Button>
         </div>
-        <RecordsSortingSelect />
+        <RecordsSortingSelect setSortingValues={setSortingValues} />
       </div>
       {recordData && (
         <RecordDateList
+          sortingValues={sortingValues}
           recordData={recordData}
           currency={currency}
           categoryValue={categoryValue}
