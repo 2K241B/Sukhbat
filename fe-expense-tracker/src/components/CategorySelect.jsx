@@ -17,8 +17,15 @@ import {
   TaxiIcon,
 } from './icon';
 
-const icons = {
-  gift: <GiftIcon />,
+export const Gift = <GiftIcon />;
+export const HouseIco = <HouseIcon />;
+export const icons = {
+  Gift: <GiftIcon />,
+  House: HouseIco,
+  Food: <FoodIcon />,
+  Shopping: <ShoppingIcon />,
+  Taxi: <TaxiIcon />,
+  Drink: <DrinkIcon />,
 };
 
 export const CategorySelect = ({ setIconData }) => {
@@ -29,22 +36,22 @@ export const CategorySelect = ({ setIconData }) => {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup className="grid grid-cols-3 p-6">
-          <SelectItem value="house">
+          <SelectItem value="House">
             <HouseIcon />
           </SelectItem>
-          <SelectItem value="gift">
+          <SelectItem value="Gift">
             <GiftIcon />
           </SelectItem>
-          <SelectItem value="food">
+          <SelectItem value="Food">
             <FoodIcon />
           </SelectItem>
-          <SelectItem value="shopping">
+          <SelectItem value="Shopping">
             <ShoppingIcon />
           </SelectItem>
-          <SelectItem value="taxi">
+          <SelectItem value="Taxi">
             <TaxiIcon />
           </SelectItem>
-          <SelectItem value="drink">
+          <SelectItem value="Drink">
             <DrinkIcon />
           </SelectItem>
         </SelectGroup>

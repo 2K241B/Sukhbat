@@ -23,11 +23,11 @@ export const AddCategory = ({ isAlerShow = false }) => {
 
   const handlerClick = async () => {
     console.log(iconData);
-    // await axios.post('http://localhost:8000/category/create', {
-    //   name: formRef.current[0].value,
-    //   description: formRef.current[0].value,
-    //   category_image: '',
-    // });
+    await axios.post('http://localhost:8000/category/create', {
+      name: formRef.current[0].value,
+      description: formRef.current[0].value,
+      category_image: iconData,
+    });
   };
   return (
     <AlertDialog>

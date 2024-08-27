@@ -64,7 +64,7 @@ export const RecordDateList = ({
               id={'bla'}
               content={
                 <div className="flex items-center gap-4">
-                  <ListLogo />
+                  <div className="size-10 rounded-full bg-[#0166FF]"></div>
                   <div className="flex flex-col gap-1">
                     <h1 className="text-[#000] font-semibold ">{el.name}</h1>
                     <p className="text-[12px] leading-4 text-[#6B7280]">
