@@ -23,15 +23,22 @@ export const CategoryMenu = ({
   setCategoryValue,
   setTypeValue,
   typeValue,
+  recordData,
 }) => {
   const [sortedCategories, setSortedCategories] = useState();
   const [onChangeValue, setOnChangeValue] = useState(200000);
 
   useEffect(() => {
-    const sort = _.orderBy(categories, [(category) => category.name], ['asc']);
-    setSortedCategories(sort);
-  }, []);
+    const records = _.groupBy(recordData, 'category_id');
 
+    const category = Object.keys(records)
+      .map((e) => {
+        return categories.filter((rec) => rec.id == e);
+      })
+      .flat();
+
+    setSortedCategories(category);
+  }, []);
   const handlerClick = (name) => {
     setCategoryValue(name);
   };
@@ -49,12 +56,13 @@ export const CategoryMenu = ({
         <CommandGroup heading="Category">
           {sortedCategories &&
             sortedCategories.map((el) => (
-              <div className="flex items-center cursor-pointer justify-between hover:bg-[#E5E7EB] rounded-sm px-1 py-1">
+              <div
+                onClick={() => handlerClick(el.id)}
+                className="flex items-center cursor-pointer justify-between hover:bg-[#E5E7EB] rounded-sm px-1 py-1"
+              >
                 <div className="flex items-center ">
                   <Eye />
-                  <p className="px-3 py-1" onClick={() => handlerClick(el.id)}>
-                    {el.name}
-                  </p>
+                  <p className="px-3 py-1">{el.name}</p>
                 </div>
                 <Leading />
               </div>
