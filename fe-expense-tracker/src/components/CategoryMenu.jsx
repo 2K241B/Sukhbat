@@ -1,22 +1,27 @@
 import { Style } from '@/components/Constants';
 import {
   Command,
-  CommandDialog,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from '@/components/ui/command';
 import { Slider } from '@/components/ui/slider';
 import { MenuCheckbox, AddCategory, RecordAlertDialog } from '@/components';
 import { useEffect, useState } from 'react';
 import { Eye, Leading } from './icon';
-import { Button } from './ui/button';
-import { PlusIcon } from 'lucide-react';
 import { Input } from './ui/input';
+import groupBy from 'lodash/groupBy';
+
+const styles = {
+  commandContainer:
+    'w-[350px] h-fit border-[#E5E7EB] bg-[#F9FAFB] border-[1px] rounded-[12px] px-4 py-6 flex gap-6 ',
+  header: 'text-[24px] font-semibold text-[#0F172A]',
+  contentContainer:
+    'flex items-center cursor-pointer justify-between hover:bg-[#E5E7EB] rounded-sm px-1 py-1',
+  sliderInputContainer: 'flex gap-3 pb-3',
+  sliderInput: 'bg-[#F3F4F6] border-[#D1D5DB] text-[#0F172A] outline-none',
+  SliderTextContainer: 'flex justify-between px-1.5 text-[16px] leading-6',
+};
 
 export const CategoryMenu = ({
   categories,
@@ -29,22 +34,22 @@ export const CategoryMenu = ({
   const [onChangeValue, setOnChangeValue] = useState(200000);
 
   useEffect(() => {
-    const records = _.groupBy(recordData, 'category_id');
-
+    const records = groupBy(recordData, 'category_id');
     const category = Object.keys(records)
       .map((e) => {
         return categories.filter((rec) => rec.id == e);
       })
       .flat();
-
     setSortedCategories(category);
   }, []);
+
   const handlerClick = (name) => {
     setCategoryValue(name);
   };
+
   return (
-    <Command className="w-[350px] h-fit border-[#E5E7EB] bg-[#F9FAFB] border-[1px] rounded-[12px] px-4 py-6 flex gap-6 ">
-      <h1 className="text-[24px] font-semibold text-[#0F172A]">Records</h1>
+    <Command className={styles.commandContainer}>
+      <h1 className={styles.header}>Records</h1>
       <RecordAlertDialog isButtonName={'Add'} />
       <div className={Style.buttonStyle3}>
         <CommandInput placeholder="Search" />
@@ -58,7 +63,7 @@ export const CategoryMenu = ({
             sortedCategories.map((el) => (
               <div
                 onClick={() => handlerClick(el.id)}
-                className="flex items-center cursor-pointer justify-between hover:bg-[#E5E7EB] rounded-sm px-1 py-1"
+                className={styles.contentContainer}
               >
                 <div className="flex items-center ">
                   <Eye />
@@ -70,14 +75,14 @@ export const CategoryMenu = ({
           <AddCategory />
         </CommandGroup>
         <CommandGroup heading="Amount Range">
-          <div className="flex gap-3 pb-3">
+          <div className={styles.sliderInputContainer}>
             <Input
-              className="bg-[#F3F4F6] border-[#D1D5DB] text-[#0F172A] outline-none"
+              className={styles.sliderInput}
               defaultValue="0"
               type="number"
             />
             <Input
-              className="bg-[#F3F4F6] border-[#D1D5DB] text-[#0F172A] outline-none"
+              className={styles.sliderInput}
               defaultValue={onChangeValue}
               value={onChangeValue}
               onChange={(e) => setOnChangeValue(e.target.value)}
@@ -90,7 +95,7 @@ export const CategoryMenu = ({
             max={500000}
             step={1}
           />
-          <div className="flex justify-between px-1.5 text-[16px] leading-6">
+          <div className={styles.SliderTextContainer}>
             <p>0</p>
             <p>{onChangeValue}</p>
           </div>

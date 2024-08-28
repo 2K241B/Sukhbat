@@ -1,18 +1,17 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+
+const styles = {
+  card: 'h-[284px]',
+  cardHeader: 'py-4 px-6 border-b-[1px]',
+  cardContent: 'py-8 px-6 flex gap-4 justify-between ',
+  chartContainer: 'h-[162px] w-full',
+};
 
 const chartConfig = {
   income: {
@@ -26,12 +25,12 @@ const chartConfig = {
 };
 export const Chart = ({ getBarChartData }) => {
   return (
-    <Card className="h-[284px]">
-      <CardHeader className="py-4 px-6 border-b-[1px]">
+    <Card className={styles.card}>
+      <CardHeader className={styles.cardHeader}>
         <CardTitle className="text-[16px] ">Income - Expense</CardTitle>
       </CardHeader>
-      <CardContent className="py-8 px-6 flex gap-4 justify-between ">
-        <ChartContainer className="h-[162px] w-full" config={chartConfig}>
+      <CardContent className={styles.cardContent}>
+        <ChartContainer className={styles.chartContainer} config={chartConfig}>
           <BarChart accessibilityLayer data={getBarChartData}>
             <CartesianGrid
               vertical={false}

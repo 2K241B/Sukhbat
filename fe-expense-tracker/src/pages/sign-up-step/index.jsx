@@ -2,8 +2,9 @@ import { LogoIcon } from '@/components/icon';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { CurrencyType, GoToDashboard, SelectCashBalance } from '@/components';
+import { axiosInstance } from '@/lib/axios';
+
 const styles = {
   tag: 'size-6 bg-[#E5E7EB] rounded-full text-center',
   activeTag: 'size-6 bg-[#0166FF] rounded-full text-center text-white',
@@ -22,7 +23,6 @@ const Process = ['Currency', 'Balance', 'Finish'];
 const SignUpStep = () => {
   const router = useRouter();
   const [showSelect, setShowSelect] = useState(1);
-
   const [onboard, setOnboard] = useState('MNT');
 
   const handlerClick = async () => {
@@ -30,12 +30,10 @@ const SignUpStep = () => {
     if (showSelect >= 3) {
       let user = localStorage.getItem('user');
       const userId = JSON.parse(user);
-      const data = await axios.put(
-        `http://localhost:8000/user/${userId.user.id}`,
-        {
-          currency_type: onboard,
-        }
-      );
+
+      const data = await axiosInstance.put(`/user/${userId.user.id}`, {
+        currency_type: onboard,
+      });
       localStorage.setItem('user', JSON.stringify(data.data));
       router.push('/dashboard');
     }

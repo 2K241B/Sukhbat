@@ -1,10 +1,13 @@
 import { Cards, Chart, PieDashboardChart, RecordList } from '@/components';
 import { axiosInstance } from '@/lib/axios';
 import { useEffect, useState } from 'react';
+
 const styles = {
+  container: 'flex flex-col gap-6',
   chartContainer: 'grid grid-cols-2 gap-6 h-[284px]',
   recordListContainer: 'rounded-[12px] bg-white',
-  recordListHeader: 'py-4 px-6 border-b-[1px] border-[#E2E8F0]',
+  recordListHeader:
+    'py-4 px-6 border-b-[1px] border-[#E2E8F0] font-semibold text-[#0F172A]',
 };
 
 const Dashboard = () => {
@@ -35,7 +38,7 @@ const Dashboard = () => {
     }
   }, []);
   return (
-    <div className="flex flex-col gap-6">
+    <div className={styles.container}>
       {getBarChartData && (
         <Cards getBarChartData={getBarChartData} currency={currency} />
       )}
@@ -49,11 +52,7 @@ const Dashboard = () => {
         )}
       </div>
       <div className={styles.recordListContainer}>
-        <div
-          className={`${styles.recordListHeader} font-semibold text-[#0F172A]`}
-        >
-          Last Records
-        </div>
+        <div className={`${styles.recordListHeader} `}>Last Records</div>
         {recordData && (
           <RecordList recordData={recordData} currency={currency} />
         )}

@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { CardCircle } from './icon';
 import { DashboardCard, BalanceCard } from '@/components';
 
+const styles = { container: 'grid grid-cols-3 gap-6 max-h-[220px]' };
+
 export const Cards = ({ getBarChartData, currency }) => {
   const [prevTotal, setPrevTotal] = useState([]);
   const [nextTotal, setNextTotal] = useState([]);
+
   useEffect(() => {
     const lastIndex = getBarChartData.length;
     if (lastIndex <= 1) {
@@ -18,7 +21,7 @@ export const Cards = ({ getBarChartData, currency }) => {
   }, []);
 
   return (
-    <div className="grid grid-cols-3 gap-6 max-h-[220px]">
+    <div className={styles.container}>
       <BalanceCard
         nextTotaltotalIncome={nextTotal ? nextTotal.income : 0}
         totalExpense={nextTotal ? nextTotal.expense : 0}

@@ -3,7 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
-import axios from 'axios';
+import { axiosInstance } from '@/lib/axios';
+
 const styles = {
   container: 'grid grid-cols-2 w-full h-screen',
   contentContainer: 'flex flex-col justify-center items-center gap-10',
@@ -17,14 +18,15 @@ const styles = {
   routerButton: 'bg-white text-[#0166FF] hover:bg-white',
   errorMsg: 'text-red-500 font-semibold',
 };
+
 const SigninPage = () => {
   const [error, setError] = useState('');
   const router = useRouter();
-  const BASE_URL = 'http://localhost:8000';
   const formRef = useRef(null);
+
   const onSubmit = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post(BASE_URL + '/api/signin', {
+    const { data } = await axiosInstance.post('/api/signin', {
       email: formRef.current[0].value,
       password: formRef.current[1].value,
     });
@@ -35,6 +37,7 @@ const SigninPage = () => {
       setError('Email or Password Wrong');
     }
   };
+
   return (
     <div className={styles.container}>
       <form

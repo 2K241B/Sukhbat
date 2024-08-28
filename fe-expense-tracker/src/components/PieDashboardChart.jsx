@@ -1,22 +1,21 @@
-import { Label, LabelList, Legend, Pie, PieChart, Tooltip } from 'recharts';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
-} from '@/components/ui/chart';
+import { Legend, Pie, PieChart } from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChartContainer, ChartLegendContent } from '@/components/ui/chart';
 import { useEffect, useState } from 'react';
 import groupBy from 'lodash/groupBy';
 import map from 'lodash/map';
+
+const styles = {
+  card: 'h-[284px] flex flex-col ',
+  cardHeader: 'items-start px-8 py-4 border-b-[1px]',
+  cardContent: 'p-0 flex gap-16',
+  chartContainer: 'h-[230px] w-[330px]',
+  legend: 'flex flex-col items-start p-0',
+  amountContainer: 'flex flex-col items-center justify-center',
+  amount:
+    'grid pb-4 last:pb-0 grid-cols-2 text-xs w-full text-end text-[#111827] gap-16',
+};
+
 const chartConfig = {
   Others: {
     label: 'Others',
@@ -48,6 +47,7 @@ const chartConfig = {
 export const PieDashboardChart = ({ getPieChartData, currency }) => {
   const [pieChartData, setPieChartData] = useState();
   const [totalExpense, setTotalExpense] = useState();
+
   useEffect(() => {
     const totalExpense = getPieChartData.reduce(
       (acc, el) => (acc += el.amount),
@@ -74,12 +74,12 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
   }, []);
 
   return (
-    <Card className="h-[284px] flex flex-col ">
-      <CardHeader className="items-start px-8 py-4 border-b-[1px]">
+    <Card className={styles.card}>
+      <CardHeader className={styles.cardHeader}>
         <CardTitle className="text-base">Expense</CardTitle>
       </CardHeader>
-      <CardContent className="p-0 flex gap-16">
-        <ChartContainer config={chartConfig} className="h-[230px] w-[330px]">
+      <CardContent className={styles.cardContent}>
+        <ChartContainer config={chartConfig} className={styles.chartContainer}>
           <PieChart>
             <Pie data={pieChartData} dataKey="amount" innerRadius={40} />
             <Legend
@@ -87,15 +87,15 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
               verticalAlign="middle"
               align="right"
               content={<ChartLegendContent nameKey="categoryname" />}
-              className="flex flex-col items-start p-0"
+              className={styles.legend}
             />
           </PieChart>
         </ChartContainer>
-        <div className="flex flex-col items-center justify-center">
+        <div className={styles.amountContainer}>
           {pieChartData &&
             pieChartData.map((el) => (
-              <div className="grid pb-4 last:pb-0 grid-cols-2 text-xs w-full text-end text-[#111827] gap-16">
-                <p className="">
+              <div className={styles.amount}>
+                <p>
                   {el.amount}
                   {currency == 'USD' ? '$' : '₮'}
                 </p>

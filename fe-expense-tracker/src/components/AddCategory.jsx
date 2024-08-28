@@ -3,21 +3,31 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-
 import { PlusIcon, ArrowDropDown, CategorySelectAdd } from './icon';
-
 import { X } from 'lucide-react';
 import { useRef, useState } from 'react';
-import axios from 'axios';
 import CategorySelect from './CategorySelect';
 import { axiosInstance } from '@/lib/axios';
-import { RecordAlertDialog } from './RecordAlertDialog';
+
+const styles = {
+  isAlertShow: 'bg-white flex gap-2 leading-6 ',
+  isAlertShowFalse:
+    'bg-[#F9FAFB] h-8 flex items-center justify-center gap-1 rounded-[20px] leading-6 ',
+  alerDialogContent: 'min-w-[466px] h-fit p-0',
+  alertDialogHeader:
+    'border-b-[1px] px-6 py-5 flex flex-row justify-between items-center',
+  alertDialogCancel: 'border-0 p-0 items-start hover:bg-white',
+  form: 'p-4 rounded-[8px] bg-[#F9FAFB] border-[#94A3B8] border-[1px] flex items-center justify-between w-full',
+  input: 'bg-[#F9FAFB] outline-none',
+  alertDialogAction:
+    'w-full bg-[#16A34A] hover:bg-[#16A34A] rounded-[20px] text-white',
+  contentContainer: 'flex flex-col gap-8 p-6 w-full',
+  subContainer: 'flex items-center w-full gap-3',
+};
 
 export const AddCategory = ({ isAlerShow = false }) => {
   const [iconData, setIconData] = useState();
@@ -31,39 +41,33 @@ export const AddCategory = ({ isAlerShow = false }) => {
     });
     isAlerShow ? console.log('kk') : location.reload();
   };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger
-        className={
-          isAlerShow
-            ? 'bg-white flex gap-2 leading-6 '
-            : 'bg-[#F9FAFB] h-8 flex items-center justify-center gap-1 rounded-[20px] leading-6 '
-        }
+        className={isAlerShow ? styles.isAlertShow : styles.isAlertShowFalse}
       >
         {isAlerShow ? <CategorySelectAdd /> : <PlusIcon color="#0166FF" />}
         Add Category
       </AlertDialogTrigger>
-      <AlertDialogContent className="min-w-[466px] h-fit p-0">
-        <AlertDialogHeader className="border-b-[1px] px-6 py-5 flex flex-row justify-between items-center">
+      <AlertDialogContent className={styles.alerDialogContent}>
+        <AlertDialogHeader className={styles.alertDialogHeader}>
           <AlertDialogTitle>Add Category</AlertDialogTitle>
-          <AlertDialogCancel className="border-0 p-0 items-start hover:bg-white">
+          <AlertDialogCancel className={styles.alertDialogCancel}>
             <X />
           </AlertDialogCancel>
         </AlertDialogHeader>
-        <div className="flex flex-col gap-8 p-6 w-full">
-          <div className="flex items-center w-full gap-3">
+        <div className={styles.contentContainer}>
+          <div className={styles.subContainer}>
             <CategorySelect setIconData={setIconData} />
-            <form
-              ref={formRef}
-              className="p-4 rounded-[8px] bg-[#F9FAFB] border-[#94A3B8] border-[1px] flex items-center justify-between w-full"
-            >
-              <input className="bg-[#F9FAFB] outline-none" />
+            <form ref={formRef} className={styles.form}>
+              <input className={styles.input} />
               <ArrowDropDown />
             </form>
           </div>
           <AlertDialogAction
             onClick={handlerClick}
-            className="w-full bg-[#16A34A] hover:bg-[#16A34A] rounded-[20px] text-white"
+            className={styles.alertDialogAction}
           >
             Continue
           </AlertDialogAction>

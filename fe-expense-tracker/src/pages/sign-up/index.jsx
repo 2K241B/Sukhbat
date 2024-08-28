@@ -2,8 +2,9 @@ import { LogoIcon } from '@/components/icon/LogoIcon';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { useRef } from 'react';
+import { axiosInstance } from '@/lib/axios';
+
 const styles = {
   container: 'grid grid-cols-2 w-full h-screen',
   contentContainer: 'flex flex-col justify-center items-center gap-10',
@@ -15,15 +16,17 @@ const styles = {
     'p-4 items-center bg-[#F3F4F6] text-[#A3A3A3] h-12 focus-visible:ring-0 focus-visible:ring-offset-0',
   bottomTextContainer: 'flex items-center',
   routerButton: 'bg-white text-[#0166FF] hover:bg-white',
+  button:
+    'w-full bg-[#0166FF] px-16 rounded-[20px] flex justify-center items-center text-[20px] leading-7 text-white h-[48px]',
 };
+
 const SignupPage = () => {
   const router = useRouter();
-  const BASE_URL = 'http://localhost:8000';
   const formRef = useRef(null);
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post(BASE_URL + '/api/signup', {
+    const { data } = await axiosInstance.post('/api/signup', {
       name: formRef.current[0].value,
       email: formRef.current[1].value,
       password: formRef.current[2].value,
@@ -32,6 +35,7 @@ const SignupPage = () => {
       localStorage.setItem('user', JSON.stringify(data));
     }
   };
+
   return (
     <div className={styles.container}>
       <form
@@ -61,7 +65,7 @@ const SignupPage = () => {
           />
           <Button
             onClick={() => router.push('/sign-up-step')}
-            className="w-full bg-[#0166FF] px-16 rounded-[20px] flex justify-center items-center text-[20px] leading-7 text-white h-[48px]"
+            className={styles.button}
             type="submit"
           >
             Sign up

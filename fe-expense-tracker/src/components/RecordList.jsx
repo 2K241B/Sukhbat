@@ -7,6 +7,10 @@ export const styles = {
   transTypeExp: 'text-[#F54949] font-semibold leading-[24px]',
   listContainer:
     'flex justify-between items-center h-[40] py-[20px] mx-6 border-b-[1px] last:border-0',
+  contentContainer: 'flex items-center gap-4',
+  iconBg: 'size-10 rounded-full bg-[#0166FF] flex justify-center items-center',
+  contentName: 'text-[#000] font-semibold ',
+  contentDate: 'text-[12px] leading-4 text-[#6B7280]',
 };
 export const RecordList = ({ recordData, currency }) => {
   const [sortedRecord, setSortedRecord] = useState([]);
@@ -26,13 +30,11 @@ export const RecordList = ({ recordData, currency }) => {
     <div>
       {sortedRecord.map((el) => (
         <div className={styles.listContainer}>
-          <div className="flex items-center gap-4">
-            <div className="size-10 rounded-full bg-[#0166FF] flex justify-center items-center">
-              {icons[el.categoryimage]}
-            </div>
+          <div className={styles.contentContainer}>
+            <div className={styles.iconBg}>{icons[el.categoryimage]}</div>
             <div>
-              <h1 className="text-[#000] font-semibold ">{el.name}</h1>
-              <p className="text-[12px] leading-4 text-[#6B7280]">
+              <h1 className={styles.contentName}>{el.name}</h1>
+              <p className={styles.contentDate}>
                 {DiffHours(el.createdat)} hours Ago
               </p>
             </div>

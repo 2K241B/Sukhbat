@@ -1,31 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { PlusIcon, X } from 'lucide-react';
 import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { DatePicker } from './DatePicker';
+import { axiosInstance } from '@/lib/axios';
+import CategorySelector from './CategorySelector';
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Input } from './ui/input';
-import { DatePicker } from './DatePicker';
-import AddCategory from './AddCategory';
-import { axiosInstance } from '@/lib/axios';
-import { icons } from './CategorySelect';
+
 const styles = {
   button1default:
     'w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]',
@@ -35,6 +24,21 @@ const styles = {
     'w-full bg-[#F3F4F6] hover:bg-[#F3F4F6] rounded-[20px] text-[#1F2937]',
   button2focus:
     'w-full bg-[#16A34A] hover:bg-[#16A34A] rounded-[20px] text-white',
+  dialogTrigger:
+    'bg-[#0166FF] h-8 text-white flex items-center justify-center gap-1 px-3 rounded-[20px] leading-6',
+  dialogContent: 'min-w-[744px] h-fit p-0 ',
+  dialogHeader:
+    'border-b-[1px] px-6 py-5 flex flex-row justify-between items-center',
+  dialogCancel: 'border-0 p-0 items-start hover:bg-white',
+  nameInput: 'bg-[#F3F4F6] border-[#D1D5DB] text-[#171717] mt-1 mb-5 ',
+  noteInput: 'h-full w-full bg-[#F3F4F6] border-[#D1D5DB] text-[#171717] mt-1 ',
+  amountInput:
+    'bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px] w-full outline-none',
+  form: 'grid grid-cols-2',
+  container: 'p-6 pt-5 flex flex-col gap-1',
+  container2: 'flex flex-col gap-5',
+  buttonContainer: 'flex bg-[#F3F4F6] rounded-[20px] mb-5',
+  containers: 'flex flex-col gap-2',
 };
 
 export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
@@ -43,7 +47,7 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
   const [transType, setTransType] = useState('EXP');
   const [categories, setCategories] = useState();
   const formRef = useRef();
-  const formRef2 = useRef();
+
   useEffect(() => {
     {
       axiosInstance.get('/category/').then((response) => {
@@ -51,6 +55,7 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
       });
     }
   }, []);
+
   const buttonHandler = () => {
     setButtonStyles(styles.button1default);
     setButtonStyles2(styles.button2default);
@@ -67,30 +72,31 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
     const userId = data.user.id;
     await axiosInstance.post('/record/create', {
       user_id: userId,
-      name: formRef2.current[0].value,
-      amount: formRef.current[0].value,
+      name: formRef.current[7].value,
+      amount: formRef.current[2].value,
       transaction_type: transType,
-      description: formRef2.current[1].value,
-      category_id: formRef.current[2].value,
+      description: formRef.current[8].value,
+      category_id: formRef.current[4].value,
     });
     location.reload();
   };
+
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-[#0166FF] h-8 text-white flex items-center justify-center gap-1 px-3 rounded-[20px] leading-6">
+      <AlertDialogTrigger className={styles.dialogTrigger}>
         <PlusIcon />
         {isButtonName}
       </AlertDialogTrigger>
-      <AlertDialogContent className="min-w-[744px] h-fit p-0">
-        <AlertDialogHeader className="border-b-[1px] px-6 py-5 flex flex-row justify-between items-center">
+      <AlertDialogContent className={styles.dialogContent}>
+        <AlertDialogHeader className={styles.dialogHeader}>
           <AlertDialogTitle>Add Record</AlertDialogTitle>
-          <AlertDialogCancel className="border-0 p-0 items-start hover:bg-white">
+          <AlertDialogCancel className={styles.dialogCancel}>
             <X />
           </AlertDialogCancel>
         </AlertDialogHeader>
-        <div className="grid grid-cols-2">
-          <div className="p-6 pt-5 flex flex-col gap-5">
-            <div className="flex bg-[#F3F4F6] rounded-[20px]">
+        <form ref={formRef} className={styles.form}>
+          <div className={styles.container}>
+            <div className={styles.buttonContainer}>
               <Button className={buttonStyles} onClick={buttonHandler}>
                 Expense
               </Button>
@@ -98,68 +104,45 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
                 Income
               </Button>
             </div>
-            <form ref={formRef} className="flex flex-col gap-5">
-              <div className="w-full">
+            <div className={styles.container2}>
+              <div className={styles.containers}>
                 <p className="text-[#171717]">Amount</p>
                 <input
+                  name="amount"
                   type="number"
-                  className="bg-[#F3F4F6] py-3 px-4 rounded-[8px] border-[#D1D5DB] border-[1px] w-full outline-none"
+                  className={styles.amountInput}
                   placeholder="1'000'00"
                 />
               </div>
-              <div>
+              <div className={styles.containers}>
                 <h1>Category</h1>
-                <Select>
-                  <SelectTrigger className=" w-full bg-[#F3F4F6] border-[#D1D5DB] text-[#171717]">
-                    <SelectValue placeholder="Find or choose category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel className="p-2 border-b">
-                        <AddCategory isAlerShow={true} />
-                      </SelectLabel>
-                      {categories &&
-                        categories.map((el) => (
-                          <SelectItem value={el.id}>
-                            <div className="flex gap-2 px-0.5">
-                              <div className="flex items-center justify-center size-5 rounded-full bg-[#0166FF] p-1">
-                                {icons[el.category_image]}
-                              </div>
-                              <div>{el.name}</div>
-                            </div>
-                          </SelectItem>
-                        ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <CategorySelector name="category" categories={categories} />
               </div>
-              <div className="flex flex-col gap-8">
-                <div>
-                  <h1>Date</h1>
-                  <DatePicker />
-                </div>
+              <div className={styles.containers}>
+                <h1>Date</h1>
+                <DatePicker />
               </div>
-            </form>
-            <AlertDialogAction
-              onClick={handlerClick}
-              className={
-                buttonStyles == styles.button1default
-                  ? styles.button1default
-                  : styles.button2focus
-              }
-            >
-              Add Record
-            </AlertDialogAction>
+              <AlertDialogAction
+                onClick={handlerClick}
+                className={
+                  buttonStyles == styles.button1default
+                    ? styles.button1default
+                    : styles.button2focus
+                }
+              >
+                Add Record
+              </AlertDialogAction>
+            </div>
           </div>
-          <form ref={formRef2} className="p-6 pt-3 flex flex-col">
-            <div>
+          <div className={styles.container}>
+            <div className={styles.containers}>
               <h1>Name</h1>
-              <Input className="bg-[#F3F4F6] border-[#D1D5DB] text-[#171717] mt-1 mb-5 " />
+              <Input className={styles.nameInput} name="Name" />
             </div>
             <h2>Note</h2>
-            <Input className="h-full w-full bg-[#F3F4F6] border-[#D1D5DB] text-[#171717] mt-1 " />
-          </form>
-        </div>
+            <Input className={styles.noteInput} name="Note" />
+          </div>
+        </form>
       </AlertDialogContent>
     </AlertDialog>
   );

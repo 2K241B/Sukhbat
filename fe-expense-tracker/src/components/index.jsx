@@ -17,4 +17,3 @@ export * from './RecordAlertDialog';
 export * from './RecordDateList';
 export * from './RecordsListTable';
 export * from './SelectCashBalance';
-export * from './SelectOption';
