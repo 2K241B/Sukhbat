@@ -16,26 +16,28 @@ import { X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import CategorySelect from './CategorySelect';
+import { axiosInstance } from '@/lib/axios';
+import { RecordAlertDialog } from './RecordAlertDialog';
 
 export const AddCategory = ({ isAlerShow = false }) => {
   const [iconData, setIconData] = useState();
   const formRef = useRef();
 
   const handlerClick = async () => {
-    console.log(iconData);
-    await axios.post('http://localhost:8000/category/create', {
+    await axiosInstance.post('/category/create', {
       name: formRef.current[0].value,
       description: formRef.current[0].value,
       category_image: iconData,
     });
+    isAlerShow ? console.log('kk') : location.reload();
   };
   return (
     <AlertDialog>
       <AlertDialogTrigger
         className={
           isAlerShow
-            ? 'bg-white flex gap-2 h-8 leading-6 '
-            : 'bg-[#F9FAFB] h-8 flex items-center justify-center gap-1 rounded-[20px] leading-6'
+            ? 'bg-white flex gap-2 leading-6 '
+            : 'bg-[#F9FAFB] h-8 flex items-center justify-center gap-1 rounded-[20px] leading-6 '
         }
       >
         {isAlerShow ? <CategorySelectAdd /> : <PlusIcon color="#0166FF" />}

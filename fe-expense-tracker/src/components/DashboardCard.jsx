@@ -13,6 +13,7 @@ export const DashboardCard = ({
   icon,
   circle,
   colorArrow,
+  title,
 }) => {
   const percentage = Math.floor((total / totalLast - 1) * 100);
   return (
@@ -28,7 +29,7 @@ export const DashboardCard = ({
           {total}
           {currency == 'USD' ? '$' : '₮'}
         </p>
-        <p className="text-lg leading-7 text-slate-500">Your Income Amount</p>
+        <p className="text-lg leading-7 text-slate-500">Your {title} Amount</p>
       </CardContent>
       <CardFooter className="flex gap-2">
         {percentage > 0 ? (

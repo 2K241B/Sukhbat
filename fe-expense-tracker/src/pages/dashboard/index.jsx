@@ -1,4 +1,5 @@
 import { Cards, Chart, PieDashboardChart, RecordList } from '@/components';
+import { axiosInstance } from '@/lib/axios';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 const styles = {
@@ -21,16 +22,16 @@ const Dashboard = () => {
       const currenryType = data.user.currency_type;
       setCurrency(currenryType);
 
-      axios
-        .get(`http://localhost:8000/record/recordPieChart/${userId}`)
+      axiosInstance
+        .get(`/record/recordPieChart/${userId}`)
         .then((resp) => setGetPieChartData(resp.data));
 
-      axios
-        .get(`http://localhost:8000/record/id/${userId}`)
+      axiosInstance
+        .get(`/record/id/${userId}`)
         .then((res) => setRecordData(res.data));
 
-      axios
-        .get(`http://localhost:8000/record/getBarChartData/${userId}`)
+      axiosInstance
+        .get(`/record/getBarChartData/${userId}`)
         .then((response) => setGetBarChartData(response.data));
     }
   }, []);

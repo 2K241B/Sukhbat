@@ -26,6 +26,7 @@ export const Cards = ({ getBarChartData, currency }) => {
       />
       <DashboardCard
         header={'Your Income'}
+        title={'Income'}
         total={nextTotal ? nextTotal.income : 0}
         totalLast={prevTotal ? prevTotal.income : 0}
         currency={currency}
@@ -34,7 +35,8 @@ export const Cards = ({ getBarChartData, currency }) => {
       />
 
       <DashboardCard
-        header={'Total Expenses'}
+        header={'Total Expense'}
+        title={'Expense'}
         total={nextTotal ? nextTotal.expense : 0}
         totalLast={prevTotal ? prevTotal.expense : 0}
         currency={currency}

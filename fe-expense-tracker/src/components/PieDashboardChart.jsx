@@ -67,7 +67,9 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
     });
 
     setPieChartData(
-      response.map((el) => ({ ...el, fill: `var(--color-${el.categoryname})` }))
+      response
+        .slice(0, 6)
+        .map((el) => ({ ...el, fill: `var(--color-${el.categoryname})` }))
     );
   }, []);
 

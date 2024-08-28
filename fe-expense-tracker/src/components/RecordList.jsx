@@ -1,8 +1,7 @@
 import { sortBy } from 'lodash/sortBy';
 import { useEffect, useState } from 'react';
-import { ListLogo } from './icon';
 import { icons } from './CategorySelect';
-import { object } from 'zod';
+
 export const styles = {
   transTypeInc: 'text-[#84CC16] font-semibold leading-[24px]',
   transTypeExp: 'text-[#F54949] font-semibold leading-[24px]',
@@ -23,15 +22,13 @@ export const RecordList = ({ recordData, currency }) => {
     var diffHours = Math.floor(Math.abs(date1 - date2) / 36e5);
     return diffHours;
   };
-  const getIcon = (categoryName) => {};
-  getIcon('House');
   return (
     <div>
       {sortedRecord.map((el) => (
         <div className={styles.listContainer}>
           <div className="flex items-center gap-4">
             <div className="size-10 rounded-full bg-[#0166FF] flex justify-center items-center">
-              {/* {getIcon(el.categoryimage)} */}
+              {icons[el.categoryimage]}
             </div>
             <div>
               <h1 className="text-[#000] font-semibold ">{el.name}</h1>

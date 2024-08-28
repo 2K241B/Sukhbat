@@ -26,6 +26,8 @@ import { DatePicker } from './DatePicker';
 import axios from 'axios';
 import CategorySelectAdd from './icon/CategorySelectAdd';
 import AddCategory from './AddCategory';
+import { axiosInstance } from '@/lib/axios';
+import { icons } from './CategorySelect';
 const styles = {
   button1default:
     'w-full px-3 text-white rounded-[20px] bg-[#0166FF] hover:bg-[#0166FF]',
@@ -46,7 +48,7 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
   const formRef2 = useRef();
   useEffect(() => {
     {
-      axios.get('http://localhost:8000/category/').then((response) => {
+      axiosInstance.get('/category/').then((response) => {
         setCategories(response.data);
       });
     }
@@ -65,7 +67,7 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
     let user = localStorage.getItem('user');
     const data = JSON.parse(user);
     const userId = data.user.id;
-    await axios.post('http://localhost:8000/record/create', {
+    await axiosInstance.post('/record/create', {
       user_id: userId,
       name: formRef2.current[0].value,
       amount: formRef.current[0].value,
@@ -111,7 +113,7 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
                 <h1>Category</h1>
                 <Select>
                   <SelectTrigger className=" w-full bg-[#F3F4F6] border-[#D1D5DB] text-[#171717]">
-                    <SelectValue placeholder="Choose" />
+                    <SelectValue placeholder="Find or choose category" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -120,7 +122,14 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
                       </SelectLabel>
                       {categories &&
                         categories.map((el) => (
-                          <SelectItem value={el.id}>{el.name}</SelectItem>
+                          <SelectItem value={el.id}>
+                            <div className="flex gap-2 px-0.5">
+                              <div className="flex items-center justify-center size-5 rounded-full bg-[#0166FF] p-1">
+                                {icons[el.category_image]}
+                              </div>
+                              <div>{el.name}</div>
+                            </div>
+                          </SelectItem>
                         ))}
                     </SelectGroup>
                   </SelectContent>

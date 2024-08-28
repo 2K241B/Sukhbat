@@ -16,16 +16,37 @@ import {
   ShoppingIcon,
   TaxiIcon,
 } from './icon';
+import {
+  Beer,
+  CarFront,
+  CarTaxiFront,
+  Cross,
+  Ellipsis,
+  FolderOpenDot,
+  Gift,
+  House,
+  Image,
+  Landmark,
+  PlaneTakeoff,
+  Shirt,
+  ShoppingBag,
+  Utensils,
+  Wine,
+} from 'lucide-react';
 
-export const Gift = <GiftIcon />;
-export const HouseIco = <HouseIcon />;
 export const icons = {
   Gift: <GiftIcon />,
-  House: HouseIco,
+  House: <HouseIcon />,
   Food: <FoodIcon />,
   Shopping: <ShoppingIcon />,
   Taxi: <TaxiIcon />,
-  Drink: <DrinkIcon />,
+  Drink: <Beer color="white" />,
+  Insurance: <Cross color="white" fill="white" stroke="10" />,
+  Vehicle: <CarFront color="white" />,
+  Others: <Ellipsis color="white" fill="white" />,
+  Bills: <Landmark color="white" fill="white" />,
+  Image: <Image color="white" />,
+  Plane: <PlaneTakeoff color="white" />,
 };
 
 export const CategorySelect = ({ setIconData }) => {
@@ -35,24 +56,42 @@ export const CategorySelect = ({ setIconData }) => {
         <SelectValue placeholder={<CategorySelectAdd />} />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup className="grid grid-cols-3 p-6">
+        <SelectGroup className="grid grid-cols-3">
           <SelectItem value="House">
-            <HouseIcon />
+            <House />
           </SelectItem>
           <SelectItem value="Gift">
-            <GiftIcon />
+            <Gift />
           </SelectItem>
           <SelectItem value="Food">
-            <FoodIcon />
+            <Utensils />
           </SelectItem>
           <SelectItem value="Shopping">
-            <ShoppingIcon />
+            <Shirt />
           </SelectItem>
           <SelectItem value="Taxi">
-            <TaxiIcon />
+            <CarTaxiFront />
           </SelectItem>
           <SelectItem value="Drink">
-            <DrinkIcon />
+            <Beer />
+          </SelectItem>
+          <SelectItem value="Insurance">
+            <Cross />
+          </SelectItem>
+          <SelectItem value="Vehicle">
+            <CarFront />
+          </SelectItem>
+          <SelectItem value="Others">
+            <Ellipsis />
+          </SelectItem>
+          <SelectItem value="Bills">
+            <Landmark />
+          </SelectItem>
+          <SelectItem value="Image">
+            <Image />
+          </SelectItem>
+          <SelectItem value="Plane">
+            <PlaneTakeoff />
           </SelectItem>
         </SelectGroup>
       </SelectContent>

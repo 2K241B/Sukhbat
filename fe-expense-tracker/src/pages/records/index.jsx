@@ -1,4 +1,5 @@
 import { CategoryMenu, RecordsListTable } from '@/components';
+import { axiosInstance } from '@/lib/axios';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -15,13 +16,14 @@ const Records = () => {
       const userId = data.user.id;
       const currencyType = data.user.currency_type;
       setCurrency(currencyType);
-      axios.get(`http://localhost:8000/record/id/${userId}`).then((res) => {
+
+      axiosInstance.get(`/record/id/${userId}`).then((res) => {
         const records = res.data;
         const sort = _.sortBy(records, ['createdat']);
         setRecordData(sort.reverse());
       });
     }
-    axios.get('http://localhost:8000/category/').then((response) => {
+    axiosInstance.get('/category/').then((response) => {
       setCategories(response.data);
     });
   }, []);
