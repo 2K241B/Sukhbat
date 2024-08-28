@@ -10,9 +10,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import RecordDateList from './RecordDateList';
-import Records from '@/pages/records';
 import RecordsSortingSelect from './RecordsSortingSelect';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const styles = {
   arrowButton:

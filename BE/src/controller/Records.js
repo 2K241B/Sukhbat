@@ -1,5 +1,8 @@
 import { db } from '../../db.js';
-import _ from 'lodash';
+// import _ from 'lodash';
+
+import map from 'lodash/map.js';
+import groupBy from 'lodash/groupBy.js';
 
 export const getBarChartData = async (req, res) => {
   const { id } = req.params;
@@ -8,12 +11,12 @@ export const getBarChartData = async (req, res) => {
   try {
     const result = await db.query(queryText, [id]);
 
-    const groupedData = _.groupBy(result.rows, (el) => {
+    const groupedData = groupBy(result.rows, (el) => {
       const moonLanding = new Date(el.createdat);
       return moonLanding.getMonth() + 1;
     });
 
-    const response = _.map(groupedData, (monthRecords, month) => {
+    const response = map(groupedData, (monthRecords, month) => {
       const totalAmount = monthRecords.reduce(
         (acc, record) => {
           if (record.transaction_type === 'INC') {

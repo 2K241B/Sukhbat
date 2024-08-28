@@ -23,8 +23,6 @@ import {
 } from '@/components/ui/select';
 import { Input } from './ui/input';
 import { DatePicker } from './DatePicker';
-import axios from 'axios';
-import CategorySelectAdd from './icon/CategorySelectAdd';
 import AddCategory from './AddCategory';
 import { axiosInstance } from '@/lib/axios';
 import { icons } from './CategorySelect';

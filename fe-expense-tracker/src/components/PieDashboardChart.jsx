@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import {
-  ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -16,7 +15,8 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { useEffect, useState } from 'react';
-import _ from 'lodash';
+import groupBy from 'lodash/groupBy';
+import map from 'lodash/map';
 const chartConfig = {
   Others: {
     label: 'Others',
@@ -54,8 +54,8 @@ export const PieDashboardChart = ({ getPieChartData, currency }) => {
       0
     );
     setTotalExpense(totalExpense);
-    const result = _.groupBy(getPieChartData, (el) => el.categoryname);
-    const response = _.map(result, (records) => {
+    const result = groupBy(getPieChartData, (el) => el.categoryname);
+    const response = map(result, (records) => {
       const result = records.reduce(
         (acc, el) => {
           const amount = (acc.amount += el.amount);

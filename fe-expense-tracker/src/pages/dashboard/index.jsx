@@ -1,6 +1,5 @@
 import { Cards, Chart, PieDashboardChart, RecordList } from '@/components';
 import { axiosInstance } from '@/lib/axios';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 const styles = {
   chartContainer: 'grid grid-cols-2 gap-6 h-[284px]',

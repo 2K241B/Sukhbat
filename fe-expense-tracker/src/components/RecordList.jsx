@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash/sortBy';
+import sortBy from 'lodash/sortBy';
 import { useEffect, useState } from 'react';
 import { icons } from './CategorySelect';
 
@@ -11,7 +11,7 @@ export const styles = {
 export const RecordList = ({ recordData, currency }) => {
   const [sortedRecord, setSortedRecord] = useState([]);
   useEffect(() => {
-    const sort = _.sortBy(recordData, ['createdat']);
+    const sort = sortBy(recordData, ['createdat']);
     setSortedRecord(sort.reverse());
   }, []);
 
