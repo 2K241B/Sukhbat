@@ -4,7 +4,7 @@ import { MenuCheckbox, AddCategory, RecordAlertDialog } from '@/components';
 import { useContext, useEffect, useState } from 'react';
 import { Eye, Leading } from './icon';
 import { Input } from './ui/input';
-import groupBy from 'lodash/groupBy';
+import orderBy from 'lodash/orderBy';
 import { RecordsDataContext } from '@/pages/records';
 import {
   Command,
@@ -31,18 +31,10 @@ export const CategoryMenu = () => {
   const [sortedCategories, setSortedCategories] = useState();
   const [onChangeValue, setOnChangeValue] = useState(200000);
 
-  const setSortCategory = () => {
-    const records = groupBy(recordData, 'category_id');
-    const category = Object.keys(records)
-      .map((e) => {
-        return categories.filter((rec) => rec.id == e);
-      })
-      .flat();
-    setSortedCategories(category);
-  };
-
   useEffect(() => {
-    setSortCategory();
+    const sort = orderBy(categories, [(category) => category.name], ['asc']);
+
+    setSortedCategories(sort);
   }, []);
 
   const handlerClick = (name) => {
