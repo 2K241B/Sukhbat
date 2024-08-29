@@ -2,6 +2,12 @@ import { CategoryMenu, RecordsListTable } from '@/components';
 import { axiosInstance } from '@/lib/axios';
 import { createContext, useEffect, useState } from 'react';
 import sortBy from 'lodash/sortBy';
+import {
+  differenceInDays,
+  endOfMonth,
+  startOfMonth,
+  subMonths,
+} from 'date-fns';
 export const RecordsDataContext = createContext();
 
 const styles = {
@@ -14,7 +20,16 @@ const Records = () => {
   const [currency, setCurrency] = useState('MNT');
   const [categories, setCategories] = useState();
   const [categoryValue, setCategoryValue] = useState();
+  const [differenceDays, setdifferenceDays] = useState();
+  const [monthDiff, setMonthDiff] = useState(0);
 
+  const handlerClick = () => {
+    console.log(monthDiff);
+    setMonthDiff(monthDiff + 1);
+    if (monthDiff === 6) {
+      return setMonthDiff(0);
+    }
+  };
   useEffect(() => {
     let user = localStorage.getItem('user');
     if (user) {
@@ -25,26 +40,29 @@ const Records = () => {
 
       axiosInstance.get(`/record/id/${userId}`).then((res) => {
         const records = res.data;
+
         const date = new Date();
-        const oldDate = new Date('2024-08-19T02:00:00Z');
-        const ddate = new Date(records[0].createdat);
+        const startMonth = startOfMonth(new Date(date));
+        const endMonth = endOfMonth(new Date(date));
 
-        ddate.setMonth(ddate.getMonth() - 1);
+        const DiffDays = differenceInDays(
+          new Date(endMonth),
+          subMonths(new Date(startMonth), monthDiff)
+        );
+        setdifferenceDays(DiffDays);
 
-        console.log(ddate.toLocaleString());
-        const result = records.sort((a, b) => {
-          return new Date(b.createdat) - new Date(a.createdat);
-        });
-        // const result = records.filter(
-        //   (el) => oldDate < el.createdat && el.createdat < date
-        // );
-        console.log();
-        console.log(result);
-        const sort = sortBy(records, ['createdat']);
+        const filtered = records.filter(
+          (el) =>
+            subMonths(new Date(startMonth), monthDiff) <
+              new Date(el.createdat) && new Date(el.createdat) < endMonth
+        );
+
+        const sort = sortBy(filtered, ['createdat']);
         setRecordData(sort.reverse());
       });
     }
-
+  }, [monthDiff]);
+  useEffect(() => {
     axiosInstance.get('/category/').then((response) => {
       setCategories(response.data);
     });
@@ -60,6 +78,10 @@ const Records = () => {
         setCategoryValue,
         currency,
         categoryValue,
+        differenceDays,
+        setMonthDiff,
+        monthDiff,
+        handlerClick,
       }}
     >
       <div className={styles.container}>

@@ -2,6 +2,7 @@ import sortBy from 'lodash/sortBy';
 import { useContext, useEffect, useState } from 'react';
 import { icons } from './CategorySelect';
 import { DataContext } from '@/pages/dashboard';
+import { formatDistanceToNow } from 'date-fns';
 
 export const styles = {
   transTypeInc: 'text-[#84CC16] font-semibold leading-[24px]',
@@ -11,7 +12,7 @@ export const styles = {
   contentContainer: 'flex items-center gap-4',
   iconBg: 'size-10 rounded-full bg-[#0166FF] flex justify-center items-center',
   contentName: 'text-[#000] font-semibold ',
-  contentDate: 'text-[12px] leading-4 text-[#6B7280]',
+  contentDate: 'text-[12px] leading-4 text-[#6B7280] pt-1',
 };
 export const RecordList = () => {
   const { recordData, currency } = useContext(DataContext);
@@ -23,11 +24,8 @@ export const RecordList = () => {
   }, []);
 
   const DiffHours = (time) => {
-    const updateDate = time;
-    let date1 = new Date();
-    let date2 = new Date(updateDate);
-    var diffHours = Math.floor(Math.abs(date1 - date2) / 36e5);
-    return diffHours;
+    const result = formatDistanceToNow(new Date(time));
+    return result;
   };
   return (
     <div>
@@ -37,9 +35,7 @@ export const RecordList = () => {
             <div className={styles.iconBg}>{icons[el.categoryimage]}</div>
             <div>
               <h1 className={styles.contentName}>{el.name}</h1>
-              <p className={styles.contentDate}>
-                {DiffHours(el.createdat)} hours Ago
-              </p>
+              <p className={styles.contentDate}>{DiffHours(el.createdat)}</p>
             </div>
           </div>
           <p

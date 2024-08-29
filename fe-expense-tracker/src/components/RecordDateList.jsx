@@ -4,6 +4,7 @@ import CheckboxRecord from './CheckboxRecord';
 import { icons } from './CategorySelect';
 import sortBy from 'lodash/sortBy';
 import { RecordsDataContext } from '@/pages/records';
+import { formatISO9075 } from 'date-fns';
 
 const styles = {
   container: 'flex flex-col gap-6',
@@ -19,13 +20,8 @@ const styles = {
 };
 
 const dateToTime = (d) => {
-  const date = new Date(d);
-  const gettime = (date.getHours() < 10 ? '0' : '') + date.getHours();
-  const getMunites = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-  const getDate = (date.getDate() < 10 ? '0' : '') + date.getDate();
-  const getMonth = (date.getMonth() < 10 ? '0' : '') + (date.getMonth() + 1);
-  const getYear = (date.getFullYear() < 10 ? '0' : '') + date.getFullYear();
-  return [`${gettime}:${getMunites} - ${getMonth}-${getDate}-${getYear}`];
+  const result = formatISO9075(new Date(d));
+  return result;
 };
 
 export const RecordDateList = ({ sortingValues }) => {

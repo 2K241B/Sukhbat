@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button';
 
 import RecordDateList from './RecordDateList';
 import RecordsSortingSelect from './RecordsSortingSelect';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { RecordsDataContext } from '@/pages/records';
 
 const styles = {
   arrowButton:
@@ -13,16 +14,18 @@ const styles = {
 };
 
 export const RecordsListTable = () => {
+  const { differenceDays, handlerClick } = useContext(RecordsDataContext);
+
   const [sortingValues, setSortingValues] = useState('newest');
 
   return (
     <div className="w-full">
       <div className={styles.container}>
         <div className={styles.subContainer}>
-          <Button className={styles.arrowButton}>
+          <Button onClick={handlerClick} className={styles.arrowButton}>
             <ChevronLeft size={20} />
           </Button>
-          <p>Last 30 Days</p>
+          <p>Last {differenceDays} Days</p>
           <Button className={styles.arrowButton}>
             <ChevronRight size={20} />
           </Button>
