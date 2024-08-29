@@ -5,6 +5,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
+import { useContext } from 'react';
+import { DataContext } from '@/pages/dashboard';
 
 const styles = {
   card: 'h-[284px]',
@@ -23,7 +25,9 @@ const chartConfig = {
     color: '#F54949',
   },
 };
-export const Chart = ({ getBarChartData }) => {
+export const Chart = () => {
+  const { getBarChartData } = useContext(DataContext);
+
   return (
     <Card className={styles.card}>
       <CardHeader className={styles.cardHeader}>

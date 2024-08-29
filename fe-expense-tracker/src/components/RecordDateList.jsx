@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import CheckboxList from './CheckboxList';
 import CheckboxRecord from './CheckboxRecord';
 import { icons } from './CategorySelect';
 import sortBy from 'lodash/sortBy';
+import { RecordsDataContext } from '@/pages/records';
 
 const styles = {
   container: 'flex flex-col gap-6',
@@ -27,14 +28,10 @@ const dateToTime = (d) => {
   return [`${gettime}:${getMunites} - ${getMonth}-${getDate}-${getYear}`];
 };
 
-export const RecordDateList = ({
-  recordData,
-  currency,
-  transType,
-  categoryValue,
-  typeValue,
-  sortingValues,
-}) => {
+export const RecordDateList = ({ sortingValues }) => {
+  const { transType, typeValue, categoryValue, currency, recordData } =
+    useContext(RecordsDataContext);
+
   const total = (name) => {
     setTotalAmount(name.reduce((acc, el) => (acc += el.amount), 0));
   };

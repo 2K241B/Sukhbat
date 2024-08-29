@@ -1,16 +1,17 @@
 import { Style } from '@/components/Constants';
+import { Slider } from '@/components/ui/slider';
+import { MenuCheckbox, AddCategory, RecordAlertDialog } from '@/components';
+import { useContext, useEffect, useState } from 'react';
+import { Eye, Leading } from './icon';
+import { Input } from './ui/input';
+import groupBy from 'lodash/groupBy';
+import { RecordsDataContext } from '@/pages/records';
 import {
   Command,
   CommandGroup,
   CommandInput,
   CommandList,
 } from '@/components/ui/command';
-import { Slider } from '@/components/ui/slider';
-import { MenuCheckbox, AddCategory, RecordAlertDialog } from '@/components';
-import { useEffect, useState } from 'react';
-import { Eye, Leading } from './icon';
-import { Input } from './ui/input';
-import groupBy from 'lodash/groupBy';
 
 const styles = {
   commandContainer:
@@ -23,17 +24,14 @@ const styles = {
   SliderTextContainer: 'flex justify-between px-1.5 text-[16px] leading-6',
 };
 
-export const CategoryMenu = ({
-  categories,
-  setCategoryValue,
-  setTypeValue,
-  typeValue,
-  recordData,
-}) => {
+export const CategoryMenu = () => {
+  const { recordData, categories, setCategoryValue } =
+    useContext(RecordsDataContext);
+
   const [sortedCategories, setSortedCategories] = useState();
   const [onChangeValue, setOnChangeValue] = useState(200000);
 
-  useEffect(() => {
+  const setSortCategory = () => {
     const records = groupBy(recordData, 'category_id');
     const category = Object.keys(records)
       .map((e) => {
@@ -41,6 +39,10 @@ export const CategoryMenu = ({
       })
       .flat();
     setSortedCategories(category);
+  };
+
+  useEffect(() => {
+    setSortCategory();
   }, []);
 
   const handlerClick = (name) => {
@@ -56,7 +58,7 @@ export const CategoryMenu = ({
       </div>
       <CommandList>
         <CommandGroup heading="Types">
-          <MenuCheckbox setTypeValue={setTypeValue} typeValue={typeValue} />
+          <MenuCheckbox />
         </CommandGroup>
         <CommandGroup heading="Category">
           {sortedCategories &&

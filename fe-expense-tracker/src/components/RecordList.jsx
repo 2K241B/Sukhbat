@@ -1,6 +1,7 @@
 import sortBy from 'lodash/sortBy';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { icons } from './CategorySelect';
+import { DataContext } from '@/pages/dashboard';
 
 export const styles = {
   transTypeInc: 'text-[#84CC16] font-semibold leading-[24px]',
@@ -12,7 +13,9 @@ export const styles = {
   contentName: 'text-[#000] font-semibold ',
   contentDate: 'text-[12px] leading-4 text-[#6B7280]',
 };
-export const RecordList = ({ recordData, currency }) => {
+export const RecordList = () => {
+  const { recordData, currency } = useContext(DataContext);
+
   const [sortedRecord, setSortedRecord] = useState([]);
   useEffect(() => {
     const sort = sortBy(recordData, ['createdat']);

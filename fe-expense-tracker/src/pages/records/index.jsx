@@ -1,7 +1,8 @@
 import { CategoryMenu, RecordsListTable } from '@/components';
 import { axiosInstance } from '@/lib/axios';
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import sortBy from 'lodash/sortBy';
+export const RecordsDataContext = createContext();
 
 const styles = {
   container: 'flex flex-row gap-6 w-[1200px] min-h-screen pb-10',
@@ -24,6 +25,21 @@ const Records = () => {
 
       axiosInstance.get(`/record/id/${userId}`).then((res) => {
         const records = res.data;
+        const date = new Date();
+        const oldDate = new Date('2024-08-19T02:00:00Z');
+        const ddate = new Date(records[0].createdat);
+
+        ddate.setMonth(ddate.getMonth() - 1);
+
+        console.log(ddate.toLocaleString());
+        const result = records.sort((a, b) => {
+          return new Date(b.createdat) - new Date(a.createdat);
+        });
+        // const result = records.filter(
+        //   (el) => oldDate < el.createdat && el.createdat < date
+        // );
+        console.log();
+        console.log(result);
         const sort = sortBy(records, ['createdat']);
         setRecordData(sort.reverse());
       });
@@ -35,25 +51,22 @@ const Records = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      {categories && (
-        <CategoryMenu
-          recordData={recordData}
-          typeValue={typeValue}
-          setTypeValue={setTypeValue}
-          categories={categories}
-          setCategoryValue={setCategoryValue}
-        />
-      )}
-      {recordData && (
-        <RecordsListTable
-          recordData={recordData}
-          currency={currency}
-          categoryValue={categoryValue}
-          typeValue={typeValue}
-        />
-      )}
-    </div>
+    <RecordsDataContext.Provider
+      value={{
+        recordData,
+        typeValue,
+        setTypeValue,
+        categories,
+        setCategoryValue,
+        currency,
+        categoryValue,
+      }}
+    >
+      <div className={styles.container}>
+        {categories && <CategoryMenu />}
+        {recordData && <RecordsListTable />}
+      </div>
+    </RecordsDataContext.Provider>
   );
 };
 

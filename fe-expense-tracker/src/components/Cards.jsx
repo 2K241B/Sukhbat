@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CardCircle } from './icon';
 import { DashboardCard, BalanceCard } from '@/components';
+import { DataContext } from '@/pages/dashboard';
 
 const styles = { container: 'grid grid-cols-3 gap-6 max-h-[220px]' };
 
-export const Cards = ({ getBarChartData, currency }) => {
+export const Cards = () => {
+  const { getBarChartData, currency } = useContext(DataContext);
+
   const [prevTotal, setPrevTotal] = useState([]);
   const [nextTotal, setNextTotal] = useState([]);
 

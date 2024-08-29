@@ -1,9 +1,10 @@
 import { Legend, Pie, PieChart } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartContainer, ChartLegendContent } from '@/components/ui/chart';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import groupBy from 'lodash/groupBy';
 import map from 'lodash/map';
+import { DataContext } from '@/pages/dashboard';
 
 const styles = {
   card: 'h-[284px] flex flex-col ',
@@ -44,7 +45,9 @@ const chartConfig = {
   },
 };
 
-export const PieDashboardChart = ({ getPieChartData, currency }) => {
+export const PieDashboardChart = () => {
+  const { getPieChartData, currency } = useContext(DataContext);
+
   const [pieChartData, setPieChartData] = useState();
   const [totalExpense, setTotalExpense] = useState();
 

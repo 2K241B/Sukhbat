@@ -1,6 +1,6 @@
 import { Cards, Chart, PieDashboardChart, RecordList } from '@/components';
 import { axiosInstance } from '@/lib/axios';
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const styles = {
   container: 'flex flex-col gap-6',
@@ -9,6 +9,7 @@ const styles = {
   recordListHeader:
     'py-4 px-6 border-b-[1px] border-[#E2E8F0] font-semibold text-[#0F172A]',
 };
+export const DataContext = createContext();
 
 const Dashboard = () => {
   const [recordData, setRecordData] = useState();
@@ -38,26 +39,21 @@ const Dashboard = () => {
     }
   }, []);
   return (
-    <div className={styles.container}>
-      {getBarChartData && (
-        <Cards getBarChartData={getBarChartData} currency={currency} />
-      )}
-      <div className={styles.chartContainer}>
-        <Chart getBarChartData={getBarChartData} />
-        {getPieChartData && (
-          <PieDashboardChart
-            getPieChartData={getPieChartData}
-            currency={currency}
-          />
-        )}
+    <DataContext.Provider
+      value={{ getBarChartData, getPieChartData, recordData, currency }}
+    >
+      <div className={styles.container}>
+        {getBarChartData && <Cards />}
+        <div className={styles.chartContainer}>
+          <Chart />
+          {getPieChartData && <PieDashboardChart />}
+        </div>
+        <div className={styles.recordListContainer}>
+          <div className={styles.recordListHeader}>Last Records</div>
+          {recordData && <RecordList />}
+        </div>
       </div>
-      <div className={styles.recordListContainer}>
-        <div className={`${styles.recordListHeader} `}>Last Records</div>
-        {recordData && (
-          <RecordList recordData={recordData} currency={currency} />
-        )}
-      </div>
-    </div>
+    </DataContext.Provider>
   );
 };
 export default Dashboard;

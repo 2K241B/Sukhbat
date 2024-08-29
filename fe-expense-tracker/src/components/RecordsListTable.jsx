@@ -12,12 +12,7 @@ const styles = {
   subContainer: 'flex gap-4 items-center',
 };
 
-export const RecordsListTable = ({
-  recordData,
-  currency,
-  categoryValue,
-  typeValue,
-}) => {
+export const RecordsListTable = () => {
   const [sortingValues, setSortingValues] = useState('newest');
 
   return (
@@ -34,15 +29,7 @@ export const RecordsListTable = ({
         </div>
         <RecordsSortingSelect setSortingValues={setSortingValues} />
       </div>
-      {recordData && (
-        <RecordDateList
-          sortingValues={sortingValues}
-          recordData={recordData}
-          currency={currency}
-          categoryValue={categoryValue}
-          typeValue={typeValue}
-        />
-      )}
+      {<RecordDateList sortingValues={sortingValues} />}
     </div>
   );
 };
