@@ -22,11 +22,17 @@ export const RecordsListTable = () => {
     <div className="w-full">
       <div className={styles.container}>
         <div className={styles.subContainer}>
-          <Button onClick={handlerClick} className={styles.arrowButton}>
+          <Button
+            onClick={() => handlerClick('left')}
+            className={styles.arrowButton}
+          >
             <ChevronLeft size={20} />
           </Button>
           <p>Last {differenceDays} Days</p>
-          <Button className={styles.arrowButton}>
+          <Button
+            onClick={() => handlerClick('right')}
+            className={styles.arrowButton}
+          >
             <ChevronRight size={20} />
           </Button>
         </div>

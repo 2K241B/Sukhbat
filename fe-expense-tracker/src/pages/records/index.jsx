@@ -23,10 +23,17 @@ const Records = () => {
   const [differenceDays, setdifferenceDays] = useState();
   const [monthDiff, setMonthDiff] = useState(0);
 
-  const handlerClick = () => {
-    console.log(monthDiff);
-    setMonthDiff(monthDiff + 1);
+  const handlerClick = (name) => {
+    if (name === 'left') {
+      setMonthDiff(monthDiff + 1);
+    } else {
+      setMonthDiff(monthDiff - 1);
+    }
+
     if (monthDiff === 6) {
+      return setMonthDiff(0);
+    }
+    if (monthDiff < 0) {
       return setMonthDiff(0);
     }
   };

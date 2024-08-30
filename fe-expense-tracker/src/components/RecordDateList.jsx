@@ -21,7 +21,7 @@ const styles = {
 
 const dateToTime = (d) => {
   const result = formatISO9075(new Date(d));
-  return result;
+  return result.slice(0, 16);
 };
 
 export const RecordDateList = ({ sortingValues }) => {

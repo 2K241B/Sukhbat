@@ -97,10 +97,18 @@ export const RecordAlertDialog = ({ isButtonName = 'Record' }) => {
         <form ref={formRef} className={styles.form}>
           <div className={styles.container}>
             <div className={styles.buttonContainer}>
-              <Button className={buttonStyles} onClick={buttonHandler}>
+              <Button
+                type="button"
+                className={buttonStyles}
+                onClick={buttonHandler}
+              >
                 Expense
               </Button>
-              <Button className={buttonStyles2} onClick={buttonHandler2}>
+              <Button
+                type="button"
+                className={buttonStyles2}
+                onClick={buttonHandler2}
+              >
                 Income
               </Button>
             </div>
