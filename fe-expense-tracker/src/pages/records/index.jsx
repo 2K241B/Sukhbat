@@ -1,6 +1,7 @@
 import { CategoryMenu, RecordsListTable } from '@/components';
 import { axiosInstance } from '@/lib/axios';
 import { createContext, useEffect, useState } from 'react';
+import groupBy from 'lodash/groupBy';
 import sortBy from 'lodash/sortBy';
 import {
   differenceInDays,
@@ -46,7 +47,9 @@ const Records = () => {
       setCurrency(currencyType);
 
       axiosInstance.get(`/record/id/${userId}`).then((res) => {
-        const records = res.data;
+        const record = res.data;
+
+        const recordsSort = sortBy(record, 'createdat');
 
         const date = new Date();
         const startMonth = startOfMonth(new Date(date));
@@ -58,14 +61,15 @@ const Records = () => {
         );
         setdifferenceDays(DiffDays);
 
-        const filtered = records.filter(
-          (el) =>
-            subMonths(new Date(startMonth), monthDiff) <
-              new Date(el.createdat) && new Date(el.createdat) < endMonth
-        );
-
-        const sort = sortBy(filtered, ['createdat']);
-        setRecordData(sort.reverse());
+        const filtered = recordsSort
+          .reverse()
+          .filter(
+            (el) =>
+              subMonths(new Date(startMonth), monthDiff) <
+                new Date(el.createdat) && new Date(el.createdat) < endMonth
+          );
+        const filterDate = groupBy(filtered, (r) => r.createdat.split('T')[0]);
+        setRecordData(filterDate);
       });
     }
   }, [monthDiff]);

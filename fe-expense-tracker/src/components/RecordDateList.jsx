@@ -4,7 +4,7 @@ import CheckboxRecord from './CheckboxRecord';
 import { icons } from './CategorySelect';
 import sortBy from 'lodash/sortBy';
 import { RecordsDataContext } from '@/pages/records';
-import { formatISO9075 } from 'date-fns';
+import { formatDistanceToNow, formatISO9075 } from 'date-fns';
 
 const styles = {
   container: 'flex flex-col gap-6',
@@ -25,30 +25,42 @@ const dateToTime = (d) => {
 };
 
 export const RecordDateList = ({ sortingValues }) => {
-  const { transType, typeValue, categoryValue, currency, recordData } =
-    useContext(RecordsDataContext);
+  const {
+    transType,
+    typeValue,
+    categoryValue,
+    currency,
+    recordData,
+    filterData,
+  } = useContext(RecordsDataContext);
 
   const total = (name) => {
     setTotalAmount(name.reduce((acc, el) => (acc += el.amount), 0));
   };
   const [totalAmount, setTotalAmount] = useState(0);
+  useEffect(() => {
+    console.log(Object.values(recordData).flat());
+  }, []);
+  // const filteredArray = useMemo(() => {
+  //   const filterdata =
+  //     sortingValues === 'newest' ? recordData : sortBy(recordData, 'createdat');
 
-  const filteredArray = useMemo(() => {
-    const filterdata =
-      sortingValues === 'newest' ? recordData : sortBy(recordData, 'createdat');
-
-    const filterByType = filterdata.filter((record) =>
-      typeValue == 'ALL' ? recordData : record.transaction_type == typeValue
-    );
-    return filterByType.filter((record) =>
-      !categoryValue ? filterByType : record.category_id == categoryValue
-    );
-  }, [typeValue, categoryValue]);
+  //   const filterByType = filterdata.filter((record) =>
+  //     typeValue == 'ALL' ? recordData : record.transaction_type == typeValue
+  //   );
+  //   return filterByType.filter((record) =>
+  //     !categoryValue ? filterByType : record.category_id == categoryValue
+  //   );
+  // }, [typeValue, categoryValue]);
 
   useEffect(() => {
-    total(filteredArray);
+    // total(filteredArray);
   }, [typeValue, categoryValue]);
 
+  const DiffHours = (time) => {
+    const result = formatDistanceToNow(new Date(time));
+    return result;
+  };
   return (
     <div className={styles.container}>
       <div className={styles.selectAllContainer}>
@@ -63,26 +75,43 @@ export const RecordDateList = ({ sortingValues }) => {
         </p>
       </div>
       <div className={styles.contentContainer}>
-        {filteredArray &&
-          filteredArray.map((el) => (
-            <CheckboxList
-              id={'select'}
-              content={
-                <div className={styles.recordContentContainer}>
-                  <div className={styles.iconBg}>{icons[el.categoryimage]}</div>
-                  <div className={styles.textContainer}>
-                    <h1 className={styles.recordName}>{el.name}</h1>
-                    <p className={styles.recordDate}>
-                      {dateToTime(el.createdat)}
-                    </p>
-                  </div>
-                </div>
-              }
-              transType={el.transaction_type}
-              amount={el.amount}
-              currency={currency}
-            />
-          ))}
+        {recordData &&
+          Object.keys(recordData).map((days) => {
+            return (
+              <div className="flex flex-col gap-3">
+                {
+                  <h1 className="font-medium pl-2">
+                    {formatDistanceToNow(new Date(days))} ago
+                  </h1>
+                }
+                {recordData[days].map((el) => (
+                  <CheckboxList
+                    id={'select'}
+                    content={
+                      <div className={styles.recordContentContainer}>
+                        <div className={styles.iconBg}>
+                          {icons[el.categoryimage]}
+                        </div>
+                        <div className={styles.textContainer}>
+                          <h1 className={styles.recordName}>{el.name}</h1>
+                          <p className={styles.recordDate}>
+                            {dateToTime(el.createdat)}
+                          </p>
+                        </div>
+                      </div>
+                    }
+                    transType={el.transaction_type}
+                    amount={el.amount}
+                    currency={currency}
+                  />
+                ))}
+              </div>
+            );
+          })}
+        {/* {filteredArray &&
+          filteredArray.map((el, i) => (
+            
+          ))} */}
       </div>
     </div>
   );
