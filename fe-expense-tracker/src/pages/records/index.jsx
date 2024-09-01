@@ -23,6 +23,7 @@ const Records = () => {
   const [differenceDays, setdifferenceDays] = useState();
   const [monthDiff, setMonthDiff] = useState(0);
   const [filteredData, setFilteredData] = useState({});
+  const [searchInput, setSearchInput] = useState();
 
   const handlerClick = (name) => {
     if (name === 'left') {
@@ -50,6 +51,9 @@ const Records = () => {
         const record = res.data;
 
         const recordsSort = sortBy(record, 'createdat');
+
+        setSearchInput(recordsSort);
+        console.log(recordsSort);
 
         const date = new Date();
         const startMonth = startOfMonth(new Date(date));
@@ -92,6 +96,7 @@ const Records = () => {
         handlerClick,
         setFilteredData,
         filteredData,
+        searchInput,
       }}
     >
       <div className={styles.container}>
