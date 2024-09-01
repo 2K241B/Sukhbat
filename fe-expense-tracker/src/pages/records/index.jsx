@@ -53,7 +53,6 @@ const Records = () => {
         const recordsSort = sortBy(record, 'createdat');
 
         setSearchInput(recordsSort);
-        console.log(recordsSort);
 
         const date = new Date();
         const startMonth = startOfMonth(new Date(date));

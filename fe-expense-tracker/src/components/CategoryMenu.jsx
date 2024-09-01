@@ -68,9 +68,11 @@ export const CategoryMenu = () => {
   const handlerInput = () => {
     setIsShow(!isShow);
   };
-  const search = searchInput.filter((el, i) =>
-    el.name.toLowerCase().includes(inputText.toLowerCase())
-  );
+  const search =
+    searchInput &&
+    searchInput.filter((el, i) =>
+      el.name.toLowerCase().includes(inputText.toLowerCase())
+    );
 
   return (
     <Command className={style.commandContainer}>

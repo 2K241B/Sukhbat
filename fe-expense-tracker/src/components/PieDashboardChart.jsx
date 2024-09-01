@@ -5,6 +5,28 @@ import { useContext, useEffect, useState } from 'react';
 import groupBy from 'lodash/groupBy';
 import map from 'lodash/map';
 import { DataContext } from '@/pages/dashboard';
+import {
+  endOfMonth,
+  formatISO9075,
+  getDate,
+  getMonth,
+  startOfMonth,
+} from 'date-fns';
+
+const months = {
+  1: 'January',
+  2: 'February',
+  3: 'March',
+  4: 'April',
+  5: 'May',
+  6: 'June',
+  7: 'July',
+  8: 'August',
+  9: 'September',
+  10: 'October',
+  11: 'November',
+  12: 'December',
+};
 
 const styles = {
   card: 'h-[284px] flex flex-col ',
@@ -51,13 +73,34 @@ export const PieDashboardChart = () => {
   const [pieChartData, setPieChartData] = useState();
   const [totalExpense, setTotalExpense] = useState();
 
+  const date = new Date();
+  const startMonth = startOfMonth(new Date(date));
+  const endMonth = endOfMonth(new Date(date));
+
+  const getMonths = (d) => {
+    const date = new Date(d);
+    const month = getMonth(new Date(date)) + 1;
+    return month;
+  };
+  const getDay = (d) => {
+    const date = new Date(d);
+    const getDay = getDate(new Date(date));
+    return getDay;
+  };
+
   useEffect(() => {
-    const totalExpense = getPieChartData.reduce(
+    const getLastMonth = getPieChartData.filter(
+      (el) =>
+        new Date(startMonth) < new Date(el.createdat) &&
+        new Date(el.createdat) < new Date(endMonth)
+    );
+    const totalExpense = getLastMonth.reduce(
       (acc, el) => (acc += el.amount),
       0
     );
     setTotalExpense(totalExpense);
-    const result = groupBy(getPieChartData, (el) => el.categoryname);
+
+    const result = groupBy(getLastMonth, (el) => el.categoryname);
     const response = map(result, (records) => {
       const result = records.reduce(
         (acc, el) => {
@@ -79,7 +122,13 @@ export const PieDashboardChart = () => {
   return (
     <Card className={styles.card}>
       <CardHeader className={styles.cardHeader}>
-        <CardTitle className="text-base">Expense</CardTitle>
+        <CardTitle className="text-base flex justify-between w-full items-center">
+          <h2>Expense</h2>
+          <p className="font-normal text-sm flex tracking-wide text-[#6B7280]">
+            {months[getMonths(startMonth)].slice(0, 3)} {getDay(startMonth)} -{' '}
+            {months[getMonths(endMonth)].slice(0, 3)} {getDay(endMonth)}
+          </p>
+        </CardTitle>
       </CardHeader>
       <CardContent className={styles.cardContent}>
         <ChartContainer config={chartConfig} className={styles.chartContainer}>
