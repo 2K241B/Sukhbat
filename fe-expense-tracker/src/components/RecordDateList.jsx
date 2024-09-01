@@ -5,6 +5,7 @@ import { icons } from './CategorySelect';
 import sortBy from 'lodash/sortBy';
 import { RecordsDataContext } from '@/pages/records';
 import { formatDistanceToNow, formatISO9075 } from 'date-fns';
+import groupBy from 'lodash/groupBy';
 
 const styles = {
   container: 'flex flex-col gap-6',
@@ -25,34 +26,33 @@ const dateToTime = (d) => {
 };
 
 export const RecordDateList = ({ sortingValues }) => {
-  const {
-    transType,
-    typeValue,
-    categoryValue,
-    currency,
-    recordData,
-    filterData,
-  } = useContext(RecordsDataContext);
+  const { transType, typeValue, categoryValue, currency, recordData } =
+    useContext(RecordsDataContext);
+  const [filteredData, setFilteredData] = useState();
 
   const total = (name) => {
     setTotalAmount(name.reduce((acc, el) => (acc += el.amount), 0));
   };
   const [totalAmount, setTotalAmount] = useState(0);
+
+  const filteredArray = useMemo(() => {
+    const filterdata =
+      sortingValues === 'newest' ? recordData : sortBy(recordData, 'createdat');
+
+    const filterByType = filterdata.filter((record) =>
+      typeValue == 'ALL' ? recordData : record.transaction_type == typeValue
+    );
+    return filterByType.filter((record) =>
+      !categoryValue ? filterByType : record.category_id == categoryValue
+    );
+  }, [typeValue, categoryValue]);
+
   useEffect(() => {
-    console.log(Object.values(recordData).flat());
-  }, []);
-  // const filteredArray = useMemo(() => {
-  //   const filterdata =
-  //     sortingValues === 'newest' ? recordData : sortBy(recordData, 'createdat');
-
-  //   const filterByType = filterdata.filter((record) =>
-  //     typeValue == 'ALL' ? recordData : record.transaction_type == typeValue
-  //   );
-  //   return filterByType.filter((record) =>
-  //     !categoryValue ? filterByType : record.category_id == categoryValue
-  //   );
-  // }, [typeValue, categoryValue]);
-
+    console.log(recordData);
+    const filterDate = groupBy(filteredArray, (r) => r.createdat.split('T')[0]);
+    setFilteredData(filterDate);
+    console.log(filterDate);
+  }, [typeValue, categoryValue]);
   useEffect(() => {
     // total(filteredArray);
   }, [typeValue, categoryValue]);
@@ -75,8 +75,8 @@ export const RecordDateList = ({ sortingValues }) => {
         </p>
       </div>
       <div className={styles.contentContainer}>
-        {recordData &&
-          Object.keys(recordData).map((days) => {
+        {filteredData &&
+          Object.keys(filteredData).map((days) => {
             return (
               <div className="flex flex-col gap-3">
                 {
@@ -84,7 +84,7 @@ export const RecordDateList = ({ sortingValues }) => {
                     {formatDistanceToNow(new Date(days))} ago
                   </h1>
                 }
-                {recordData[days].map((el) => (
+                {filteredData[days].map((el) => (
                   <CheckboxList
                     id={'select'}
                     content={

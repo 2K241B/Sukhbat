@@ -22,7 +22,7 @@ const Records = () => {
   const [categories, setCategories] = useState();
   const [categoryValue, setCategoryValue] = useState();
   const [differenceDays, setdifferenceDays] = useState();
-  const [monthDiff, setMonthDiff] = useState(0);
+  const [monthDiff, setMonthDiff] = useState(1);
 
   const handlerClick = (name) => {
     if (name === 'left') {
@@ -61,15 +61,12 @@ const Records = () => {
         );
         setdifferenceDays(DiffDays);
 
-        const filtered = recordsSort
-          .reverse()
-          .filter(
-            (el) =>
-              subMonths(new Date(startMonth), monthDiff) <
-                new Date(el.createdat) && new Date(el.createdat) < endMonth
-          );
-        const filterDate = groupBy(filtered, (r) => r.createdat.split('T')[0]);
-        setRecordData(filterDate);
+        const filtered = recordsSort.filter(
+          (el) =>
+            subMonths(new Date(startMonth), monthDiff) <
+              new Date(el.createdat) && new Date(el.createdat) < endMonth
+        );
+        setRecordData(filtered.reverse());
       });
     }
   }, [monthDiff]);
