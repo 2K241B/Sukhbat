@@ -65,6 +65,14 @@ const chartConfig = {
     label: 'Vehicle',
     color: '#FF3131',
   },
+  Taxi: {
+    label: 'Taxi',
+    color: '#FF3131',
+  },
+  Drink: {
+    label: 'Drink',
+    color: '#0166FF',
+  },
 };
 
 export const PieDashboardChart = () => {

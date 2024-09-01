@@ -86,7 +86,7 @@ export const CategoryMenu = () => {
           className="relative"
         />
         {isShow && (
-          <div className="max-h-[440px] overflow-auto absolute left-[140px] top-[274px] min-w-[262px] border-[#D1D5DB] bg-[#F9FAFB] border-[1px] rounded-2xl">
+          <div className="max-h-[550px] overflow-auto absolute left-[140px] top-[274px] min-w-[262px] border-[#D1D5DB] bg-[#F9FAFB] border-[1px] rounded-2xl">
             {search.map((el) => (
               <div className="px-4 py-2 border-b flex flex-col gap-2 last:border-b-0">
                 <p className=" text-xs">{el.categoryimage}</p>
