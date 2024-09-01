@@ -15,103 +15,84 @@ const styles = {
   recordContentContainer: 'flex items-center gap-4',
   iconBg: 'size-10 rounded-full bg-[#0166FF] flex justify-center items-center',
   textContainer: 'flex flex-col gap-1',
-  recordName: 'text-[#000] font-semibold ',
+  recordName: 'text-[#000] font-semibold',
   recordDate: 'text-[12px] leading-4 text-[#6B7280]',
   contentContainer: 'flex flex-col gap-3',
 };
 
-const dateToTime = (d) => {
-  const result = formatISO9075(new Date(d));
-  return result.slice(0, 16);
-};
+const dateToTime = (d) => formatISO9075(new Date(d)).slice(0, 16);
 
-export const RecordDateList = ({ sortingValues }) => {
-  const { transType, typeValue, categoryValue, currency, recordData } =
+const RecordDateList = ({ sortingValues }) => {
+  const { typeValue, categoryValue, currency, recordData } =
     useContext(RecordsDataContext);
-  const [filteredData, setFilteredData] = useState();
-
-  const total = (name) => {
-    setTotalAmount(name.reduce((acc, el) => (acc += el.amount), 0));
-  };
+  const [filteredData, setFilteredData] = useState({});
   const [totalAmount, setTotalAmount] = useState(0);
 
   const filteredArray = useMemo(() => {
-    const filterdata =
+    const sortedData =
       sortingValues === 'newest' ? recordData : sortBy(recordData, 'createdat');
-
-    const filterByType = filterdata.filter((record) =>
-      typeValue == 'ALL' ? recordData : record.transaction_type == typeValue
+    const filteredByType = sortedData.filter(
+      (record) => typeValue === 'ALL' || record.transaction_type === typeValue
     );
-    return filterByType.filter((record) =>
-      !categoryValue ? filterByType : record.category_id == categoryValue
+    return filteredByType.filter(
+      (record) => !categoryValue || record.category_id === categoryValue
     );
-  }, [typeValue, categoryValue]);
+  }, [recordData, sortingValues, typeValue, categoryValue]);
 
   useEffect(() => {
-    console.log(recordData);
-    const filterDate = groupBy(filteredArray, (r) => r.createdat.split('T')[0]);
-    setFilteredData(filterDate);
-    console.log(filterDate);
-  }, [typeValue, categoryValue]);
-  useEffect(() => {
-    // total(filteredArray);
-  }, [typeValue, categoryValue]);
+    const groupedData = groupBy(
+      filteredArray,
+      (record) => record.createdat.split('T')[0]
+    );
+    setFilteredData(groupedData);
 
-  const DiffHours = (time) => {
-    const result = formatDistanceToNow(new Date(time));
-    return result;
-  };
+    // Calculate total amount
+    const total = filteredArray.reduce((acc, record) => acc + record.amount, 0);
+    setTotalAmount(total);
+  }, [filteredArray]);
+
   return (
     <div className={styles.container}>
       <div className={styles.selectAllContainer}>
         <CheckboxRecord
-          id={'selectAll'}
-          content={'Select All'}
+          id="selectAll"
+          content="Select All"
           currency={currency}
         />
         <p className={styles.selectAllAmount}>
-          {totalAmount}
-          {currency && currency == 'USD' ? '$' : '₮'}
+          {totalAmount} {currency === 'USD' ? '$' : '₮'}
         </p>
       </div>
       <div className={styles.contentContainer}>
-        {filteredData &&
-          Object.keys(filteredData).map((days) => {
-            return (
-              <div className="flex flex-col gap-3">
-                {
-                  <h1 className="font-medium pl-2">
-                    {formatDistanceToNow(new Date(days))} ago
-                  </h1>
+        {Object.keys(filteredData).map((date) => (
+          <div key={date} className="flex flex-col gap-3">
+            <h1 className="font-medium pl-2">
+              {formatDistanceToNow(new Date(date))} ago
+            </h1>
+            {filteredData[date].map((record) => (
+              <CheckboxList
+                key={record.id} // Assuming `id` is unique for each record
+                id="select"
+                content={
+                  <div className={styles.recordContentContainer}>
+                    <div className={styles.iconBg}>
+                      {icons[record.categoryimage]}
+                    </div>
+                    <div className={styles.textContainer}>
+                      <h1 className={styles.recordName}>{record.name}</h1>
+                      <p className={styles.recordDate}>
+                        {dateToTime(record.createdat)}
+                      </p>
+                    </div>
+                  </div>
                 }
-                {filteredData[days].map((el) => (
-                  <CheckboxList
-                    id={'select'}
-                    content={
-                      <div className={styles.recordContentContainer}>
-                        <div className={styles.iconBg}>
-                          {icons[el.categoryimage]}
-                        </div>
-                        <div className={styles.textContainer}>
-                          <h1 className={styles.recordName}>{el.name}</h1>
-                          <p className={styles.recordDate}>
-                            {dateToTime(el.createdat)}
-                          </p>
-                        </div>
-                      </div>
-                    }
-                    transType={el.transaction_type}
-                    amount={el.amount}
-                    currency={currency}
-                  />
-                ))}
-              </div>
-            );
-          })}
-        {/* {filteredArray &&
-          filteredArray.map((el, i) => (
-            
-          ))} */}
+                transType={record.transaction_type}
+                amount={record.amount}
+                currency={currency}
+              />
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
