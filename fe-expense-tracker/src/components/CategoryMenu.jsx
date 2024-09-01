@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Eye, Leading } from './icon';
 import { Input } from './ui/input';
 import orderBy from 'lodash/orderBy';
+import groupBy from 'lodash/groupBy';
 import { RecordsDataContext } from '@/pages/records';
 import {
   Command,
@@ -26,7 +27,7 @@ const styles = {
 };
 
 export const CategoryMenu = () => {
-  const { recordData, categories, setCategoryValue } =
+  const { recordData, categories, setCategoryValue, setFilteredData } =
     useContext(RecordsDataContext);
 
   const [sortedCategories, setSortedCategories] = useState();
@@ -37,6 +38,14 @@ export const CategoryMenu = () => {
 
     setSortedCategories(sort);
   }, []);
+
+  const handlerClear = () => {
+    const groupedData = groupBy(
+      recordData,
+      (record) => record.createdat.split('T')[0]
+    );
+    setFilteredData(groupedData);
+  };
 
   const handlerClick = (name) => {
     setCategoryValue(name);
@@ -56,7 +65,10 @@ export const CategoryMenu = () => {
         <CommandGroup>
           <div className="flex items-center justify-between">
             <h1 className="font-semibold">Category</h1>
-            <Button className="bg-[#F9FAFB] text-gray-400 font-normal p-0">
+            <Button
+              onClick={handlerClear}
+              className="bg-[#F9FAFB] text-gray-400 font-normal p-0"
+            >
               Clear
             </Button>
           </div>

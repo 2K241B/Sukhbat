@@ -1,7 +1,6 @@
 import { CategoryMenu, RecordsListTable } from '@/components';
 import { axiosInstance } from '@/lib/axios';
 import { createContext, useEffect, useState } from 'react';
-import groupBy from 'lodash/groupBy';
 import sortBy from 'lodash/sortBy';
 import {
   differenceInDays,
@@ -22,7 +21,8 @@ const Records = () => {
   const [categories, setCategories] = useState();
   const [categoryValue, setCategoryValue] = useState();
   const [differenceDays, setdifferenceDays] = useState();
-  const [monthDiff, setMonthDiff] = useState(1);
+  const [monthDiff, setMonthDiff] = useState(0);
+  const [filteredData, setFilteredData] = useState({});
 
   const handlerClick = (name) => {
     if (name === 'left') {
@@ -90,6 +90,8 @@ const Records = () => {
         setMonthDiff,
         monthDiff,
         handlerClick,
+        setFilteredData,
+        filteredData,
       }}
     >
       <div className={styles.container}>

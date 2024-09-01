@@ -23,9 +23,14 @@ const styles = {
 const dateToTime = (d) => formatISO9075(new Date(d)).slice(0, 16);
 
 const RecordDateList = ({ sortingValues }) => {
-  const { typeValue, categoryValue, currency, recordData } =
-    useContext(RecordsDataContext);
-  const [filteredData, setFilteredData] = useState({});
+  const {
+    typeValue,
+    categoryValue,
+    currency,
+    recordData,
+    setFilteredData,
+    filteredData,
+  } = useContext(RecordsDataContext);
   const [totalAmount, setTotalAmount] = useState(0);
 
   const filteredArray = useMemo(() => {
