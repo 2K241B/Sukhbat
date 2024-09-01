@@ -12,6 +12,7 @@ import {
   CommandInput,
   CommandList,
 } from '@/components/ui/command';
+import { Button } from './ui/button';
 
 const styles = {
   commandContainer:
@@ -52,7 +53,13 @@ export const CategoryMenu = () => {
         <CommandGroup heading="Types">
           <MenuCheckbox />
         </CommandGroup>
-        <CommandGroup heading="Category">
+        <CommandGroup>
+          <div className="flex items-center justify-between">
+            <h1 className="font-semibold">Category</h1>
+            <Button className="bg-[#F9FAFB] text-gray-400 font-normal p-0">
+              Clear
+            </Button>
+          </div>
           {sortedCategories &&
             sortedCategories.map((el) => (
               <div

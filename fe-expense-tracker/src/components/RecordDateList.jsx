@@ -46,7 +46,6 @@ const RecordDateList = ({ sortingValues }) => {
     );
     setFilteredData(groupedData);
 
-    // Calculate total amount
     const total = filteredArray.reduce((acc, record) => acc + record.amount, 0);
     setTotalAmount(total);
   }, [filteredArray]);
@@ -71,7 +70,7 @@ const RecordDateList = ({ sortingValues }) => {
             </h1>
             {filteredData[date].map((record) => (
               <CheckboxList
-                key={record.id} // Assuming `id` is unique for each record
+                key={record.id}
                 id="select"
                 content={
                   <div className={styles.recordContentContainer}>
