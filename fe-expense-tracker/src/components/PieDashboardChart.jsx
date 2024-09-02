@@ -13,7 +13,7 @@ import {
   startOfMonth,
 } from 'date-fns';
 
-const months = {
+export const months = {
   1: 'January',
   2: 'February',
   3: 'March',
@@ -72,6 +72,10 @@ const chartConfig = {
   Drink: {
     label: 'Drink',
     color: '#0166FF',
+  },
+  Gift: {
+    label: 'Gift',
+    color: '#F2901C',
   },
 };
 

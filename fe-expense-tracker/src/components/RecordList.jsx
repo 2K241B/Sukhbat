@@ -35,7 +35,9 @@ export const RecordList = () => {
             <div className={styles.iconBg}>{icons[el.categoryimage]}</div>
             <div>
               <h1 className={styles.contentName}>{el.name}</h1>
-              <p className={styles.contentDate}>{DiffHours(el.createdat)}</p>
+              <p className={styles.contentDate}>
+                {DiffHours(el.createdat)} ago
+              </p>
             </div>
           </div>
           <p
